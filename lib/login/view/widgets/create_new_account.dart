@@ -26,54 +26,97 @@ class CreateNewAccount extends GetView<LoginController> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    LoginTextFormField(
-                      hintText: 'Username',
-                      keyboardType: TextInputType.name,
-                      obscureText: false,
-                      containerColor: kColor1,
-                      textColor: kColor2,
-                    ),
-                    LoginTextFormField(
-                      hintText: 'E-Mail',
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: false,
-                      containerColor: kColor1,
-                      textColor: kColor2,
-                    ),
-                    Obx(
-                      () => LoginTextFormField(
-                        hintText: 'Password',
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: !controller.isPasswordVisible.value,
+                child: Form(
+                  key: controller.signupFormkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      LoginTextFormField(
+                        textEditingController:
+                            controller.signUpUsernameController,
+                        hintText: 'Username',
+                        keyboardType: TextInputType.name,
+                        obscureText: false,
                         containerColor: kColor1,
                         textColor: kColor2,
-                        isPasswordField: IconButton(
-                          onPressed: () {
-                            controller.isPasswordVisible.value =
-                                !controller.isPasswordVisible.value;
-                          },
-                          icon: Icon(
-                            controller.isPasswordVisible.value
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: controller.isPasswordVisible.value
-                                ? Colors.black54
-                                : Colors.black38,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Username should not be empty';
+                          }
+                          return null;
+                        },
+                      ),
+                      LoginTextFormField(
+                        textEditingController: controller.signUPEmailController,
+                        hintText: 'E-Mail',
+                        keyboardType: TextInputType.emailAddress,
+                        obscureText: false,
+                        containerColor: kColor1,
+                        textColor: kColor2,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'E-Mail should not be empty';
+                          } else if (!controller.emailValid.hasMatch(value) ||
+                              value.contains(' ')) {
+                            return 'E-Mail is not valid';
+                          }
+                          return null;
+                        },
+                      ),
+                      Obx(
+                        () => LoginTextFormField(
+                          textEditingController:
+                              controller.signUpPasswordController,
+                          hintText: 'Password',
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: !controller.isPasswordVisible.value,
+                          containerColor: kColor1,
+                          textColor: kColor2,
+                          isPasswordField: IconButton(
+                            onPressed: () {
+                              controller.isPasswordVisible.value =
+                                  !controller.isPasswordVisible.value;
+                            },
+                            icon: Icon(
+                              controller.isPasswordVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: controller.isPasswordVisible.value
+                                  ? Colors.black54
+                                  : Colors.black38,
+                            ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Password should not be empty';
+                            } else if (!controller.passwordValid
+                                .hasMatch(value)) {
+                              return 'Please enter a strong password';
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                    ),
-                    LoginTextFormField(
-                      hintText: 'Confirm Password',
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,
-                      containerColor: kColor1,
-                      textColor: kColor2,
-                    ),
-                  ],
+                      LoginTextFormField(
+                        textEditingController:
+                            controller.signUpConfirmController,
+                        hintText: 'Confirm Password',
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,
+                        containerColor: kColor1,
+                        textColor: kColor2,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password should not be empty';
+                          } else if (value !=
+                              controller.signUpPasswordController.text) {
+                            return 'Password does not match';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -12,16 +12,20 @@ class LoginTextFormField extends GetView<LoginController> {
     required this.obscureText,
     required this.containerColor,
     required this.textColor,
+    required this.textEditingController,
     this.isPasswordField,
     this.onChanged,
+    this.validator,
   }) : super(key: key);
   final String hintText;
   final TextInputType keyboardType;
   final bool obscureText;
   final Color containerColor;
   final Color textColor;
-  Widget? isPasswordField;
   final Function(String)? onChanged;
+  final String? Function(String?)? validator;
+  final TextEditingController textEditingController;
+  Widget? isPasswordField;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +38,10 @@ class LoginTextFormField extends GetView<LoginController> {
       child: Padding(
         padding: const EdgeInsets.only(
           left: 5,
-          top: 2,
+          top: 10,
         ),
         child: TextFormField(
+          controller: textEditingController,
           onChanged: onChanged,
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -49,6 +54,7 @@ class LoginTextFormField extends GetView<LoginController> {
           obscureText: obscureText,
           keyboardType: keyboardType,
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
         ),
       ),
     );

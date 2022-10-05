@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticket_booking/home/view/home_page.dart';
 import 'package:ticket_booking/login/controllers/login_controller.dart';
 import 'package:ticket_booking/main.dart';
 
@@ -10,22 +11,36 @@ class LoginButton extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Material(
-        elevation: 5,
-        shadowColor: Colors.lightBlue,
-        borderRadius: BorderRadius.circular(10),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: kColor2,
-          ),
-          height: 50,
-          width: 100,
-          child: Center(
-            child: Obx(
-              () => Text(
+    return Obx(
+      () => GestureDetector(
+        onTap: controller.isCreatedNewAccount.value
+            ? () {
+                if (controller.signupFormkey.currentState!.validate()) {
+                  Get.to(
+                    () => const HomePage(),
+                  );
+                }
+              }
+            : () {
+                if (controller.loginFormkey.currentState!.validate()) {
+                  Get.to(
+                    () => const HomePage(),
+                  );
+                }
+              },
+        child: Material(
+          elevation: 5,
+          shadowColor: Colors.lightBlue,
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: kColor2,
+            ),
+            height: 50,
+            width: 100,
+            child: Center(
+              child: Text(
                 controller.isCreatedNewAccount.value ? 'Sign Up' : 'Login',
                 style: kButtonTextStyle,
               ),
