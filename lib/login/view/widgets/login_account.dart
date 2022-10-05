@@ -15,36 +15,72 @@ class LoginAccount extends GetView<LoginController> {
     return SizedBox(
       child: Column(
         children: [
-          LoginTextFormField(
-            hintText: 'E-Mail',
-            keyboardType: TextInputType.emailAddress,
-            obscureText: false,
-            containerColor: kColor2,
-            textColor: kColor1,
+          Obx(
+            () => AnimatedPhysicalModel(
+              borderRadius: BorderRadius.circular(10),
+              shape: BoxShape.rectangle,
+              elevation: controller.isTextFieldClicked2.value ? 5 : 0,
+              color: Colors.amber,
+              duration: const Duration(
+                seconds: 1,
+              ),
+              shadowColor: Colors.blue,
+              child: LoginTextFormField(
+                hintText: 'E-Mail',
+                keyboardType: TextInputType.emailAddress,
+                obscureText: false,
+                containerColor: kColor2,
+                textColor: kColor1,
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    controller.isTextFieldClicked2.value = true;
+                  } else {
+                    controller.isTextFieldClicked2.value = false;
+                  }
+                },
+              ),
+            ),
           ),
           const SizedBox(
             height: 30,
           ),
           Obx(
-            () => LoginTextFormField(
-              hintText: 'Password',
-              keyboardType: TextInputType.visiblePassword,
-              obscureText: !controller.isPasswordVisible.value,
-              textColor: kColor1,
-              containerColor: kColor2,
-              isPasswordField: IconButton(
-                onPressed: () {
-                  controller.isPasswordVisible.value =
-                      !controller.isPasswordVisible.value;
-                },
-                icon: Icon(
-                  controller.isPasswordVisible.value
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                  color: controller.isPasswordVisible.value
-                      ? Colors.black54
-                      : Colors.black38,
+            () => AnimatedPhysicalModel(
+              borderRadius: BorderRadius.circular(10),
+              shape: BoxShape.rectangle,
+              elevation: controller.isTextFieldClicked.value ? 5 : 0,
+              color: Colors.amber,
+              duration: const Duration(
+                seconds: 1,
+              ),
+              shadowColor: Colors.blue,
+              child: LoginTextFormField(
+                hintText: 'Password',
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: !controller.isPasswordVisible.value,
+                textColor: kColor1,
+                containerColor: kColor2,
+                isPasswordField: IconButton(
+                  onPressed: () {
+                    controller.isPasswordVisible.value =
+                        !controller.isPasswordVisible.value;
+                  },
+                  icon: Icon(
+                    controller.isPasswordVisible.value
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: controller.isPasswordVisible.value
+                        ? Colors.black54
+                        : Colors.black38,
+                  ),
                 ),
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    controller.isTextFieldClicked.value = true;
+                  } else {
+                    controller.isTextFieldClicked.value = false;
+                  }
+                },
               ),
             ),
           ),

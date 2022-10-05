@@ -27,9 +27,16 @@ class LoginPage extends GetView<LoginController> {
                   height: 150,
                 ),
                 Obx(
-                  () => controller.isCreatedNewAccount.value
-                      ? const CreateNewAccount()
-                      : const LoginAccount(),
+                  () => AnimatedCrossFade(
+                    firstChild: const CreateNewAccount(),
+                    secondChild: const LoginAccount(),
+                    crossFadeState: controller.isCreatedNewAccount.value
+                        ? CrossFadeState.showFirst
+                        : CrossFadeState.showSecond,
+                    duration: const Duration(milliseconds: 500),
+                    firstCurve: Curves.easeInOutCubicEmphasized,
+                    secondCurve: Curves.easeInOutQuart,
+                  ),
                 ),
                 Obx(
                   () => SizedBox(
