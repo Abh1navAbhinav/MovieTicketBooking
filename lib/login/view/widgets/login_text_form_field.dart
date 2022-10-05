@@ -17,7 +17,6 @@ class LoginTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      width: 300,
       decoration: BoxDecoration(
         color: kColor2,
         borderRadius: BorderRadius.circular(5),
