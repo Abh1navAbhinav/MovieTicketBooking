@@ -30,30 +30,46 @@ class CreateNewAccount extends GetView<LoginController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     LoginTextFormField(
-                      hintText: ' Username',
+                      hintText: 'Username',
                       keyboardType: TextInputType.name,
                       obscureText: false,
                       containerColor: kColor1,
                       textColor: kColor2,
                     ),
                     LoginTextFormField(
-                      hintText: ' E-Mail',
+                      hintText: 'E-Mail',
                       keyboardType: TextInputType.emailAddress,
                       obscureText: false,
                       containerColor: kColor1,
                       textColor: kColor2,
                     ),
-                    LoginTextFormField(
-                      hintText: ' Password',
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: false,
-                      containerColor: kColor1,
-                      textColor: kColor2,
+                    Obx(
+                      () => LoginTextFormField(
+                        hintText: 'Password',
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: !controller.isPasswordVisible.value,
+                        containerColor: kColor1,
+                        textColor: kColor2,
+                        isPasswordField: IconButton(
+                          onPressed: () {
+                            controller.isPasswordVisible.value =
+                                !controller.isPasswordVisible.value;
+                          },
+                          icon: Icon(
+                            controller.isPasswordVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: controller.isPasswordVisible.value
+                                ? Colors.black54
+                                : Colors.black38,
+                          ),
+                        ),
+                      ),
                     ),
                     LoginTextFormField(
-                      hintText: ' Confirm Password',
+                      hintText: 'Confirm Password',
                       keyboardType: TextInputType.visiblePassword,
-                      obscureText: false,
+                      obscureText: true,
                       containerColor: kColor1,
                       textColor: kColor2,
                     ),
