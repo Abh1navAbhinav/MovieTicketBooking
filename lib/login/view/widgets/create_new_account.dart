@@ -81,11 +81,15 @@ class CreateNewAccount extends GetView<LoginController> {
           TextButton(
             onPressed: () {
               controller.isCreatedNewAccount.value = false;
+              // controller.buttonValue.value = 'Login';
             },
             child: Text(
               'Go back to Login',
               style: ktextStyle,
             ),
+          ),
+          const SizedBox(
+            height: 20,
           ),
         ],
       ),

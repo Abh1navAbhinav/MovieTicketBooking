@@ -24,7 +24,7 @@ class LoginPage extends GetView<LoginController> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 150,
+                  height: 130,
                 ),
                 Obx(
                   () => AnimatedCrossFade(
@@ -38,11 +38,11 @@ class LoginPage extends GetView<LoginController> {
                     secondCurve: Curves.easeInOutQuart,
                   ),
                 ),
-                Obx(
-                  () => SizedBox(
-                    height: controller.isCreatedNewAccount.value ? 5 : 70,
-                  ),
-                ),
+                // Obx(
+                //   () => SizedBox(
+                //     height: controller.isCreatedNewAccount.value ? 5 : 70,
+                //   ),
+                // ),
                 const LoginButton(),
                 const SizedBox(
                   height: 50,

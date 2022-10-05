@@ -16,10 +16,15 @@ class CreateAndForgotAccount extends GetView<LoginController> {
         TextButton(
           onPressed: () {
             controller.isCreatedNewAccount.value = true;
+            // controller.buttonValue.value = "Sign Up";
           },
-          child: Text(
-            'Create new Account',
-            style: ktextStyle,
+          child: Column(
+            children: [
+              Text(
+                'Create new Account',
+                style: ktextStyle,
+              ),
+            ],
           ),
         ),
         TextButton(

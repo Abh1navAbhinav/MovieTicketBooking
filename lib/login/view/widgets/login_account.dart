@@ -13,7 +13,9 @@ class LoginAccount extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: 350,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Obx(
             () => AnimatedPhysicalModel(
