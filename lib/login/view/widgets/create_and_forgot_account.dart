@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ticket_booking/login/controllers/login_controller.dart';
 import 'package:ticket_booking/main.dart';
 
-class CreateAndForgotAccount extends StatelessWidget {
+class CreateAndForgotAccount extends GetView<LoginController> {
   const CreateAndForgotAccount({
     Key? key,
   }) : super(key: key);
@@ -12,7 +14,9 @@ class CreateAndForgotAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            controller.isCreatedNewAccount.value = true;
+          },
           child: Text(
             'Create new Account',
             style: ktextStyle,

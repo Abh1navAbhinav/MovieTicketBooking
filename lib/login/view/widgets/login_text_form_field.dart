@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ticket_booking/main.dart';
 
 class LoginTextFormField extends StatelessWidget {
   const LoginTextFormField({
@@ -8,17 +7,21 @@ class LoginTextFormField extends StatelessWidget {
     required this.hintText,
     required this.keyboardType,
     required this.obscureText,
+    required this.containerColor,
+    required this.textColor,
   }) : super(key: key);
   final String hintText;
   final TextInputType keyboardType;
   final bool obscureText;
+  final Color containerColor;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
       decoration: BoxDecoration(
-        color: kColor2,
+        color: containerColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: TextFormField(
@@ -26,7 +29,7 @@ class LoginTextFormField extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: GoogleFonts.roboto(
-            color: kColor1,
+            color: textColor,
           ),
         ),
         obscureText: obscureText,

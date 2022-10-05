@@ -12,6 +12,8 @@ class SocialMediaIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 5,
+      shadowColor: Colors.blue,
+      borderRadius: BorderRadius.circular(5),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
