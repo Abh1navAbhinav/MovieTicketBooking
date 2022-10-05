@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ticket_booking/login/controllers/login_controller.dart';
 import 'package:ticket_booking/main.dart';
 
-class LoginButton extends StatelessWidget {
+class LoginButton extends GetView<LoginController> {
   const LoginButton({
     Key? key,
   }) : super(key: key);
@@ -12,7 +14,7 @@ class LoginButton extends StatelessWidget {
       onTap: () {},
       child: Material(
         elevation: 5,
-        shadowColor: Colors.white,
+        shadowColor: Colors.lightBlue,
         borderRadius: BorderRadius.circular(10),
         child: Container(
           decoration: BoxDecoration(
@@ -22,9 +24,11 @@ class LoginButton extends StatelessWidget {
           height: 50,
           width: 100,
           child: Center(
-            child: Text(
-              'Login',
-              style: kButtonTextStyle,
+            child: Obx(
+              () => Text(
+                controller.isCreatedNewAccount.value ? 'Sign Up' : 'Login',
+                style: kButtonTextStyle,
+              ),
             ),
           ),
         ),
