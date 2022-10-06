@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/login/controllers/login_controller.dart';
 import 'package:ticket_booking/login/view/widgets/login_text_form_field.dart';
@@ -44,8 +45,15 @@ class CreateNewAccount extends GetView<LoginController> {
                         textColor: kColor2,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Username should not be empty';
+                            return 'Username is required';
                           }
+                          if (value.length < 3) {
+                            return 'Insufficient length';
+                          }
+                          if (value.contains(' ')) {
+                            return 'Remove all whiteSpaces';
+                          }
+
                           return null;
                         },
                       ),
@@ -53,18 +61,22 @@ class CreateNewAccount extends GetView<LoginController> {
                         height: 10,
                       ),
                       LoginTextFormField(
-                        textEditingController: controller.signUPEmailController,
-                        hintText: 'E-Mail',
-                        keyboardType: TextInputType.emailAddress,
+                        textEditingController:
+                            controller.signUPMobileController,
+                        hintText: 'Mobile number',
+                        keyboardType: TextInputType.phone,
+                        textInputFormatter: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         obscureText: false,
                         containerColor: kColor1,
                         textColor: kColor2,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'E-Mail should not be empty';
-                          } else if (!controller.emailValid.hasMatch(value) ||
-                              value.contains(' ')) {
-                            return 'E-Mail is not valid';
+                            return 'Mobile is required';
+                          }
+                          if (value.length != 10) {
+                            return 'Moblie is not valid';
                           }
                           return null;
                         },
@@ -97,9 +109,9 @@ class CreateNewAccount extends GetView<LoginController> {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Password should not be empty';
-                            } else if (!controller.passwordValid
-                                .hasMatch(value)) {
+                              return 'Password is required';
+                            }
+                            if (!controller.passwordValid.hasMatch(value)) {
                               return 'Please enter a strong password';
                             }
                             return null;
@@ -119,8 +131,9 @@ class CreateNewAccount extends GetView<LoginController> {
                         textColor: kColor2,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Password should not be empty';
-                          } else if (value !=
+                            return 'Confirm password is required';
+                          }
+                          if (value !=
                               controller.signUpPasswordController.text) {
                             return 'Password does not match';
                           }

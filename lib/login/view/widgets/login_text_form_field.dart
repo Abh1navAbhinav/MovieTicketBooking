@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_booking/login/controllers/login_controller.dart';
@@ -16,6 +17,7 @@ class LoginTextFormField extends GetView<LoginController> {
     this.isPasswordField,
     this.onChanged,
     this.validator,
+    this.textInputFormatter,
   }) : super(key: key);
   final String hintText;
   final TextInputType keyboardType;
@@ -25,13 +27,14 @@ class LoginTextFormField extends GetView<LoginController> {
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final TextEditingController textEditingController;
+  List<TextInputFormatter>? textInputFormatter;
 
   Widget? isPasswordField;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 50,
+      height: 50,
       decoration: BoxDecoration(
         color: containerColor,
         borderRadius: BorderRadius.circular(5),
@@ -39,23 +42,31 @@ class LoginTextFormField extends GetView<LoginController> {
       child: Padding(
         padding: const EdgeInsets.only(
           left: 5,
-          // top: 10,
+          // top: obscureText ? 10 : 0,
         ),
-        child: TextFormField(
-          controller: textEditingController,
-          onChanged: onChanged,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: hintText,
-            hintStyle: GoogleFonts.roboto(
-              color: textColor,
+        child: Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: textEditingController,
+                onChanged: onChanged,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: hintText,
+                  hintStyle: GoogleFonts.roboto(
+                    color: textColor,
+                  ),
+                  // suffixIcon: isPasswordField,
+                ),
+                obscureText: obscureText,
+                keyboardType: keyboardType,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: validator,
+                inputFormatters: textInputFormatter,
+              ),
             ),
-            suffixIcon: isPasswordField,
-          ),
-          obscureText: obscureText,
-          keyboardType: keyboardType,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: validator,
+            isPasswordField ?? const SizedBox(),
+          ],
         ),
       ),
     );

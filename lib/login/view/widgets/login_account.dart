@@ -21,17 +21,17 @@ class LoginAccount extends GetView<LoginController> {
           children: [
             Obx(
               () => AnimatedPhysicalModel(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(14),
                 shape: BoxShape.rectangle,
-                elevation: controller.isTextFieldClicked2.value ? 5 : 0,
+                elevation: controller.isTextFieldClicked2.value ? 4 : 0,
                 color: Colors.amber,
                 duration: const Duration(
                   seconds: 1,
                 ),
-                shadowColor: Colors.blue,
+                shadowColor: Colors.cyan,
                 child: LoginTextFormField(
                   textEditingController: controller.loginEmailController,
-                  hintText: 'E-Mail',
+                  hintText: 'Username',
                   keyboardType: TextInputType.emailAddress,
                   obscureText: false,
                   containerColor: kColor2,
@@ -45,10 +45,10 @@ class LoginAccount extends GetView<LoginController> {
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'E-Mail should not be empty';
-                    } else if (!controller.emailValid.hasMatch(value) ||
-                        value.contains(' ')) {
-                      return 'E-Mail is not valid';
+                      return 'Username is required';
+                    }
+                    if (value.length < 3 || value.contains(' ')) {
+                      return 'Username is not valid';
                     }
                     return null;
                   },
@@ -60,14 +60,14 @@ class LoginAccount extends GetView<LoginController> {
             ),
             Obx(
               () => AnimatedPhysicalModel(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(14),
                 shape: BoxShape.rectangle,
-                elevation: controller.isTextFieldClicked.value ? 5 : 0,
+                elevation: controller.isTextFieldClicked.value ? 4 : 0,
                 color: Colors.amber,
                 duration: const Duration(
                   seconds: 1,
                 ),
-                shadowColor: Colors.blue,
+                shadowColor: Colors.cyan,
                 child: LoginTextFormField(
                   textEditingController: controller.loginPasswordController,
                   hintText: 'Password',
@@ -98,7 +98,7 @@ class LoginAccount extends GetView<LoginController> {
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Password should not be empty';
+                      return 'Password is required';
                     } else if (!controller.passwordValid.hasMatch(value)) {
                       return 'Please enter a strong password';
                     }

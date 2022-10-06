@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/home/view/home_page.dart';
@@ -22,20 +20,19 @@ class LoginButton extends GetView<LoginController> {
                       //this is the next button on press function
 
                       controller.isOTpRegistration.value = false;
-                      log('nextbutton');
                     }
                   }
                 : () {
                     // this is the signUp button on press function
-                    log('signup button');
-                    Get.to(
-                      const HomePage(),
-                    );
+                    if (controller.otpFormkey.currentState!.validate()) {
+                      Get.to(
+                        () => const HomePage(),
+                      );
+                    }
                   })
             : (() {
                 if (controller.loginFormkey.currentState!.validate()) {
                   // this is the login button on press function
-                  log('Login button');
                   Get.to(
                     () => const HomePage(),
                   );
