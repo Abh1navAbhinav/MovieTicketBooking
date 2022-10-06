@@ -4,6 +4,7 @@ import 'package:ticket_booking/login/controllers/login_controller.dart';
 import 'package:ticket_booking/login/view/widgets/create_new_account.dart';
 import 'package:ticket_booking/login/view/widgets/login_account.dart';
 import 'package:ticket_booking/login/view/widgets/login_button.dart';
+import 'package:ticket_booking/login/view/widgets/otp_registration.dart';
 import 'package:ticket_booking/login/view/widgets/social_media_icon.dart';
 import 'package:ticket_booking/main.dart';
 
@@ -28,7 +29,9 @@ class LoginPage extends GetView<LoginController> {
                 ),
                 Obx(
                   () => AnimatedCrossFade(
-                    firstChild: const CreateNewAccount(),
+                    firstChild: !controller.isOTpRegistration.value
+                        ? const OtpRegistration()
+                        : const CreateNewAccount(),
                     secondChild: const LoginAccount(),
                     crossFadeState: controller.isCreatedNewAccount.value
                         ? CrossFadeState.showFirst
@@ -43,6 +46,7 @@ class LoginPage extends GetView<LoginController> {
                 //     height: controller.isCreatedNewAccount.value ? 5 : 70,
                 //   ),
                 // ),
+
                 const LoginButton(),
                 const SizedBox(
                   height: 50,

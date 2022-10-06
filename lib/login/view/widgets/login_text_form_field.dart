@@ -25,12 +25,13 @@ class LoginTextFormField extends GetView<LoginController> {
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
   final TextEditingController textEditingController;
+
   Widget? isPasswordField;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      // height: 50,
       decoration: BoxDecoration(
         color: containerColor,
         borderRadius: BorderRadius.circular(5),
@@ -38,7 +39,7 @@ class LoginTextFormField extends GetView<LoginController> {
       child: Padding(
         padding: const EdgeInsets.only(
           left: 5,
-          top: 10,
+          // top: 10,
         ),
         child: TextFormField(
           controller: textEditingController,

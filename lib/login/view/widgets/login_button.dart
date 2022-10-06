@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/home/view/home_page.dart';
@@ -14,20 +16,31 @@ class LoginButton extends GetView<LoginController> {
     return Obx(
       () => GestureDetector(
         onTap: controller.isCreatedNewAccount.value
-            ? () {
-                if (controller.signupFormkey.currentState!.validate()) {
-                  Get.to(
-                    () => const HomePage(),
-                  );
-                }
-              }
-            : () {
+            ? (controller.isOTpRegistration.value
+                ? () {
+                    if (controller.signupFormkey.currentState!.validate()) {
+                      //this is the next button on press function
+
+                      controller.isOTpRegistration.value = false;
+                      log('nextbutton');
+                    }
+                  }
+                : () {
+                    // this is the signUp button on press function
+                    log('signup button');
+                    Get.to(
+                      const HomePage(),
+                    );
+                  })
+            : (() {
                 if (controller.loginFormkey.currentState!.validate()) {
+                  // this is the login button on press function
+                  log('Login button');
                   Get.to(
                     () => const HomePage(),
                   );
                 }
-              },
+              }),
         child: Material(
           elevation: 5,
           shadowColor: Colors.lightBlue,
@@ -40,9 +53,15 @@ class LoginButton extends GetView<LoginController> {
             height: 50,
             width: 100,
             child: Center(
-              child: Text(
-                controller.isCreatedNewAccount.value ? 'Sign Up' : 'Login',
-                style: kButtonTextStyle,
+              child: Obx(
+                () => Text(
+                  controller.isCreatedNewAccount.value
+                      ? (controller.isOTpRegistration.value
+                          ? "Next"
+                          : 'Sign Up')
+                      : 'Login',
+                  style: kButtonTextStyle,
+                ),
               ),
             ),
           ),

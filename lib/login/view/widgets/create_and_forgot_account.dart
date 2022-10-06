@@ -16,7 +16,6 @@ class CreateAndForgotAccount extends GetView<LoginController> {
         TextButton(
           onPressed: () {
             controller.isCreatedNewAccount.value = true;
-            // controller.buttonValue.value = "Sign Up";
           },
           child: Column(
             children: [

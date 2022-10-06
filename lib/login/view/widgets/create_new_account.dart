@@ -15,10 +15,10 @@ class CreateNewAccount extends GetView<LoginController> {
         children: [
           Material(
             elevation: 5,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(20),
             shadowColor: Colors.blue,
             child: Container(
-              height: 300,
+              // height: 300,
               width: MediaQuery.of(context).size.width / 1.1,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -31,6 +31,9 @@ class CreateNewAccount extends GetView<LoginController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
                       LoginTextFormField(
                         textEditingController:
                             controller.signUpUsernameController,
@@ -45,6 +48,9 @@ class CreateNewAccount extends GetView<LoginController> {
                           }
                           return null;
                         },
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       LoginTextFormField(
                         textEditingController: controller.signUPEmailController,
@@ -63,11 +69,14 @@ class CreateNewAccount extends GetView<LoginController> {
                           return null;
                         },
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Obx(
                         () => LoginTextFormField(
                           textEditingController:
                               controller.signUpPasswordController,
-                          hintText: 'Password',
+                          hintText: 'New Password',
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: !controller.isPasswordVisible.value,
                           containerColor: kColor1,
@@ -97,6 +106,9 @@ class CreateNewAccount extends GetView<LoginController> {
                           },
                         ),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       LoginTextFormField(
                         textEditingController:
                             controller.signUpConfirmController,
@@ -114,6 +126,9 @@ class CreateNewAccount extends GetView<LoginController> {
                           }
                           return null;
                         },
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                     ],
                   ),
