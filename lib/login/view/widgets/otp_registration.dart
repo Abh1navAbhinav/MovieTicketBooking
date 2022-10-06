@@ -83,6 +83,8 @@ class OtpRegistration extends GetView<LoginController> {
               TextButton(
                 onPressed: () {
                   controller.isOTpRegistration.value = true;
+                  controller.loginButtonColor.value = kColor2;
+
                   // controller.buttonValue.value = 'Login';
                 },
                 child: Text(

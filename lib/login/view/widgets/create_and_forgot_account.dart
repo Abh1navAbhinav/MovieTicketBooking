@@ -16,6 +16,7 @@ class CreateAndForgotAccount extends GetView<LoginController> {
         TextButton(
           onPressed: () {
             controller.isCreatedNewAccount.value = true;
+            controller.loginButtonColor.value = kColor2;
           },
           child: Column(
             children: [

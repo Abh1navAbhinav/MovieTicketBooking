@@ -152,6 +152,7 @@ class CreateNewAccount extends GetView<LoginController> {
           TextButton(
             onPressed: () {
               controller.isCreatedNewAccount.value = false;
+              controller.loginButtonColor.value = kColor2;
               // controller.buttonValue.value = 'Login';
             },
             child: Text(

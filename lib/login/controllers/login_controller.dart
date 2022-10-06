@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticket_booking/home/view/home_page.dart';
+import 'package:ticket_booking/main.dart';
 
 class LoginController extends GetxController {
   //Boolean values
@@ -9,6 +11,7 @@ class LoginController extends GetxController {
   RxBool isTextFieldClicked = false.obs;
   RxBool isTextFieldClicked2 = false.obs;
   RxBool isOTpRegistration = true.obs;
+  RxBool isLoginButtonPressed = false.obs;
 
   // other variable declaration
 
@@ -37,4 +40,54 @@ class LoginController extends GetxController {
   TextEditingController signUpPasswordController = TextEditingController();
   TextEditingController signUpConfirmController = TextEditingController();
   TextEditingController otpSignUpController = TextEditingController();
+
+  //colors
+
+  Rx<Color> loginButtonColor = kColor2.obs;
+
+  //functions
+
+  nextButtonOnPress() async {
+    if (signupFormkey.currentState!.validate()) {
+      loginButtonColor.value = Colors.green;
+
+      await Future.delayed(
+        const Duration(milliseconds: 1000),
+      );
+
+      isOTpRegistration.value = false;
+      loginButtonColor.value = kColor2;
+    } else {
+      loginButtonColor.value = Colors.red;
+    }
+  }
+
+  loginButtonOnPressed() async {
+    if (loginFormkey.currentState!.validate()) {
+      loginButtonColor.value = Colors.green;
+      await Future.delayed(
+        const Duration(milliseconds: 1000),
+      );
+      Get.to(
+        () => const HomePage(),
+      );
+    } else {
+      loginButtonColor.value = Colors.red;
+    }
+  }
+
+  signUpButtonOnPressed() async {
+    if (otpFormkey.currentState!.validate()) {
+      loginButtonColor.value = Colors.green;
+      await Future.delayed(
+        const Duration(milliseconds: 1000),
+      );
+
+      Get.to(
+        () => const HomePage(),
+      );
+    } else {
+      loginButtonColor.value = Colors.red;
+    }
+  }
 }

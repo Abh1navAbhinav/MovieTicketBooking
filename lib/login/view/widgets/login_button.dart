@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_booking/home/view/home_page.dart';
 import 'package:ticket_booking/login/controllers/login_controller.dart';
 import 'package:ticket_booking/main.dart';
 
@@ -15,49 +14,33 @@ class LoginButton extends GetView<LoginController> {
       () => GestureDetector(
         onTap: controller.isCreatedNewAccount.value
             ? (controller.isOTpRegistration.value
-                ? () {
-                    if (controller.signupFormkey.currentState!.validate()) {
-                      //this is the next button on press function
-
-                      controller.isOTpRegistration.value = false;
-                    }
-                  }
-                : () {
-                    // this is the signUp button on press function
-                    if (controller.otpFormkey.currentState!.validate()) {
-                      Get.to(
-                        () => const HomePage(),
-                      );
-                    }
-                  })
-            : (() {
-                if (controller.loginFormkey.currentState!.validate()) {
-                  // this is the login button on press function
-                  Get.to(
-                    () => const HomePage(),
-                  );
-                }
-              }),
+                ? controller.nextButtonOnPress
+                : controller.signUpButtonOnPressed)
+            : controller.loginButtonOnPressed,
+        //
         child: Material(
           elevation: 5,
           shadowColor: Colors.lightBlue,
           borderRadius: BorderRadius.circular(10),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: kColor2,
-            ),
-            height: 50,
-            width: 100,
-            child: Center(
-              child: Obx(
-                () => Text(
-                  controller.isCreatedNewAccount.value
-                      ? (controller.isOTpRegistration.value
-                          ? "Next"
-                          : 'Sign Up')
-                      : 'Login',
-                  style: kButtonTextStyle,
+          child: Obx(
+            () => AnimatedContainer(
+              duration: const Duration(milliseconds: 800),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: controller.loginButtonColor.value,
+              ),
+              height: 50,
+              width: 100,
+              child: Center(
+                child: Obx(
+                  () => Text(
+                    controller.isCreatedNewAccount.value
+                        ? (controller.isOTpRegistration.value
+                            ? "Next"
+                            : 'Sign Up')
+                        : 'Login',
+                    style: kButtonTextStyle,
+                  ),
                 ),
               ),
             ),

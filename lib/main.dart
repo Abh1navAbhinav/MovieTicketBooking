@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         canvasColor: Colors.transparent,
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Color.fromARGB(255, 0, 149, 255),
+          cursorColor: Color.fromARGB(255, 0, 225, 255),
         ),
         textTheme: GoogleFonts.robotoTextTheme(
           Theme.of(context).textTheme,
