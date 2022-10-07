@@ -41,20 +41,13 @@ class LoginPage extends GetView<LoginController> {
                     secondCurve: Curves.easeInOutQuart,
                   ),
                 ),
-                // Obx(
-                //   () => SizedBox(
-                //     height: controller.isCreatedNewAccount.value ? 5 : 70,
-                //   ),
-                // ),
                 Obx(
                   () => !controller.isOTpRegistration.value
-                      ? AnimatedContainer(
-                          duration: const Duration(milliseconds: 1500),
+                      ? const SizedBox(
                           height: 80,
                         )
                       : const SizedBox(),
                 ),
-
                 const LoginButton(),
                 const SizedBox(
                   height: 50,

@@ -9,7 +9,8 @@ class LoginController extends GetxController {
   //Boolean values
 
   RxBool isCreatedNewAccount = false.obs;
-  RxBool isPasswordVisible = false.obs;
+  RxBool isPasswordVisibleLogin = false.obs;
+  RxBool isPasswordVisibleSignin = false.obs;
   RxBool isTextFieldClicked = false.obs;
   RxBool isTextFieldClicked2 = false.obs;
   RxBool isOTpRegistration = true.obs;

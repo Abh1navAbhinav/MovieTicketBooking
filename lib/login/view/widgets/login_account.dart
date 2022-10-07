@@ -72,19 +72,19 @@ class LoginAccount extends GetView<LoginController> {
                   textEditingController: controller.loginPasswordController,
                   hintText: 'Password',
                   keyboardType: TextInputType.visiblePassword,
-                  obscureText: !controller.isPasswordVisible.value,
+                  obscureText: !controller.isPasswordVisibleLogin.value,
                   textColor: kColor1,
                   containerColor: kColor2,
                   isPasswordField: IconButton(
                     onPressed: () {
-                      controller.isPasswordVisible.value =
-                          !controller.isPasswordVisible.value;
+                      controller.isPasswordVisibleLogin.value =
+                          !controller.isPasswordVisibleLogin.value;
                     },
                     icon: Icon(
-                      controller.isPasswordVisible.value
+                      controller.isPasswordVisibleLogin.value
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: controller.isPasswordVisible.value
+                      color: controller.isPasswordVisibleLogin.value
                           ? Colors.black54
                           : Colors.black38,
                     ),

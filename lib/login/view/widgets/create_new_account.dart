@@ -90,19 +90,20 @@ class CreateNewAccount extends GetView<LoginController> {
                               controller.signUpPasswordController,
                           hintText: 'New Password',
                           keyboardType: TextInputType.visiblePassword,
-                          obscureText: !controller.isPasswordVisible.value,
+                          obscureText:
+                              !controller.isPasswordVisibleSignin.value,
                           containerColor: kColor1,
                           textColor: kColor2,
                           isPasswordField: IconButton(
                             onPressed: () {
-                              controller.isPasswordVisible.value =
-                                  !controller.isPasswordVisible.value;
+                              controller.isPasswordVisibleSignin.value =
+                                  !controller.isPasswordVisibleSignin.value;
                             },
                             icon: Icon(
-                              controller.isPasswordVisible.value
+                              controller.isPasswordVisibleSignin.value
                                   ? Icons.visibility
                                   : Icons.visibility_off,
-                              color: controller.isPasswordVisible.value
+                              color: controller.isPasswordVisibleSignin.value
                                   ? Colors.black54
                                   : Colors.black38,
                             ),
