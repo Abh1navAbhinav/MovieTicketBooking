@@ -151,6 +151,9 @@ class CreateNewAccount extends GetView<LoginController> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 10,
+          ),
           TextButton(
             onPressed: () {
               controller.isCreatedNewAccount.value = false;
@@ -163,7 +166,7 @@ class CreateNewAccount extends GetView<LoginController> {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
         ],
       ),
