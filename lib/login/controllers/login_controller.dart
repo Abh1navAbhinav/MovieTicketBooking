@@ -28,7 +28,7 @@ class LoginController extends GetxController {
 
   // focus nodes
 
-  FocusNode textfieldFocusNode = FocusNode();
+  FocusNode mobileTextfieldFocusNode = FocusNode();
 
   //RegExp validation
   RegExp emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$');

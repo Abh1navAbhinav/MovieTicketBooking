@@ -18,6 +18,7 @@ class LoginTextFormField extends GetView<LoginController> {
     this.onChanged,
     this.validator,
     this.textInputFormatter,
+    this.focusNode,
   }) : super(key: key);
   final String hintText;
   final TextInputType keyboardType;
@@ -28,6 +29,7 @@ class LoginTextFormField extends GetView<LoginController> {
   final String? Function(String?)? validator;
   final TextEditingController textEditingController;
   List<TextInputFormatter>? textInputFormatter;
+  FocusNode? focusNode;
 
   Widget? isPasswordField;
 
@@ -48,6 +50,7 @@ class LoginTextFormField extends GetView<LoginController> {
           children: [
             Expanded(
               child: TextFormField(
+                focusNode: focusNode,
                 controller: textEditingController,
                 onChanged: onChanged,
                 decoration: InputDecoration(
@@ -56,6 +59,7 @@ class LoginTextFormField extends GetView<LoginController> {
                   hintStyle: GoogleFonts.roboto(
                     color: textColor,
                   ),
+
                   // suffixIcon: isPasswordField,
                 ),
                 obscureText: obscureText,

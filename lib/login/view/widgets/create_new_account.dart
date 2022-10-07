@@ -61,6 +61,7 @@ class CreateNewAccount extends GetView<LoginController> {
                         height: 10,
                       ),
                       LoginTextFormField(
+                        focusNode: controller.mobileTextfieldFocusNode,
                         textEditingController:
                             controller.signUPMobileController,
                         hintText: 'Mobile number',

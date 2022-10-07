@@ -68,8 +68,21 @@ class OtpRegistration extends GetView<LoginController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                          "   Mobile Number: ${controller.signUPMobileController.text}"),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            const TextSpan(text: "   Mobile Number: "),
+                            TextSpan(
+                              text: controller.signUPMobileController.text,
+                              style: const TextStyle(
+                                color: Colors.brown,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       const Spacer(),
                     ],
                   ),
@@ -84,6 +97,12 @@ class OtpRegistration extends GetView<LoginController> {
                 onPressed: () {
                   controller.isOTpRegistration.value = true;
                   controller.loginButtonColor.value = kColor2;
+
+                  controller.mobileTextfieldFocusNode.requestFocus();
+                  controller.signUPMobileController.selection = TextSelection(
+                    baseOffset: 0,
+                    extentOffset: controller.signUPMobileController.text.length,
+                  );
 
                   // controller.buttonValue.value = 'Login';
                 },
