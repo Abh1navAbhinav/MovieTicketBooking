@@ -46,25 +46,69 @@ class LoginPage extends GetView<LoginController> {
                 //     height: controller.isCreatedNewAccount.value ? 5 : 70,
                 //   ),
                 // ),
+                Obx(
+                  () => !controller.isOTpRegistration.value
+                      ? AnimatedContainer(
+                          duration: const Duration(milliseconds: 1500),
+                          height: 80,
+                        )
+                      : const SizedBox(),
+                ),
 
                 const LoginButton(),
                 const SizedBox(
                   height: 50,
                 ),
-                Text(
-                  'or',
-                  style: ktextStyle,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    SocialMediaIcon(image: 'assets/icons/facebook.png'),
-                    SocialMediaIcon(image: 'assets/icons/google.png'),
-                    SocialMediaIcon(image: 'assets/icons/twitter.png'),
-                  ],
+                Obx(
+                  () => controller.isOTpRegistration.value
+                      ? AnimatedContainer(
+                          duration: const Duration(seconds: 1),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: const Divider(
+                                      thickness: 1,
+                                      color: Colors.black45,
+                                    ),
+                                  ),
+                                  Text(
+                                    '   or   ',
+                                    style: ktextStyle,
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                    child: const Divider(
+                                      thickness: 1,
+                                      color: Colors.black45,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: const [
+                                  SocialMediaIcon(
+                                      image: 'assets/icons/facebook.png'),
+                                  SocialMediaIcon(
+                                      image: 'assets/icons/google.png'),
+                                  SocialMediaIcon(
+                                      image: 'assets/icons/twitter.png'),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      : const SizedBox(),
                 ),
               ],
             ),

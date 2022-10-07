@@ -22,26 +22,20 @@ class LoginButton extends GetView<LoginController> {
           elevation: 5,
           shadowColor: Colors.lightBlue,
           borderRadius: BorderRadius.circular(10),
-          child: Obx(
-            () => AnimatedContainer(
-              duration: const Duration(milliseconds: 800),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: controller.loginButtonColor.value,
-              ),
-              height: 50,
-              width: 100,
-              child: Center(
-                child: Obx(
-                  () => Text(
-                    controller.isCreatedNewAccount.value
-                        ? (controller.isOTpRegistration.value
-                            ? "Next"
-                            : 'Sign Up')
-                        : 'Login',
-                    style: kButtonTextStyle,
-                  ),
-                ),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 1000),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: controller.loginButtonColor.value,
+            ),
+            height: 50,
+            width: !controller.isOTpRegistration.value ? 250 : 100,
+            child: Center(
+              child: Text(
+                controller.isCreatedNewAccount.value
+                    ? (controller.isOTpRegistration.value ? "Next" : 'Sign Up')
+                    : 'Login',
+                style: kButtonTextStyle,
               ),
             ),
           ),

@@ -22,6 +22,7 @@ class GridImages extends StatelessWidget {
             image: AssetImage(
               image,
             ),
+            fit: BoxFit.cover,
           ),
         ),
       ),

@@ -16,6 +16,7 @@ dependencies:
   get: ^4.6.5
   google_fonts: ^3.0.1
   pinput: ^2.2.13
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:
