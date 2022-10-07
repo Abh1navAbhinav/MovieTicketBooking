@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/home/view/home_page.dart';
@@ -12,6 +14,7 @@ class LoginController extends GetxController {
   RxBool isTextFieldClicked2 = false.obs;
   RxBool isOTpRegistration = true.obs;
   RxBool isLoginButtonPressed = false.obs;
+  RxBool isDividerSize = false.obs;
 
   // other variable declaration
 
@@ -89,5 +92,13 @@ class LoginController extends GetxController {
     } else {
       loginButtonColor.value = Colors.red;
     }
+  }
+
+  @override
+  void onInit() async {
+    await Future.delayed(const Duration(seconds: 2));
+    isDividerSize.value = true;
+    log("onInit");
+    super.onInit();
   }
 }

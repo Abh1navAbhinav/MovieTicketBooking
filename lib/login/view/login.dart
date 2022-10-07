@@ -68,9 +68,11 @@ class LoginPage extends GetView<LoginController> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
+                                  AnimatedContainer(
+                                    duration: const Duration(seconds: 1),
+                                    width: !controller.isDividerSize.value
+                                        ? 0
+                                        : MediaQuery.of(context).size.width / 3,
                                     child: const Divider(
                                       thickness: 1,
                                       color: Colors.black45,
@@ -80,9 +82,11 @@ class LoginPage extends GetView<LoginController> {
                                     '   or   ',
                                     style: ktextStyle,
                                   ),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
+                                  AnimatedContainer(
+                                    duration: const Duration(seconds: 1),
+                                    width: !controller.isDividerSize.value
+                                        ? 0
+                                        : MediaQuery.of(context).size.width / 3,
                                     child: const Divider(
                                       thickness: 1,
                                       color: Colors.black45,
