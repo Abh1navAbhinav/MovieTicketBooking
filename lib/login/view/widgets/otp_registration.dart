@@ -94,11 +94,16 @@ class OtpRegistration extends GetView<LoginController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: () {
+                onPressed: () async {
                   controller.isOTpRegistration.value = true;
                   controller.loginButtonColor.value = kColor2;
-
+                  await Future.delayed(
+                    const Duration(milliseconds: 500),
+                  );
                   controller.mobileTextfieldFocusNode.requestFocus();
+                  await Future.delayed(
+                    const Duration(milliseconds: 500),
+                  );
                   controller.signUPMobileController.selection = TextSelection(
                     baseOffset: 0,
                     extentOffset: controller.signUPMobileController.text.length,

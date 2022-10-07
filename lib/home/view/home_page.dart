@@ -10,55 +10,51 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return /* Scaffold(
-      backgroundColor: kColor1,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CarouselSliderWidget(),
-          const SizedBox(
-            height: 20,
-          ),
-          const HomePageHorizontalItems(),
-        ],
-      ),
-    ); */
-        Scaffold(
-      backgroundColor: kColor1,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 202,
-            backgroundColor: Colors.black,
-            floating: true,
-            shadowColor: Colors.blue,
-            pinned: false,
-            flexibleSpace: FlexibleSpaceBar(
-              background: CarouselSliderWidget(),
+    return RefreshIndicator(
+      onRefresh: () async {
+        return controller.carouselItemImage.shuffle();
+      },
+      child: Scaffold(
+        backgroundColor: kColor2,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              automaticallyImplyLeading: false,
+              expandedHeight: 202,
+              backgroundColor: kColor1,
+              floating: true,
+              shadowColor: Colors.blue,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                background: CarouselSliderWidget(),
+              ),
+              // title: const CupertinoSearchTextField(
+              //   backgroundColor: Colors.black,
+              // ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: const [
-                HomePageHorizontalItems(
-                  gridHeading: 'Top Trending',
-                ),
-                HomePageHorizontalItems(
-                  gridHeading: 'Up Comming',
-                ),
-                HomePageHorizontalItems(
-                  gridHeading: 'Screen 1',
-                ),
-                HomePageHorizontalItems(
-                  gridHeading: 'Screen 2',
-                ),
-                HomePageHorizontalItems(
-                  gridHeading: 'House Full',
-                ),
-              ],
+            SliverToBoxAdapter(
+              child: Column(
+                children: const [
+                  HomePageHorizontalItems(
+                    gridHeading: 'Top Trending',
+                  ),
+                  HomePageHorizontalItems(
+                    gridHeading: 'Up Comming',
+                  ),
+                  HomePageHorizontalItems(
+                    gridHeading: 'Screen 1',
+                  ),
+                  HomePageHorizontalItems(
+                    gridHeading: 'Screen 2',
+                  ),
+                  HomePageHorizontalItems(
+                    gridHeading: 'House Full',
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
