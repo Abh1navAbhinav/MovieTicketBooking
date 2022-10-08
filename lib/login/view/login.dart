@@ -69,7 +69,7 @@ class LoginPage extends GetView<LoginController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     AnimatedContainer(
-                                      duration: const Duration(seconds: 1),
+                                      duration: const Duration(seconds: 2),
                                       width: !controller.isDividerSize.value
                                           ? 0
                                           : MediaQuery.of(context).size.width /
@@ -84,7 +84,7 @@ class LoginPage extends GetView<LoginController> {
                                       style: ktextStyle,
                                     ),
                                     AnimatedContainer(
-                                      duration: const Duration(seconds: 1),
+                                      duration: const Duration(seconds: 2),
                                       width: !controller.isDividerSize.value
                                           ? 0
                                           : MediaQuery.of(context).size.width /

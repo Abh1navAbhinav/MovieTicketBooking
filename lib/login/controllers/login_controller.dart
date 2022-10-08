@@ -99,6 +99,7 @@ class LoginController extends GetxController {
   void onInit() async {
     await Future.delayed(const Duration(seconds: 2));
     isDividerSize.value = true;
+
     log("onInit");
     super.onInit();
   }
