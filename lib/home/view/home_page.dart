@@ -24,7 +24,7 @@ class HomePage extends GetView<HomeController> {
               backgroundColor: kColor1,
               floating: true,
               shadowColor: Colors.blue,
-              pinned: true,
+              pinned: false,
               flexibleSpace: FlexibleSpaceBar(
                 background: CarouselSliderWidget(),
               ),

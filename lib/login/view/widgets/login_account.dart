@@ -67,7 +67,7 @@ class LoginAccount extends GetView<LoginController> {
                 duration: const Duration(
                   seconds: 1,
                 ),
-                shadowColor: Colors.cyan,
+                shadowColor: const Color.fromARGB(255, 0, 225, 255),
                 child: LoginTextFormField(
                   textEditingController: controller.loginPasswordController,
                   hintText: 'Password',
