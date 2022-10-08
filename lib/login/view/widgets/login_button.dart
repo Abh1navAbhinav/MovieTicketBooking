@@ -29,7 +29,9 @@ class LoginButton extends GetView<LoginController> {
               color: controller.loginButtonColor.value,
             ),
             height: 50,
-            width: !controller.isOTpRegistration.value ? 250 : 100,
+            width: controller.isCreatedNewAccount.value
+                ? (!controller.isOTpRegistration.value ? 150 : 250)
+                : 100,
             child: Center(
               child: Text(
                 controller.isCreatedNewAccount.value

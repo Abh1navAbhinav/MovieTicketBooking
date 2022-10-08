@@ -5,7 +5,7 @@ import 'package:ticket_booking/login/view/widgets/create_new_account.dart';
 import 'package:ticket_booking/login/view/widgets/login_account.dart';
 import 'package:ticket_booking/login/view/widgets/login_button.dart';
 import 'package:ticket_booking/login/view/widgets/otp_registration.dart';
-import 'package:ticket_booking/login/view/widgets/social_media_icon.dart';
+import 'package:ticket_booking/login/view/widgets/signupbutton.dart';
 import 'package:ticket_booking/main.dart';
 
 class LoginPage extends GetView<LoginController> {
@@ -31,8 +31,8 @@ class LoginPage extends GetView<LoginController> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 130,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 8,
                   ),
                   Obx(
                     () => AnimatedCrossFade(
@@ -49,18 +49,18 @@ class LoginPage extends GetView<LoginController> {
                     ),
                   ),
                   Obx(
-                    () => !controller.isOTpRegistration.value
+                    () => controller.isCreatedNewAccount.value
                         ? const SizedBox(
                             height: 80,
                           )
                         : const SizedBox(),
                   ),
                   const LoginButton(),
-                  const SizedBox(
-                    height: 50,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width / 5,
                   ),
                   Obx(
-                    () => controller.isOTpRegistration.value
+                    () => !controller.isCreatedNewAccount.value
                         ? AnimatedContainer(
                             duration: const Duration(seconds: 1),
                             child: Column(
@@ -99,7 +99,7 @@ class LoginPage extends GetView<LoginController> {
                                 const SizedBox(
                                   height: 30,
                                 ),
-                                Row(
+                                /*    Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: const [
@@ -110,7 +110,11 @@ class LoginPage extends GetView<LoginController> {
                                     SocialMediaIcon(
                                         image: 'assets/icons/twitter.png'),
                                   ],
-                                ),
+                                ), */
+                                // const SizedBox(
+                                //   height: 80,
+                                // ),
+                                const CreateNewAccountButton(),
                               ],
                             ),
                           )

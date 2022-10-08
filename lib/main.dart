@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
 //Global Constant Values
 
 //Color
-Color kColor2 = const Color.fromARGB(255, 242, 244, 246);
-Color kColor1 = const Color.fromARGB(255, 175, 201, 220);
+Color kColor1 = const Color.fromARGB(255, 242, 244, 246);
+Color kColor2 = const Color.fromARGB(255, 175, 201, 220);
 
 //TextStyle
 TextStyle kButtonTextStyle = GoogleFonts.roboto(
