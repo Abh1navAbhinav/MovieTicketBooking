@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
-import 'package:ticket_booking/view/login/view/widgets/forgot_account.dart';
-import 'package:ticket_booking/view/login/view/widgets/login_text_form_field.dart';
 import 'package:ticket_booking/main.dart';
+import 'package:ticket_booking/view/login/widgets/forgot_account.dart';
+import 'package:ticket_booking/view/login/widgets/login_text_form_field.dart';
 
 class LoginAccount extends GetView<LoginController> {
   const LoginAccount({
