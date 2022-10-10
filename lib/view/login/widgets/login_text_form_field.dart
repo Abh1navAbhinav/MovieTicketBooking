@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ticket_booking/login/controllers/login_controller.dart';
+import 'package:ticket_booking/controller/login_controller.dart';
 
 // ignore: must_be_immutable
 class LoginTextFormField extends GetView<LoginController> {

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_booking/home/view/home_page.dart';
+import 'package:ticket_booking/home/home_page.dart';
 import 'package:ticket_booking/main.dart';
 
 class LoginController extends GetxController {

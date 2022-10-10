@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ticket_booking/login/view/login.dart';
+import 'package:ticket_booking/view/login/login.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_booking/home/controllers/home_controller.dart';
-import 'package:ticket_booking/home/view/widgets/carousel_slider.dart';
-import 'package:ticket_booking/home/view/widgets/horizontal_items.dart';
+import 'package:ticket_booking/controller/home_controller.dart';
+import 'package:ticket_booking/home/widgets/carousel_slider.dart';
+import 'package:ticket_booking/home/widgets/horizontal_items.dart';
 import 'package:ticket_booking/main.dart';
 
 class HomePage extends GetView<HomeController> {

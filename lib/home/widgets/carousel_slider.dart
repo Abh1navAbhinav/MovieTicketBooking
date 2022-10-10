@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_booking/home/controllers/home_controller.dart';
+import 'package:ticket_booking/controller/home_controller.dart';
 
 class CarouselSliderWidget extends GetView<HomeController> {
   CarouselSliderWidget({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_booking/home/controllers/home_controller.dart';
-import 'package:ticket_booking/home/view/widgets/grid_images.dart';
+import 'package:ticket_booking/controller/home_controller.dart';
+import 'package:ticket_booking/home/widgets/grid_images.dart';
 
 class HomePageHorizontalItems extends GetView<HomeController> {
   const HomePageHorizontalItems({

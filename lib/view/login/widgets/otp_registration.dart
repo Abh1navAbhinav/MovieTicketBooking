@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
-import 'package:ticket_booking/login/controllers/login_controller.dart';
+import 'package:ticket_booking/controller/login_controller.dart';
 import 'package:ticket_booking/main.dart';
 
 class OtpRegistration extends GetView<LoginController> {

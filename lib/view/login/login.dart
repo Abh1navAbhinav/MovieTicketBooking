@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_booking/login/controllers/login_controller.dart';
-import 'package:ticket_booking/login/view/widgets/create_new_account.dart';
-import 'package:ticket_booking/login/view/widgets/createnewaccount.dart';
-import 'package:ticket_booking/login/view/widgets/login_account.dart';
-import 'package:ticket_booking/login/view/widgets/login_button.dart';
-import 'package:ticket_booking/login/view/widgets/login_text.dart';
-import 'package:ticket_booking/login/view/widgets/otp_registration.dart';
+import 'package:ticket_booking/controller/login_controller.dart';
+import 'package:ticket_booking/view/login/widgets/create_new_account.dart';
+import 'package:ticket_booking/view/login/widgets/createnewaccount.dart';
+import 'package:ticket_booking/view/login/widgets/login_account.dart';
+import 'package:ticket_booking/view/login/widgets/login_button.dart';
+import 'package:ticket_booking/view/login/widgets/login_text.dart';
+import 'package:ticket_booking/view/login/widgets/otp_registration.dart';
 import 'package:ticket_booking/main.dart';
 
 class LoginPage extends GetView<LoginController> {
