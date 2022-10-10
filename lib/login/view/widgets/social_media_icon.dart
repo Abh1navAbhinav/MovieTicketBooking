@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_booking/main.dart';
 
 class SocialMediaIcon extends StatelessWidget {
   const SocialMediaIcon({
@@ -17,7 +16,7 @@ class SocialMediaIcon extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: kColor2,
+          color: const Color.fromARGB(255, 242, 244, 246),
         ),
         width: 40,
         height: 40,

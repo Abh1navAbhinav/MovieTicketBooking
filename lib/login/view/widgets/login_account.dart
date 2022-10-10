@@ -34,8 +34,8 @@ class LoginAccount extends GetView<LoginController> {
                   hintText: 'Username',
                   keyboardType: TextInputType.emailAddress,
                   obscureText: false,
-                  containerColor: kColor2,
-                  textColor: kColor1,
+                  containerColor: kColor30,
+                  textColor: const Color.fromARGB(255, 242, 244, 246),
                   onChanged: (value) {
                     if (value.isNotEmpty) {
                       controller.isTextFieldClicked2.value = true;
@@ -73,8 +73,8 @@ class LoginAccount extends GetView<LoginController> {
                   hintText: 'Password',
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: !controller.isPasswordVisibleLogin.value,
-                  textColor: kColor1,
-                  containerColor: kColor2,
+                  textColor: const Color.fromARGB(255, 242, 244, 246),
+                  containerColor: kColor30,
                   isPasswordField: IconButton(
                     onPressed: () {
                       controller.isPasswordVisibleLogin.value =

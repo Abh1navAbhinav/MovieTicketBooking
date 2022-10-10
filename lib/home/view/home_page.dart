@@ -15,13 +15,13 @@ class HomePage extends GetView<HomeController> {
         return controller.carouselItemImage.shuffle();
       },
       child: Scaffold(
-        backgroundColor: kColor2,
+        backgroundColor: kColor10,
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
               automaticallyImplyLeading: false,
               expandedHeight: 202,
-              backgroundColor: kColor1,
+              backgroundColor: kColor10,
               floating: true,
               shadowColor: Colors.blue,
               pinned: false,

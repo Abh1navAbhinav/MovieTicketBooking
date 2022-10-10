@@ -30,7 +30,7 @@ class OtpRegistration extends GetView<LoginController> {
               width: MediaQuery.of(context).size.width / 1.1,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: kColor2,
+                color: kColor30,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -96,7 +96,7 @@ class OtpRegistration extends GetView<LoginController> {
               TextButton(
                 onPressed: () async {
                   controller.isOTpRegistration.value = true;
-                  controller.loginButtonColor.value = kColor2;
+                  controller.loginButtonColor.value = kColor40;
                   await Future.delayed(
                     const Duration(milliseconds: 500),
                   );

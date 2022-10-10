@@ -47,7 +47,7 @@ class LoginController extends GetxController {
 
   //colors
 
-  Rx<Color> loginButtonColor = kColor2.obs;
+  Rx<Color> loginButtonColor = kColor40.obs;
 
   //functions
 
@@ -60,7 +60,7 @@ class LoginController extends GetxController {
       );
 
       isOTpRegistration.value = false;
-      loginButtonColor.value = kColor2;
+      loginButtonColor.value = kColor40;
     } else {
       loginButtonColor.value = Colors.red;
     }
