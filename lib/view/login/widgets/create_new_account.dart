@@ -21,10 +21,8 @@ class CreateNewAccount extends GetView<LoginController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
                   LoginTextFormField(
+                    isTextFieldClicked: controller.isTextFieldClicked3,
                     textEditingController: controller.signUpUsernameController,
                     hintText: 'Username',
                     keyboardType: TextInputType.name,
@@ -45,10 +43,8 @@ class CreateNewAccount extends GetView<LoginController> {
                       return null;
                     },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   LoginTextFormField(
+                    isTextFieldClicked: controller.isTextFieldClicked4,
                     focusNode: controller.mobileTextfieldFocusNode,
                     textEditingController: controller.signUPMobileController,
                     hintText: 'Mobile number',
@@ -69,11 +65,9 @@ class CreateNewAccount extends GetView<LoginController> {
                       return null;
                     },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   Obx(
                     () => LoginTextFormField(
+                      isTextFieldClicked: controller.isTextFieldClicked5,
                       textEditingController:
                           controller.signUpPasswordController,
                       hintText: 'New Password',
@@ -106,10 +100,8 @@ class CreateNewAccount extends GetView<LoginController> {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   LoginTextFormField(
+                    isTextFieldClicked: controller.isTextFieldClicked6,
                     textEditingController: controller.signUpConfirmController,
                     hintText: 'Confirm Password',
                     keyboardType: TextInputType.visiblePassword,
