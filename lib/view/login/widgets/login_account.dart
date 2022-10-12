@@ -22,17 +22,17 @@ class LoginAccount extends GetView<LoginController> {
             LoginTextFormField(
               isTextFieldClicked: controller.isTextFieldClicked1,
               textEditingController: controller.loginEmailController,
-              hintText: 'Username',
+              hintText: 'E-mail',
               keyboardType: TextInputType.emailAddress,
               obscureText: false,
               containerColor: constantObj.kColor30,
               textColor: const Color.fromARGB(255, 242, 244, 246),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Username is required';
+                  return 'E-mail is required';
                 }
-                if (value.length < 3 || value.contains(' ')) {
-                  return 'Username is not valid';
+                if (!controller.emailValid.hasMatch(value)) {
+                  return 'E-mail is not valid';
                 }
                 return null;
               },

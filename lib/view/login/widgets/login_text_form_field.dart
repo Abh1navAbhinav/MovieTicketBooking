@@ -44,7 +44,7 @@ class LoginTextFormField extends GetView<LoginController> {
                 ? EdgeInsets.only(
                     left: 3,
                     bottom: 2,
-                    top: (hintText == 'Username') ? 0 : 10,
+                    top: (hintText == 'E-mail') ? 0 : 10,
                   )
                 : const EdgeInsets.all(0),
             child: AnimatedOpacity(

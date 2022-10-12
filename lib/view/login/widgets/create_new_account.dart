@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
@@ -24,47 +23,48 @@ class CreateNewAccount extends GetView<LoginController> {
                   LoginTextFormField(
                     isTextFieldClicked: controller.isTextFieldClicked3,
                     textEditingController: controller.signUpUsernameController,
-                    hintText: 'Username',
+                    hintText: 'E-mail',
                     keyboardType: TextInputType.name,
                     obscureText: false,
                     containerColor: constantObj.kColor30,
                     textColor: const Color.fromARGB(255, 242, 244, 246),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Username is required';
+                        return 'E-mail is required';
                       }
-                      if (value.length < 3) {
-                        return 'Insufficient length';
-                      }
+
                       if (value.contains(' ')) {
                         return 'Remove all whiteSpaces';
+                      }
+                      if (!controller.emailValid.hasMatch(value)) {
+                        return 'E-mail is not valid';
                       }
 
                       return null;
                     },
                   ),
-                  LoginTextFormField(
-                    isTextFieldClicked: controller.isTextFieldClicked4,
-                    focusNode: controller.mobileTextfieldFocusNode,
-                    textEditingController: controller.signUPMobileController,
-                    hintText: 'Mobile number',
-                    keyboardType: TextInputType.phone,
-                    textInputFormatter: [
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    obscureText: false,
-                    containerColor: constantObj.kColor30,
-                    textColor: const Color.fromARGB(255, 242, 244, 246),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Mobile is required';
-                      }
-                      if (value.length != 10) {
-                        return 'Moblie is not valid';
-                      }
-                      return null;
-                    },
-                  ),
+                  // LoginTextFormField(
+                  //   isTextFieldClicked: controller.isTextFieldClicked4,
+                  //   focusNode: controller.mobileTextfieldFocusNode,
+                  //   textEditingController: controller.signUPMobileController,
+                  //   hintText: 'Mobile number',
+                  //   keyboardType: TextInputType.phone,
+                  //   textInputFormatter: [
+                  //     FilteringTextInputFormatter.digitsOnly
+                  //   ],
+                  //   obscureText: false,
+                  //   containerColor: constantObj.kColor30,
+                  //   textColor: const Color.fromARGB(255, 242, 244, 246),
+                  //   validator: (value) {
+                  //     if (value == null || value.isEmpty) {
+                  //       return 'Mobile is required';
+                  //     }
+                  //     if (value.length != 10) {
+                  //       return 'Moblie is not valid';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
                   Obx(
                     () => LoginTextFormField(
                       isTextFieldClicked: controller.isTextFieldClicked5,

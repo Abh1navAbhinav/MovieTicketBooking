@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
@@ -58,44 +56,63 @@ class LoginController extends GetxController {
   nextButtonOnPress() async {
     if (signupFormkey.currentState!.validate()) {
       loginButtonColor.value = Colors.green;
-
-      await Future.delayed(
-        const Duration(milliseconds: 1000),
-      );
-
+      await Future.delayed(const Duration(milliseconds: 1000));
       isOTpRegistration.value = false;
       loginButtonColor.value = constantObj.kColor40;
     } else {
       loginButtonColor.value = Colors.red;
+      Get.snackbar(
+        margin: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 10,
+        ),
+        borderWidth: 2,
+        borderColor: Colors.black,
+        backgroundColor: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        'Warning',
+        'Enter all the details carefully',
+      );
     }
   }
 
   loginButtonOnPressed() async {
     if (loginFormkey.currentState!.validate()) {
       loginButtonColor.value = Colors.green;
-      await Future.delayed(
-        const Duration(milliseconds: 1000),
+      await Future.delayed(const Duration(milliseconds: 1000));
+      Get.snackbar(
+        'Succcess',
+        'Successfully loged in.',
       );
       Get.to(
         () => const HomePage(),
       );
     } else {
       loginButtonColor.value = Colors.red;
+      Get.snackbar(
+        'Warning',
+        'Email or password does not match.',
+      );
     }
   }
 
   signUpButtonOnPressed() async {
     if (otpFormkey.currentState!.validate()) {
       loginButtonColor.value = Colors.green;
-      await Future.delayed(
-        const Duration(milliseconds: 1000),
-      );
-
+      await Future.delayed(const Duration(milliseconds: 1000));
       Get.to(
         () => const HomePage(),
       );
+      Get.snackbar(
+        'Succcess',
+        'Successfully loged in.',
+      );
     } else {
       loginButtonColor.value = Colors.red;
+      Get.snackbar(
+        'Warning',
+        'Invalid OTP.',
+      );
     }
   }
 
@@ -103,8 +120,6 @@ class LoginController extends GetxController {
   void onInit() async {
     await Future.delayed(const Duration(seconds: 2));
     isDividerSize.value = true;
-
-    log("onInit");
     super.onInit();
   }
 }
