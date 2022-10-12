@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
-import 'package:ticket_booking/main.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/view/login/widgets/login_text_form_field.dart';
 
 class CreateNewAccount extends GetView<LoginController> {
@@ -27,7 +27,7 @@ class CreateNewAccount extends GetView<LoginController> {
                     hintText: 'Username',
                     keyboardType: TextInputType.name,
                     obscureText: false,
-                    containerColor: kColor30,
+                    containerColor: constantObj.kColor30,
                     textColor: const Color.fromARGB(255, 242, 244, 246),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -53,7 +53,7 @@ class CreateNewAccount extends GetView<LoginController> {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     obscureText: false,
-                    containerColor: kColor30,
+                    containerColor: constantObj.kColor30,
                     textColor: const Color.fromARGB(255, 242, 244, 246),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -73,7 +73,7 @@ class CreateNewAccount extends GetView<LoginController> {
                       hintText: 'New Password',
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: !controller.isPasswordVisibleSignin.value,
-                      containerColor: kColor30,
+                      containerColor: constantObj.kColor30,
                       textColor: const Color.fromARGB(255, 242, 244, 246),
                       isPasswordField: IconButton(
                         onPressed: () {
@@ -106,7 +106,7 @@ class CreateNewAccount extends GetView<LoginController> {
                     hintText: 'Confirm Password',
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
-                    containerColor: kColor30,
+                    containerColor: constantObj.kColor30,
                     textColor: const Color.fromARGB(255, 242, 244, 246),
                     validator: (value) {
                       if (value == null || value.isEmpty) {

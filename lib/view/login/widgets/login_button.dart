@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
-import 'package:ticket_booking/main.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 
 class LoginButton extends GetView<LoginController> {
   const LoginButton({
@@ -37,7 +37,7 @@ class LoginButton extends GetView<LoginController> {
                 controller.isCreatedNewAccount.value
                     ? (controller.isOTpRegistration.value ? "Next" : 'Sign Up')
                     : 'Login',
-                style: kButtonTextStyle,
+                style: constantObj.kButtonTextStyle,
               ),
             ),
           ),

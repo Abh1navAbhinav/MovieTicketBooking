@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
-import 'package:ticket_booking/main.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/view/login/widgets/forgot_account.dart';
 import 'package:ticket_booking/view/login/widgets/login_text_form_field.dart';
 
@@ -25,7 +25,7 @@ class LoginAccount extends GetView<LoginController> {
               hintText: 'Username',
               keyboardType: TextInputType.emailAddress,
               obscureText: false,
-              containerColor: kColor30,
+              containerColor: constantObj.kColor30,
               textColor: const Color.fromARGB(255, 242, 244, 246),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -45,7 +45,7 @@ class LoginAccount extends GetView<LoginController> {
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: !controller.isPasswordVisibleLogin.value,
                 textColor: const Color.fromARGB(255, 242, 244, 246),
-                containerColor: kColor30,
+                containerColor: constantObj.kColor30,
                 isPasswordField: IconButton(
                   onPressed: () {
                     controller.isPasswordVisibleLogin.value =

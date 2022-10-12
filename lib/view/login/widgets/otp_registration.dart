@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
-import 'package:ticket_booking/main.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 
 class OtpRegistration extends GetView<LoginController> {
   const OtpRegistration({super.key});
@@ -30,7 +30,7 @@ class OtpRegistration extends GetView<LoginController> {
               width: MediaQuery.of(context).size.width / 1.1,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: kColor30,
+                color: constantObj.kColor30,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -96,7 +96,7 @@ class OtpRegistration extends GetView<LoginController> {
               TextButton(
                 onPressed: () async {
                   controller.isOTpRegistration.value = true;
-                  controller.loginButtonColor.value = kColor40;
+                  controller.loginButtonColor.value = constantObj.kColor40;
                   await Future.delayed(
                     const Duration(milliseconds: 500),
                   );
@@ -113,7 +113,7 @@ class OtpRegistration extends GetView<LoginController> {
                 },
                 child: Text(
                   'Change Mobile number',
-                  style: ktextStyle,
+                  style: constantObj.ktextStyle,
                 ),
               ),
               TextButton(
@@ -123,7 +123,7 @@ class OtpRegistration extends GetView<LoginController> {
                 },
                 child: Text(
                   'Resend OTP!',
-                  style: ktextStyle,
+                  style: constantObj.ktextStyle,
                 ),
               ),
             ],

@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/home/home_page.dart';
-import 'package:ticket_booking/main.dart';
 
 class LoginController extends GetxController {
   //Boolean values
@@ -51,7 +51,7 @@ class LoginController extends GetxController {
 
   //colors
 
-  Rx<Color> loginButtonColor = kColor40.obs;
+  Rx<Color> loginButtonColor = constantObj.kColor40.obs;
 
   //functions
 
@@ -64,7 +64,7 @@ class LoginController extends GetxController {
       );
 
       isOTpRegistration.value = false;
-      loginButtonColor.value = kColor40;
+      loginButtonColor.value = constantObj.kColor40;
     } else {
       loginButtonColor.value = Colors.red;
     }

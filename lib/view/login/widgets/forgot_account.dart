@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
-import 'package:ticket_booking/main.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 
 class ForgotAccountButton extends GetView<LoginController> {
   const ForgotAccountButton({
@@ -17,7 +17,7 @@ class ForgotAccountButton extends GetView<LoginController> {
           onPressed: () {},
           child: Text(
             'Forgot password?',
-            style: ktextStyle,
+            style: constantObj.ktextStyle,
           ),
         ),
       ],

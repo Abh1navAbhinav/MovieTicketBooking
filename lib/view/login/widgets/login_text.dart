@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
-import 'package:ticket_booking/main.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 
 class LoginText extends GetView<LoginController> {
   const LoginText({
@@ -21,16 +21,7 @@ class LoginText extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 8,
-      child: /* Text(
-        text,
-        style: GoogleFonts.adamina(
-          textStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 70,
-          ),
-        ),
-      ), */
-          RichText(
+      child: RichText(
         text: TextSpan(
           text: text1,
           style: GoogleFonts.aladin(
@@ -42,7 +33,7 @@ class LoginText extends GetView<LoginController> {
               text: text2,
               style: GoogleFonts.adamina(
                 fontSize: fontSize,
-                color: kColor40,
+                color: constantObj.kColor40,
               ),
             ),
             TextSpan(

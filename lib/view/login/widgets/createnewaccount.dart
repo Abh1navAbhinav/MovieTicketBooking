@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
-import 'package:ticket_booking/main.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 
 class CreateNewAccountText extends GetView<LoginController> {
   const CreateNewAccountText({
@@ -28,13 +28,13 @@ class CreateNewAccountText extends GetView<LoginController> {
             text: secondText,
             style: GoogleFonts.akayaKanadaka(
               fontSize: 20,
-              color: kColor40,
+              color: constantObj.kColor40,
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
                 controller.isCreatedNewAccount.value =
                     !controller.isCreatedNewAccount.value;
-                controller.loginButtonColor.value = kColor40;
+                controller.loginButtonColor.value = constantObj.kColor40;
               },
           ),
         ],

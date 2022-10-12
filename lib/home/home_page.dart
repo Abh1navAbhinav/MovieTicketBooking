@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/home/widgets/carousel_slider.dart';
 import 'package:ticket_booking/home/widgets/horizontal_items.dart';
-import 'package:ticket_booking/main.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -15,13 +15,13 @@ class HomePage extends GetView<HomeController> {
         return controller.carouselItemImage.shuffle();
       },
       child: Scaffold(
-        backgroundColor: kColor10,
+        backgroundColor: constantObj.kColor10,
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
               automaticallyImplyLeading: false,
               expandedHeight: 202,
-              backgroundColor: kColor10,
+              backgroundColor: constantObj.kColor10,
               floating: true,
               shadowColor: Colors.blue,
               pinned: false,
