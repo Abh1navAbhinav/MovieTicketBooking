@@ -1,28 +1,21 @@
-import 'dart:convert';
-
-RegisterResponse registerResponseFromJson(String str) =>
-    RegisterResponse.fromJson(json.decode(str));
-
-String registerResponseToJson(RegisterResponse data) =>
-    json.encode(data.toJson());
-
-class RegisterResponse {
-  RegisterResponse({
-    required this.status,
-    required this.id,
+class EmailSignupRespones {
+  EmailSignupRespones({
+    this.status,
+    this.id,
+    this.message,
+    this.error,
   });
 
-  bool status;
-  String id;
+  bool? error;
+  bool? status;
+  String? id;
+  String? message;
 
-  factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
-      RegisterResponse(
+  factory EmailSignupRespones.fromJson(Map<String, dynamic> json) =>
+      EmailSignupRespones(
         status: json["status"],
         id: json["id"],
+        message: json["message"],
+        error: json["error"] ?? true,
       );
-
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "id": id,
-      };
 }

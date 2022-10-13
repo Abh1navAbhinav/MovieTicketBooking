@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final constantObj = GlobalConstants();
@@ -23,4 +24,21 @@ class GlobalConstants {
   TextStyle ktextStyle = GoogleFonts.roboto(
     color: Colors.black,
   );
+
+  // get snackbar
+  SnackbarController getSnackbarMethod(
+      {String? title, required String message}) {
+    return Get.snackbar(
+      margin: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 10,
+      ),
+      borderWidth: 2,
+      borderColor: Colors.black,
+      backgroundColor: Colors.white,
+      snackPosition: SnackPosition.BOTTOM,
+      title ?? '',
+      message,
+    );
+  }
 }

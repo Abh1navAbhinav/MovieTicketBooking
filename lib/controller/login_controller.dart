@@ -1,7 +1,16 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ticket_booking/config/endpoints.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/home/home_page.dart';
+import 'package:ticket_booking/model/login/login_response.dart';
+import 'package:ticket_booking/model/otp/otp_response.dart';
+import 'package:ticket_booking/model/register/register_response.dart';
+import 'package:ticket_booking/services/login_and_signup.dart';
 
 class LoginController extends GetxController {
   //Boolean values
@@ -18,6 +27,7 @@ class LoginController extends GetxController {
   RxBool isOTpRegistration = true.obs;
   RxBool isLoginButtonPressed = false.obs;
   RxBool isDividerSize = false.obs;
+  RxBool isLoading = false.obs;
 
   // other variable declaration
 
@@ -42,7 +52,7 @@ class LoginController extends GetxController {
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
   TextEditingController signUPMobileController = TextEditingController();
-  TextEditingController signUpUsernameController = TextEditingController();
+  TextEditingController signUpEmailController = TextEditingController();
   TextEditingController signUpPasswordController = TextEditingController();
   TextEditingController signUpConfirmController = TextEditingController();
   TextEditingController otpSignUpController = TextEditingController();
@@ -51,68 +61,99 @@ class LoginController extends GetxController {
 
   Rx<Color> loginButtonColor = constantObj.kColor40.obs;
 
+  //service variable
+  final Dio dio = Dio(BaseOptions(baseUrl: EndPoints.baseUrl));
+  String id = '';
+
   //functions
 
   nextButtonOnPress() async {
     if (signupFormkey.currentState!.validate()) {
-      loginButtonColor.value = Colors.green;
-      await Future.delayed(const Duration(milliseconds: 1000));
-      isOTpRegistration.value = false;
-      loginButtonColor.value = constantObj.kColor40;
+      String email = signUpEmailController.text.trim();
+      String password = signUpPasswordController.text.trim();
+      isLoading.value = true;
+      EmailSignupRespones? respones =
+          await ApiServices().signupEmail(email, password);
+      isLoading.value = false;
+      if (respones != null) {
+        if (respones.error == true) {
+          loginButtonColor.value = Colors.green;
+          await Future.delayed(const Duration(milliseconds: 1000));
+          isOTpRegistration.value = false;
+          loginButtonColor.value = constantObj.kColor40;
+          id = respones.id!;
+        } else {
+          loginButtonColor.value = Colors.red;
+          constantObj.getSnackbarMethod(
+              message: 'User with same E-mail All ready exist');
+          log(respones.message.toString());
+        }
+      } else {
+        loginButtonColor.value = Colors.red;
+        log("response is null");
+      }
     } else {
       loginButtonColor.value = Colors.red;
-      Get.snackbar(
-        margin: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 10,
-        ),
-        borderWidth: 2,
-        borderColor: Colors.black,
-        backgroundColor: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-        'Warning',
-        'Enter all the details carefully',
-      );
+      constantObj.getSnackbarMethod(message: 'Enter all the details carefully');
     }
   }
 
   loginButtonOnPressed() async {
     if (loginFormkey.currentState!.validate()) {
-      loginButtonColor.value = Colors.green;
-      await Future.delayed(const Duration(milliseconds: 1000));
-      Get.snackbar(
-        'Succcess',
-        'Successfully loged in.',
-      );
-      Get.to(
-        () => const HomePage(),
-      );
+      String mail = loginEmailController.text.trim();
+      String password = loginPasswordController.text.trim();
+      isLoading.value = true;
+      EmailLoginRespones? response =
+          await ApiServices().emailLogin(mail, password);
+      isLoading.value = false;
+      if (response != null) {
+        if (response.error == true) {
+          loginButtonColor.value = Colors.green;
+          await Future.delayed(const Duration(milliseconds: 1000));
+          constantObj.getSnackbarMethod(message: 'Successfully loged in');
+          Get.offAll(
+            () => const HomePage(),
+          );
+        } else {
+          loginButtonColor.value = Colors.red;
+          constantObj.getSnackbarMethod(
+            message: 'Please check your email & password',
+          );
+        }
+      }
     } else {
       loginButtonColor.value = Colors.red;
-      Get.snackbar(
-        'Warning',
-        'Email or password does not match.',
-      );
+      constantObj.getSnackbarMethod(message: 'All field is required');
     }
   }
 
   signUpButtonOnPressed() async {
     if (otpFormkey.currentState!.validate()) {
-      loginButtonColor.value = Colors.green;
-      await Future.delayed(const Duration(milliseconds: 1000));
-      Get.to(
-        () => const HomePage(),
-      );
-      Get.snackbar(
-        'Succcess',
-        'Successfully loged in.',
-      );
+      String otp = otpSignUpController.text.trim();
+      final SharedPreferences storage = await SharedPreferences.getInstance();
+      isLoading.value = true;
+      EmailVerifyRespones? responses =
+          await ApiServices().verifyEmailOtp(otp, id);
+      isLoading.value = false;
+      if (responses!.error == true) {
+        storage.setString('refreshToken', responses.refreshToken!);
+        storage.setString('token', responses.token!);
+        loginButtonColor.value = Colors.green;
+        await Future.delayed(const Duration(milliseconds: 1000));
+        isOTpRegistration.value = false;
+        loginButtonColor.value = constantObj.kColor40;
+        Get.offAll(
+          () => const HomePage(),
+        );
+
+        constantObj.getSnackbarMethod(message: 'Successfully loged in');
+      } else {
+        loginButtonColor.value = Colors.red;
+        constantObj.getSnackbarMethod(message: 'OTP entered is invalid');
+      }
     } else {
       loginButtonColor.value = Colors.red;
-      Get.snackbar(
-        'Warning',
-        'Invalid OTP.',
-      );
+      constantObj.getSnackbarMethod(message: 'Complete the OTP');
     }
   }
 

@@ -17,6 +17,8 @@ dependencies:
   google_fonts: ^3.0.1
   pinput: ^2.2.13
   carousel_slider: ^4.1.1
+  dio: ^4.0.6
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

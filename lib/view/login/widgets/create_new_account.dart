@@ -22,7 +22,7 @@ class CreateNewAccount extends GetView<LoginController> {
                 children: [
                   LoginTextFormField(
                     isTextFieldClicked: controller.isTextFieldClicked3,
-                    textEditingController: controller.signUpUsernameController,
+                    textEditingController: controller.signUpEmailController,
                     hintText: 'E-mail',
                     keyboardType: TextInputType.name,
                     obscureText: false,

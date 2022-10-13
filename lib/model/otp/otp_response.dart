@@ -1,5 +1,5 @@
-class EmailLoginRespones {
-  EmailLoginRespones({
+class EmailVerifyRespones {
+  EmailVerifyRespones({
     this.status,
     this.message,
     this.token,
@@ -12,8 +12,8 @@ class EmailLoginRespones {
   String? token;
   String? refreshToken;
 
-  factory EmailLoginRespones.fromJson(Map<String, dynamic> json) =>
-      EmailLoginRespones(
+  factory EmailVerifyRespones.fromJson(Map<String, dynamic> json) =>
+      EmailVerifyRespones(
         status: json["status"],
         message: json["message"],
         token: json["token"],

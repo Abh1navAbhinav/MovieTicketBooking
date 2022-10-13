@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/login_controller.dart';
@@ -12,11 +13,13 @@ class LoginButton extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Obx(
       () => GestureDetector(
-        onTap: controller.isCreatedNewAccount.value
-            ? (controller.isOTpRegistration.value
-                ? controller.nextButtonOnPress
-                : controller.signUpButtonOnPressed)
-            : controller.loginButtonOnPressed,
+        onTap: !controller.isLoading.value
+            ? (controller.isCreatedNewAccount.value
+                ? (controller.isOTpRegistration.value
+                    ? controller.nextButtonOnPress
+                    : controller.signUpButtonOnPressed)
+                : controller.loginButtonOnPressed)
+            : () {},
         //
         child: Material(
           elevation: 5,
@@ -33,12 +36,16 @@ class LoginButton extends GetView<LoginController> {
                 ? (!controller.isOTpRegistration.value ? 150 : 250)
                 : 100,
             child: Center(
-              child: Text(
-                controller.isCreatedNewAccount.value
-                    ? (controller.isOTpRegistration.value ? "Next" : 'Sign Up')
-                    : 'Login',
-                style: constantObj.kButtonTextStyle,
-              ),
+              child: !controller.isLoading.value
+                  ? Text(
+                      controller.isCreatedNewAccount.value
+                          ? (controller.isOTpRegistration.value
+                              ? "Next"
+                              : 'Sign Up')
+                          : 'Login',
+                      style: constantObj.kButtonTextStyle,
+                    )
+                  : const CupertinoActivityIndicator(color: Colors.white),
             ),
           ),
         ),
