@@ -5,8 +5,8 @@ import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/home/widgets/carousel_slider.dart';
 import 'package:ticket_booking/home/widgets/horizontal_items.dart';
 
-class HomePage extends GetView<HomeController> {
-  const HomePage({super.key});
+class HomePagemovie extends GetView<HomeController> {
+  const HomePagemovie({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -38,10 +38,10 @@ class OtpRegistration extends GetView<LoginController> {
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      'Enter the OTP Below to verify your Mobile Number',
+                      'Enter the OTP Below to verify your E-mail',
                       textAlign: TextAlign.start,
                       style: GoogleFonts.anekOdia(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -71,9 +71,9 @@ class OtpRegistration extends GetView<LoginController> {
                       Text.rich(
                         TextSpan(
                           children: [
-                            const TextSpan(text: "   Mobile Number: "),
+                            const TextSpan(text: "   E-Mail:  "),
                             TextSpan(
-                              text: controller.signUPMobileController.text,
+                              text: controller.signUpEmailController.text,
                               style: const TextStyle(
                                 color: Colors.brown,
                                 fontWeight: FontWeight.bold,
@@ -100,19 +100,19 @@ class OtpRegistration extends GetView<LoginController> {
                   await Future.delayed(
                     const Duration(milliseconds: 500),
                   );
-                  controller.mobileTextfieldFocusNode.requestFocus();
+                  controller.eMailTextfieldFocusNode.requestFocus();
                   await Future.delayed(
                     const Duration(milliseconds: 500),
                   );
-                  controller.signUPMobileController.selection = TextSelection(
+                  controller.signUpEmailController.selection = TextSelection(
                     baseOffset: 0,
-                    extentOffset: controller.signUPMobileController.text.length,
+                    extentOffset: controller.signUpEmailController.text.length,
                   );
 
                   // controller.buttonValue.value = 'Login';
                 },
                 child: Text(
-                  'Change Mobile number',
+                  'Change E-Mail',
                   style: constantObj.ktextStyle,
                 ),
               ),

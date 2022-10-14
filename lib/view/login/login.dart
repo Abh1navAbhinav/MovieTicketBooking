@@ -16,11 +16,8 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image:
-                AssetImage('assets/images/movie-objects-whita-background.jpg'),
-            fit: BoxFit.cover),
+      decoration: BoxDecoration(
+        gradient: constantObj.gradientColors(),
       ),
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 242, 244, 246),
@@ -73,7 +70,7 @@ class LoginPage extends GetView<LoginController> {
                       crossFadeState: controller.isCreatedNewAccount.value
                           ? CrossFadeState.showFirst
                           : CrossFadeState.showSecond,
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 700),
                       firstCurve: Curves.easeInOutCubicEmphasized,
                       secondCurve: Curves.easeInOutQuart,
                     ),

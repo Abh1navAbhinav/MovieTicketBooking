@@ -21,10 +21,11 @@ class CreateNewAccount extends GetView<LoginController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   LoginTextFormField(
+                    focusNode: controller.eMailTextfieldFocusNode,
                     isTextFieldClicked: controller.isTextFieldClicked3,
                     textEditingController: controller.signUpEmailController,
                     hintText: 'E-mail',
-                    keyboardType: TextInputType.name,
+                    keyboardType: TextInputType.emailAddress,
                     obscureText: false,
                     containerColor: constantObj.kColor30,
                     textColor: const Color.fromARGB(255, 242, 244, 246),

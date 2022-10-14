@@ -2,15 +2,16 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_booking/config/endpoints.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
-import 'package:ticket_booking/home/home_page.dart';
 import 'package:ticket_booking/model/login/login_response.dart';
 import 'package:ticket_booking/model/otp/otp_response.dart';
 import 'package:ticket_booking/model/register/register_response.dart';
 import 'package:ticket_booking/services/login_and_signup.dart';
+import 'package:ticket_booking/view/home_page/home.dart';
 
 class LoginController extends GetxController {
   //Boolean values
@@ -40,7 +41,7 @@ class LoginController extends GetxController {
 
   // focus nodes
 
-  FocusNode mobileTextfieldFocusNode = FocusNode();
+  FocusNode eMailTextfieldFocusNode = FocusNode();
 
   //RegExp validation
   RegExp emailValid = RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$');
@@ -51,7 +52,6 @@ class LoginController extends GetxController {
 
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
-  TextEditingController signUPMobileController = TextEditingController();
   TextEditingController signUpEmailController = TextEditingController();
   TextEditingController signUpPasswordController = TextEditingController();
   TextEditingController signUpConfirmController = TextEditingController();
@@ -78,14 +78,22 @@ class LoginController extends GetxController {
       if (respones != null) {
         if (respones.error == true) {
           loginButtonColor.value = Colors.green;
-          await Future.delayed(const Duration(milliseconds: 1000));
+          Fluttertoast.showToast(
+            msg: 'OTP send to ${signUpEmailController.text.trim()}',
+          );
+          await Future.delayed(const Duration(milliseconds: 2000));
           isOTpRegistration.value = false;
           loginButtonColor.value = constantObj.kColor40;
           id = respones.id!;
+          // constantObj.getSnackbarMethod(
+          //   message: 'OTP send to ${signUpEmailController.text.trim()}',
+          // );
+
         } else {
           loginButtonColor.value = Colors.red;
           constantObj.getSnackbarMethod(
-              message: 'User with same E-mail All ready exist');
+            message: 'User with same E-mail All ready exist',
+          );
           log(respones.message.toString());
         }
       } else {
@@ -109,8 +117,15 @@ class LoginController extends GetxController {
       if (response != null) {
         if (response.error == true) {
           loginButtonColor.value = Colors.green;
-          await Future.delayed(const Duration(milliseconds: 1000));
-          constantObj.getSnackbarMethod(message: 'Successfully loged in');
+          await Future.delayed(const Duration(milliseconds: 500));
+          constantObj.getSnackbarMethod(
+            message: 'processing....',
+            success: true,
+          );
+          await Future.delayed(const Duration(milliseconds: 500));
+
+          await Future.delayed(const Duration(seconds: 2));
+
           Get.offAll(
             () => const HomePage(),
           );
@@ -141,12 +156,15 @@ class LoginController extends GetxController {
         loginButtonColor.value = Colors.green;
         await Future.delayed(const Duration(milliseconds: 1000));
         isOTpRegistration.value = false;
-        loginButtonColor.value = constantObj.kColor40;
+        constantObj.getSnackbarMethod(
+          message: 'processing....',
+          success: true,
+        );
+        await Future.delayed(const Duration(milliseconds: 3000));
         Get.offAll(
           () => const HomePage(),
         );
-
-        constantObj.getSnackbarMethod(message: 'Successfully loged in');
+        loginButtonColor.value = constantObj.kColor40;
       } else {
         loginButtonColor.value = Colors.red;
         constantObj.getSnackbarMethod(message: 'OTP entered is invalid');
