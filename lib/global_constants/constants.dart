@@ -1,3 +1,7 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,9 +10,8 @@ import 'package:lottie/lottie.dart';
 final constantObj = GlobalConstants();
 
 class GlobalConstants {
-//Global Constant Values
+//-----------------------------------------------------------Color---------------------------------------------------------------------------
 
-//Color
 // Color kColor1 = const Color.fromARGB(255, 242, 244, 246);
 // Color kColor2 = const Color.fromARGB(255, 175, 201, 220);
   Color kColor40 = const Color.fromARGB(255, 172, 142, 248);
@@ -16,7 +19,8 @@ class GlobalConstants {
   Color kColor20 = const Color.fromARGB(255, 231, 212, 250);
   Color kColor10 = const Color.fromARGB(255, 247, 229, 253);
 
-//gradient
+//----------------------------------------------------------gradient-------------------------------------------------------------------------
+
   gradientColors() {
     return const LinearGradient(
       colors: <Color>[
@@ -28,7 +32,7 @@ class GlobalConstants {
     );
   }
 
-//TextStyle
+//-------------------------------------------------------TextStyle---------------------------------------------------------------------------
   TextStyle kButtonTextStyle = GoogleFonts.roboto(
     fontWeight: FontWeight.bold,
     fontSize: 25,
@@ -77,5 +81,35 @@ class GlobalConstants {
         ),
       ),
     );
+  }
+
+//-------------------------------------------------error handler snackbar------------------------------------------------------------
+
+  errorHandler(Object e) {
+    if (e is DioError) {
+      log(e.toString());
+      if (e.response?.statusCode == 401) {
+        getSnackbarMethod(message: 'User not found !');
+        constantObj.getSnackbarMethod(
+          message: 'Please check your email & password',
+        );
+      } else if (e.type == DioErrorType.connectTimeout) {
+        getSnackbarMethod(message: 'Connection Timout');
+      } else if (e.type == DioErrorType.receiveTimeout) {
+        getSnackbarMethod(message: 'Recieve Timout');
+      } else if (e.type == DioErrorType.cancel) {
+        getSnackbarMethod(message: 'Request cancelled');
+      } else if (e.type == DioErrorType.sendTimeout) {
+        getSnackbarMethod(message: 'Url  sent timeout');
+      } else if (e.type == DioErrorType.response) {
+        getSnackbarMethod(
+            message: 'Incorrect status code, such as 404, 503...');
+      } else if (e.type == DioErrorType.other) {
+        getSnackbarMethod(message: 'No Internet Connection');
+      }
+    }
+    if (e is SocketException) {
+      getSnackbarMethod(message: 'socketexception');
+    }
   }
 }

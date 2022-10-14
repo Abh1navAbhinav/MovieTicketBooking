@@ -131,9 +131,6 @@ class LoginController extends GetxController {
           );
         } else {
           loginButtonColor.value = Colors.red;
-          constantObj.getSnackbarMethod(
-            message: 'Please check your email & password',
-          );
         }
       }
     } else {
