@@ -24,21 +24,21 @@ class CreateNewAccount extends GetView<LoginController> {
                     focusNode: controller.eMailTextfieldFocusNode,
                     isTextFieldClicked: controller.isTextFieldClicked3,
                     textEditingController: controller.signUpEmailController,
-                    hintText: 'E-mail',
+                    hintText: 'Email',
                     keyboardType: TextInputType.emailAddress,
                     obscureText: false,
                     containerColor: constantObj.kColor30,
                     textColor: const Color.fromARGB(255, 242, 244, 246),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'E-mail is required';
+                        return 'Email is required';
                       }
 
                       if (value.contains(' ')) {
                         return 'Remove all whiteSpaces';
                       }
                       if (!controller.emailValid.hasMatch(value)) {
-                        return 'E-mail is not valid';
+                        return 'Email is not valid';
                       }
 
                       return null;

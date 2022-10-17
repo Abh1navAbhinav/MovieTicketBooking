@@ -122,16 +122,17 @@ class LoginController extends GetxController {
             message: 'processing....',
             success: true,
           );
-          await Future.delayed(const Duration(milliseconds: 500));
-
-          await Future.delayed(const Duration(seconds: 2));
-
+          await Future.delayed(const Duration(milliseconds: 2500));
+          SharedPreferences pref = await SharedPreferences.getInstance();
+          await pref.setBool('userLoggedIn', true);
           Get.offAll(
-            () => const HomePage(),
+            () => HomePage(),
           );
         } else {
           loginButtonColor.value = Colors.red;
         }
+      } else {
+        log('response is null');
       }
     } else {
       loginButtonColor.value = Colors.red;
@@ -147,24 +148,30 @@ class LoginController extends GetxController {
       EmailVerifyRespones? responses =
           await ApiServices().verifyEmailOtp(otp, id);
       isLoading.value = false;
-      if (responses!.error == true) {
-        storage.setString('refreshToken', responses.refreshToken!);
-        storage.setString('token', responses.token!);
-        loginButtonColor.value = Colors.green;
-        await Future.delayed(const Duration(milliseconds: 1000));
-        isOTpRegistration.value = false;
-        constantObj.getSnackbarMethod(
-          message: 'processing....',
-          success: true,
-        );
-        await Future.delayed(const Duration(milliseconds: 3000));
-        Get.offAll(
-          () => const HomePage(),
-        );
-        loginButtonColor.value = constantObj.kColor40;
+      if (responses != null) {
+        if (responses.error == true) {
+          storage.setString('refreshToken', responses.refreshToken!);
+          storage.setString('token', responses.token!);
+          loginButtonColor.value = Colors.green;
+          await Future.delayed(const Duration(milliseconds: 1000));
+          isOTpRegistration.value = false;
+          constantObj.getSnackbarMethod(
+            message: 'processing....',
+            success: true,
+          );
+          await Future.delayed(const Duration(milliseconds: 3000));
+          SharedPreferences pref = await SharedPreferences.getInstance();
+          await pref.setBool('userLoggedIn', true);
+          Get.offAll(
+            () => HomePage(),
+          );
+          loginButtonColor.value = constantObj.kColor40;
+        } else {
+          loginButtonColor.value = Colors.red;
+          constantObj.getSnackbarMethod(message: 'OTP entered is invalid');
+        }
       } else {
-        loginButtonColor.value = Colors.red;
-        constantObj.getSnackbarMethod(message: 'OTP entered is invalid');
+        log("responses is null");
       }
     } else {
       loginButtonColor.value = Colors.red;

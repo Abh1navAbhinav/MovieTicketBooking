@@ -42,6 +42,7 @@ class ApiServices {
     try {
       final response =
           await logincontroller.dio.post(EndPoints.emailOtpVerify, data: data);
+      Fluttertoast.showToast(msg: response.data["message"]);
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         return EmailVerifyRespones.fromJson(response.data);
       }
@@ -63,7 +64,6 @@ class ApiServices {
     try {
       final response =
           await logincontroller.dio.post(EndPoints.loginEmail, data: data);
-      Fluttertoast.showToast(msg: response.data["message"]);
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         return EmailLoginRespones.fromJson(response.data);
       }

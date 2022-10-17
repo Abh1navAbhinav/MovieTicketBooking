@@ -102,8 +102,6 @@ class GlobalConstants {
       } else if (e.type == DioErrorType.sendTimeout) {
         getSnackbarMethod(message: 'Url  sent timeout');
       } else if (e.type == DioErrorType.response) {
-        getSnackbarMethod(
-            message: 'Incorrect status code, such as 404, 503...');
       } else if (e.type == DioErrorType.other) {
         getSnackbarMethod(message: 'No Internet Connection');
       }

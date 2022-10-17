@@ -92,7 +92,7 @@ class LoginPage extends GetView<LoginController> {
                             duration: const Duration(seconds: 1),
                             child: Column(
                               children: [
-                                Row(
+                                /*  Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     AnimatedContainer(
@@ -122,9 +122,9 @@ class LoginPage extends GetView<LoginController> {
                                       ),
                                     ),
                                   ],
-                                ),
+                                ), */
                                 const SizedBox(
-                                  height: 30,
+                                  height: 100,
                                 ),
                                 /*    Row(
                                   mainAxisAlignment:
@@ -144,13 +144,13 @@ class LoginPage extends GetView<LoginController> {
                                 Obx(
                                   () => !controller.isCreatedNewAccount.value
                                       ? const CreateNewAccountText(
-                                          firstText: 'Don\'t have an account.',
-                                          secondText: 'Sign UP',
+                                          firstText: 'Don\'t have an account? ',
+                                          secondText: ' Sign UP',
                                         )
                                       : const CreateNewAccountText(
                                           firstText:
-                                              'Remember my account go back to.',
-                                          secondText: 'Login',
+                                              'Already have an account? ',
+                                          secondText: ' Login',
                                         ),
                                 ),
                               ],
