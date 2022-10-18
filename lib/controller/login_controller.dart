@@ -11,7 +11,7 @@ import 'package:ticket_booking/model/login/login_response.dart';
 import 'package:ticket_booking/model/otp/otp_response.dart';
 import 'package:ticket_booking/model/register/register_response.dart';
 import 'package:ticket_booking/services/login_and_signup.dart';
-import 'package:ticket_booking/view/home_page/home.dart';
+import 'package:ticket_booking/view/bottom_navigation/bottom_screen.dart';
 
 class LoginController extends GetxController {
   //Boolean values
@@ -126,7 +126,7 @@ class LoginController extends GetxController {
           SharedPreferences pref = await SharedPreferences.getInstance();
           await pref.setBool('userLoggedIn', true);
           Get.offAll(
-            () => HomePage(),
+            () => BottomNavigationScreen(),
           );
         } else {
           loginButtonColor.value = Colors.red;
@@ -163,7 +163,7 @@ class LoginController extends GetxController {
           SharedPreferences pref = await SharedPreferences.getInstance();
           await pref.setBool('userLoggedIn', true);
           Get.offAll(
-            () => HomePage(),
+            () => BottomNavigationScreen(),
           );
           loginButtonColor.value = constantObj.kColor40;
         } else {

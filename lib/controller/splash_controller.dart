@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ticket_booking/view/home_page/home.dart';
-import 'package:ticket_booking/view/login/login.dart';
+import 'package:ticket_booking/view/bottom_navigation/bottom_screen.dart';
 
 class SplashScreenController extends GetxController {
   @override
@@ -15,8 +14,8 @@ class SplashScreenController extends GetxController {
     final userLoggedIn = pref.getBool('userLoggedIn');
     if (userLoggedIn == true || userLoggedIn != null) {
       await Future.delayed(const Duration(seconds: 2));
-      Get.to(
-        () => HomePage(),
+      Get.offAll(
+        () => BottomNavigationScreen(),
         transition: Transition.native,
         duration: const Duration(
           seconds: 3,
@@ -24,8 +23,8 @@ class SplashScreenController extends GetxController {
       );
     } else {
       await Future.delayed(const Duration(seconds: 2));
-      Get.to(
-        () => LoginPage(),
+      Get.offAll(
+        () => BottomNavigationScreen(),
         transition: Transition.native,
         duration: const Duration(
           seconds: 3,

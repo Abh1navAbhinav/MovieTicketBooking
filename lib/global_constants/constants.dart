@@ -18,6 +18,8 @@ class GlobalConstants {
   Color kColor30 = const Color.fromARGB(255, 207, 172, 249);
   Color kColor20 = const Color.fromARGB(255, 231, 212, 250);
   Color kColor10 = const Color.fromARGB(255, 247, 229, 253);
+  Color kDustyGrass1 = const Color.fromARGB(255, 212, 252, 121);
+  Color kDustyGrass2 = const Color.fromARGB(255, 150, 230, 161);
 
 //----------------------------------------------------------gradient-------------------------------------------------------------------------
 
@@ -28,6 +30,15 @@ class GlobalConstants {
         Color.fromARGB(255, 207, 172, 249),
         Color.fromARGB(255, 231, 212, 250),
         Color.fromARGB(255, 247, 229, 253),
+      ],
+    );
+  }
+
+  dustyGrassGradient() {
+    return const LinearGradient(
+      colors: <Color>[
+        Color.fromARGB(255, 212, 252, 121),
+        Color.fromARGB(255, 150, 230, 161),
       ],
     );
   }
