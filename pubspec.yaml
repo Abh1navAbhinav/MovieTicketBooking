@@ -23,6 +23,7 @@ dependencies:
   fluttertoast: ^8.0.9
   geolocator: ^9.0.2
   geocoding: ^2.0.5
+  blur_container: ^0.0.2
 
 dev_dependencies:
   flutter_test:

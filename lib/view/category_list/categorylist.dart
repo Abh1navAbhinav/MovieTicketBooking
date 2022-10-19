@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ticket_booking/view/category_list/widgets/items_list.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({super.key, required this.image});
@@ -17,6 +18,12 @@ class CategoryList extends StatelessWidget {
                   image: AssetImage(image),
                   fit: BoxFit.cover,
                 ),
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: 4,
+                (context, index) => ItemsList(indexs: index),
               ),
             ),
           ],

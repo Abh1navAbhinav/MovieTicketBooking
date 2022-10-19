@@ -18,7 +18,7 @@ class NearYouImage extends GetView<HomeController> {
       child: Container(
         width: 150,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.black,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Stack(

@@ -10,7 +10,9 @@ class Greetings extends GetView<SearchPageController> {
   Widget build(BuildContext context) {
     return Obx(
       () => AnimatedOpacity(
-        duration: const Duration(milliseconds: 500),
+        duration: controller.isSearchClicked.value
+            ? const Duration(milliseconds: 500)
+            : const Duration(seconds: 3),
         opacity: controller.isSearchClicked.value ? 0 : 1,
         child: Text(
           controller.greeting(),

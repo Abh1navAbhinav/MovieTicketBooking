@@ -13,12 +13,13 @@ class BottomNavigationScreen extends GetView<BottomController> {
         body: controller.pages[controller.selectedPageIndex.value],
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.white.withOpacity(0.7),
+            borderRadius: BorderRadius.circular(50),
+            color: Colors.white.withOpacity(0.5),
           ),
           child: BottomNavigationBar(
             showUnselectedLabels: false,
             showSelectedLabels: false,
+            elevation: 0,
             selectedIconTheme: const IconThemeData(
               size: 30,
             ),

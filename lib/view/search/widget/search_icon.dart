@@ -1,3 +1,4 @@
+import 'package:blur_container/blur_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/search_controller.dart';
@@ -20,16 +21,15 @@ class SearchIconwidget extends GetView<SearchPageController> {
               left: controller.isSearchClicked.value ? 0 : 300,
               child: AnimatedOpacity(
                 duration: const Duration(seconds: 1),
-                opacity: controller.isSearchClicked.value ? 0.4 : 1,
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 50),
-                  height: 50,
-                  width: controller.isSearchClicked.value ? 100 : 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: controller.isSearchClicked.value
-                        ? Colors.amber
-                        : Colors.amberAccent,
+                opacity: controller.isSearchClicked.value ? 0.3 : 1,
+                child: BlurContainerWidget(
+                  borderRadius: BorderRadius.circular(20),
+                  color: controller.isSearchClicked.value
+                      ? Colors.grey.withOpacity(0.6)
+                      : Colors.grey.withOpacity(0.4),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 50),
+                    width: controller.isSearchClicked.value ? 100 : 50,
                   ),
                 ),
               ),
@@ -44,6 +44,7 @@ class SearchIconwidget extends GetView<SearchPageController> {
                   controller.isSearchClicked.value =
                       !controller.isSearchClicked.value;
                   controller.searchController.clear();
+                  FocusScope.of(context).unfocus();
                 },
                 icon: const Icon(
                   Icons.search,
@@ -59,28 +60,32 @@ class SearchIconwidget extends GetView<SearchPageController> {
               child: AnimatedOpacity(
                 opacity: controller.isSearchClicked.value ? 1 : 0,
                 duration: const Duration(seconds: 1),
-                child: AnimatedContainer(
-                  duration: const Duration(seconds: 1),
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextFormField(
-                    controller: controller.searchController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                      hintText: 'Enter the Search',
+                child: BlurContainerWidget(
+                  color: Colors.grey[200]!.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(20),
+                  child: AnimatedContainer(
+                    duration: const Duration(seconds: 1),
+                    decoration: BoxDecoration(
+                      // color: Colors.amber,
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    onChanged: (value) async {
-                      if (controller.searchController.text.isEmpty) {
-                        await Future.delayed(
-                          const Duration(seconds: 5),
-                        );
-                        controller.isSearchClicked.value = false;
-                      }
-                    },
+                    child: TextFormField(
+                      controller: controller.searchController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: 'Enter the Search',
+                      ),
+                      onChanged: (value) async {
+                        if (controller.searchController.text.isEmpty) {
+                          await Future.delayed(
+                            const Duration(seconds: 5),
+                          );
+                          controller.isSearchClicked.value = false;
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),
