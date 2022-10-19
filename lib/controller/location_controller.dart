@@ -44,7 +44,7 @@ class LocationController extends GetxController {
 
 //----------------------------to store the current location of the user to a variable----------------------------
 
-  Future<void> _getCurrentPosition() async {
+  Future<void> getCurrentPosition() async {
     final hasPermission = await _handleLocationPermission();
 
     if (!hasPermission) return;
@@ -76,7 +76,7 @@ class LocationController extends GetxController {
 
   @override
   void onInit() {
-    _getCurrentPosition();
+    getCurrentPosition();
     super.onInit();
   }
 }

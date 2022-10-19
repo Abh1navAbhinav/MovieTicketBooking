@@ -10,9 +10,7 @@ class BottomNavigationScreen extends GetView<BottomController> {
     return Obx(
       () => Scaffold(
         extendBody: true,
-        body: SingleChildScrollView(
-          child: controller.pages[controller.selectedPageIndex.value],
-        ),
+        body: controller.pages[controller.selectedPageIndex.value],
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
