@@ -9,11 +9,15 @@ class BottomNavigationScreen extends GetView<BottomController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        extendBody: true,
         body: SingleChildScrollView(
           child: controller.pages[controller.selectedPageIndex.value],
         ),
         bottomNavigationBar: Container(
-          color: Colors.blueAccent.withOpacity(0.6),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white.withOpacity(0.7),
+          ),
           child: BottomNavigationBar(
             showUnselectedLabels: false,
             showSelectedLabels: false,
@@ -21,7 +25,7 @@ class BottomNavigationScreen extends GetView<BottomController> {
               size: 30,
             ),
             selectedItemColor: Colors.greenAccent,
-            backgroundColor: Colors.green.withOpacity(0.5),
+            backgroundColor: Colors.transparent,
             currentIndex: controller.selectedPageIndex.value,
             onTap: (value) => controller.selectedPageIndex.value = value,
             items: const [

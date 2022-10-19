@@ -43,6 +43,17 @@ class GlobalConstants {
     );
   }
 
+  blackAndWhitGradient() {
+    return const LinearGradient(
+      colors: <Color>[
+        Colors.transparent,
+        Color.fromARGB(220, 0, 0, 0),
+      ],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+    );
+  }
+
 //-------------------------------------------------------TextStyle---------------------------------------------------------------------------
   TextStyle kButtonTextStyle = GoogleFonts.roboto(
     fontWeight: FontWeight.bold,

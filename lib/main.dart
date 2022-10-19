@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        canvasColor: Colors.transparent,
+        // canvasColor: Colors.transparent,
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Color.fromARGB(255, 0, 225, 255),
         ),

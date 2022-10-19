@@ -5,12 +5,9 @@ class Wishlist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Center(
-          child: Text('WishList'),
-        ),
+    return const SafeArea(
+      child: Center(
+        child: Text('WishList'),
       ),
     );
   }
