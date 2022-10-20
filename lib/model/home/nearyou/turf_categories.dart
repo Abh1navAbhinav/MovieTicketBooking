@@ -1,5 +1,5 @@
-class TurfCatogery {
-  TurfCatogery({
+class TurfCategory {
+  TurfCategory({
     this.turfCricket,
     this.turfFootball,
     this.turfBadminton,
@@ -11,7 +11,7 @@ class TurfCatogery {
   bool? turfBadminton;
   bool? turfYoga;
 
-  factory TurfCatogery.fromJson(Map<String, dynamic> json) => TurfCatogery(
+  factory TurfCategory.fromJson(Map<String, dynamic> json) => TurfCategory(
         turfCricket: json["turf_cricket"],
         turfFootball: json["turf_football"],
         turfBadminton: json["turf_badminton"],

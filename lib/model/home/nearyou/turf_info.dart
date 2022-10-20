@@ -1,16 +1,16 @@
 class TurfInfo {
   TurfInfo({
-    this.turfIsAvailale,
+    this.turfIsAvailable,
     this.turfRating,
     this.turfMap,
   });
 
-  bool? turfIsAvailale;
+  bool? turfIsAvailable;
   double? turfRating;
   String? turfMap;
 
   factory TurfInfo.fromJson(Map<String, dynamic> json) => TurfInfo(
-        turfIsAvailale: json["turf_isAvailale"],
+        turfIsAvailable: json["turf_isAvailable"],
         turfRating: json["turf_rating"].toDouble(),
         turfMap: json["turf_map"],
       );

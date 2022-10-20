@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
-import 'package:ticket_booking/view/category_list/categorylist.dart';
 import 'package:ticket_booking/view/home_page/widgets/turfs_type_selection.dart';
 
 class CarouselSliderWidget extends GetView<HomeController> {
@@ -29,14 +26,7 @@ class CarouselSliderWidget extends GetView<HomeController> {
             initialPage: 1,
           ),
           itemBuilder: (context, index, realIndex) {
-            return GestureDetector(
-              onTap: () async {
-                final image = controller.carouselItemImage[index];
-                Get.to(() => CategoryList(image: image));
-                log('tapped index $index');
-              },
-              child: TurfTypeSelection(index: index),
-            );
+            return TurfTypeSelection(index: index);
           },
         ),
       ],

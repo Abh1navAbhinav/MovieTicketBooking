@@ -109,7 +109,7 @@ class GlobalConstants {
 
   errorHandler(Object e) {
     if (e is DioError) {
-      log(e.toString());
+      log("error handler========================= ${e.toString()}");
       if (e.response?.statusCode == 401) {
         getSnackbarMethod(message: 'User not found !');
         constantObj.getSnackbarMethod(

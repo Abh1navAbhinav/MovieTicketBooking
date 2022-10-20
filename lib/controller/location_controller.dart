@@ -7,7 +7,8 @@ import 'package:ticket_booking/global_constants/constants.dart';
 class LocationController extends GetxController {
 //--------------------------variables to store current address and position-----------------------------------
 
-  dynamic currentAddress = 'no location fetched'.obs;
+  RxString currentAddress = 'no location fetched'.obs;
+  RxString currentAddressToTurfFetch = ''.obs;
   dynamic currentPosition = Geolocator.getCurrentPosition().obs;
 
 //---------------------------To check and request user's location permission-----------------------------------
@@ -67,8 +68,9 @@ class LocationController extends GetxController {
       Placemark place = placemarks[0];
       currentAddress.value =
           ' ${place.subLocality}, ${place.subAdministrativeArea}';
+      currentAddressToTurfFetch.value = '${place.subAdministrativeArea}';
     }).catchError((e) {
-      debugPrint(e);
+      constantObj.errorHandler(e);
     });
   }
 

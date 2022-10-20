@@ -16,7 +16,7 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () => locationPageController.getCurrentPosition(),
+      onRefresh: () => controller.homeRefreshIndicatorFunction(),
       child: Scaffold(
         extendBody: true,
         backgroundColor: Colors.white,
@@ -27,7 +27,7 @@ class HomePage extends GetView<HomeController> {
               shape: BoxShape.rectangle,
               elevation: searchPageController.isSearchClicked.value ? 5 : 0,
               color: Colors.white,
-              shadowColor: Colors.blue,
+              shadowColor: Colors.greenAccent,
               duration: const Duration(seconds: 1),
               child: Column(
                 children: [
@@ -72,12 +72,10 @@ class HomePage extends GetView<HomeController> {
                 const SizedBox(height: 50),
                 const NearYouList(
                   heading: 'Near you',
-                  indexs: 1,
                 ),
                 const SizedBox(height: 15),
                 const NearYouList(
                   heading: 'Popular',
-                  indexs: 1,
                 ),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ticket_booking/model/home/datum.dart';
+import 'package:ticket_booking/model/home/nearyou/datum.dart';
 
 HomeResponse homeResponseFromJson(String str) =>
     HomeResponse.fromJson(json.decode(str));
@@ -16,10 +16,6 @@ class HomeResponse {
 
   factory HomeResponse.fromJson(Map<String, dynamic> json) => HomeResponse(
         status: json["status"],
-        data: List<Datum>.from(
-          json["data"].map(
-            (x) => Datum.fromJson(x),
-          ),
-        ),
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
       );
 }

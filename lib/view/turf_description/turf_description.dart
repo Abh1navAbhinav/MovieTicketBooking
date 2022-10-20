@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_booking/view/category_list/widgets/items_list.dart';
 
-class CategoryList extends StatelessWidget {
-  const CategoryList({super.key, required this.image});
+class TurfDescription extends StatelessWidget {
+  const TurfDescription({super.key, required this.image});
   final String image;
   @override
   Widget build(BuildContext context) {
@@ -15,15 +14,9 @@ class CategoryList extends StatelessWidget {
               expandedHeight: 200,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image(
-                  image: AssetImage(image),
+                  image: NetworkImage(image),
                   fit: BoxFit.cover,
                 ),
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                childCount: 4,
-                (context, index) => ItemsList(indexs: index),
               ),
             ),
           ],

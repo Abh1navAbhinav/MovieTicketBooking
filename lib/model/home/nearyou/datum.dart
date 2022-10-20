@@ -1,13 +1,14 @@
-import 'package:ticket_booking/model/home/turf_amenities.dart';
-import 'package:ticket_booking/model/home/turf_categories.dart';
-import 'package:ticket_booking/model/home/turf_image.dart';
-import 'package:ticket_booking/model/home/turf_info.dart';
-import 'package:ticket_booking/model/home/turf_time.dart';
-import 'package:ticket_booking/model/home/turf_type.dart';
+import 'package:ticket_booking/model/home/nearyou/turf_amenities.dart';
+import 'package:ticket_booking/model/home/nearyou/turf_categories.dart';
+import 'package:ticket_booking/model/home/nearyou/turf_image.dart';
+import 'package:ticket_booking/model/home/nearyou/turf_info.dart';
+import 'package:ticket_booking/model/home/nearyou/turf_price.dart';
+import 'package:ticket_booking/model/home/nearyou/turf_time.dart';
+import 'package:ticket_booking/model/home/nearyou/turf_type.dart';
 
 class Datum {
   Datum({
-    this.turfCatogery,
+    this.turfCategory,
     this.turfType,
     this.turfInfo,
     this.turfAmenities,
@@ -17,12 +18,14 @@ class Datum {
     this.turfCreatorId,
     this.turfName,
     this.turfPlace,
-    this.turfMuncipality,
+    this.turfMunicipality,
     this.turfDistrict,
+    this.turfPrice,
+    this.turfLogo,
     this.v,
   });
 
-  TurfCatogery? turfCatogery;
+  TurfCategory? turfCategory;
   TurfType? turfType;
   TurfInfo? turfInfo;
   TurfAmenities? turfAmenities;
@@ -32,12 +35,14 @@ class Datum {
   String? turfCreatorId;
   String? turfName;
   String? turfPlace;
-  String? turfMuncipality;
+  String? turfMunicipality;
   String? turfDistrict;
+  TurfPrice? turfPrice;
+  String? turfLogo;
   int? v;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        turfCatogery: TurfCatogery.fromJson(json["turf_catogery"]),
+        turfCategory: TurfCategory.fromJson(json["turf_category"]),
         turfType: TurfType.fromJson(json["turf_type"]),
         turfInfo: TurfInfo.fromJson(json["turf_info"]),
         turfAmenities: TurfAmenities.fromJson(json["turf_amenities"]),
@@ -47,8 +52,10 @@ class Datum {
         turfCreatorId: json["turf_creator_id"],
         turfName: json["turf_name"],
         turfPlace: json["turf_place"],
-        turfMuncipality: json["turf_muncipality"],
+        turfMunicipality: json["turf_municipality"],
         turfDistrict: json["turf_district"],
+        turfPrice: TurfPrice.fromJson(json["turf_price"]),
+        turfLogo: json["turf_logo"],
         v: json["__v"],
       );
 }

@@ -5,9 +5,9 @@ import 'package:ticket_booking/controller/home_controller.dart';
 import 'package:ticket_booking/view/home_page/widgets/near_you_image.dart';
 
 class NearYouList extends GetView<HomeController> {
-  const NearYouList({super.key, required this.heading, required this.indexs});
+  const NearYouList({super.key, required this.heading});
   final String heading;
-  final int indexs;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -38,11 +38,26 @@ class NearYouList extends GetView<HomeController> {
           ),
           const SizedBox(height: 8),
           Expanded(
-            child: ListView.builder(
-              itemCount: controller.carouselItemImage.length,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => NearYouImage(indexs: index),
+            child: GetBuilder<HomeController>(
+              builder: (controller) {
+                return ListView.builder(
+                  itemCount: controller.nearByTurf.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    final newList = controller.nearByTurf[index];
+
+                    return GestureDetector(
+                      onTap: () async {},
+                      child: NearYouImage(
+                        image: newList.turfImages!.turfImages2!,
+                        name: newList.turfName!,
+                        rating: newList.turfInfo!.turfRating!,
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
           const SizedBox(height: 15),

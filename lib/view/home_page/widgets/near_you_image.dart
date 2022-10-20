@@ -6,10 +6,14 @@ import 'package:ticket_booking/global_constants/constants.dart';
 class NearYouImage extends GetView<HomeController> {
   const NearYouImage({
     Key? key,
-    required this.indexs,
+    required this.image,
+    required this.name,
+    required this.rating,
   }) : super(key: key);
 
-  final int indexs;
+  final String image;
+  final String name;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +33,7 @@ class NearYouImage extends GetView<HomeController> {
                 borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    controller.carouselItemImage[indexs],
-                  ),
+                  image: NetworkImage(image),
                 ),
               ),
             ),
@@ -57,26 +59,26 @@ class NearYouImage extends GetView<HomeController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 80,
                           child: Text(
-                            'The Bandra Gymkhana',
-                            style: TextStyle(
+                            name,
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Column(
-                          children: const [
-                            Icon(
+                          children: [
+                            const Icon(
                               Icons.star,
                               color: Colors.amber,
                             ),
-                            SizedBox(height: 2),
+                            const SizedBox(height: 2),
                             Text(
-                              '4.5',
-                              style: TextStyle(
+                              rating.toString(),
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),
