@@ -38,26 +38,24 @@ class NearYouList extends GetView<HomeController> {
           ),
           const SizedBox(height: 8),
           Expanded(
-            child: GetBuilder<HomeController>(
-              builder: (controller) {
-                return ListView.builder(
-                  itemCount: controller.nearByTurf.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    final newList = controller.nearByTurf[index];
+            child: Obx(
+              () => ListView.builder(
+                itemCount: controller.nearByTurf.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  final newList = controller.nearByTurf[index];
 
-                    return GestureDetector(
-                      onTap: () async {},
-                      child: NearYouImage(
-                        image: newList.turfImages!.turfImages2!,
-                        name: newList.turfName!,
-                        rating: newList.turfInfo!.turfRating!,
-                      ),
-                    );
-                  },
-                );
-              },
+                  return GestureDetector(
+                    onTap: () async {},
+                    child: NearYouImage(
+                      image: newList.turfImages!.turfImages2!,
+                      name: newList.turfName!,
+                      rating: newList.turfInfo!.turfRating!,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           const SizedBox(height: 15),

@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_booking/controller/location_controller.dart';
-import 'package:ticket_booking/model/home/nearyou/datum.dart';
 import 'package:ticket_booking/services/home_services.dart';
 
 class HomeController extends GetxController {
@@ -20,7 +19,7 @@ class HomeController extends GetxController {
     'BadMinton',
     'Yoga',
   ];
-  List<Datum> nearByTurf = [];
+  var nearByTurf = [].obs;
 
   addToNearByTurfList() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
