@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_booking/controller/location_controller.dart';
@@ -25,11 +23,9 @@ class HomeController extends GetxController {
   List<Datum> nearByTurf = [];
 
   addToNearByTurfList() async {
-    log("nearturf");
     final SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString('token');
     final location = locationController.currentAddressToTurfFetch.value;
-    log("----------------------${locationController.currentAddressToTurfFetch}");
     final response = await HomeServices().fetchNearbyTurf(
       location: location,
       token: token!,
@@ -37,7 +33,6 @@ class HomeController extends GetxController {
     nearByTurf.clear();
     if (response != null && response.status == true) {
       nearByTurf.addAll(response.data!);
-      log('----------turf length -----------${nearByTurf.length}');
     }
   }
 
