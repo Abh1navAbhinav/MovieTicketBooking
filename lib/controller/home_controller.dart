@@ -21,7 +21,7 @@ class HomeController extends GetxController {
   ];
   var nearByTurf = [].obs;
 
-  addToNearByTurfList() async {
+  Future<void> addToNearByTurfList() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString('token');
     final location = locationController.currentAddressToTurfFetch.value;
@@ -38,5 +38,11 @@ class HomeController extends GetxController {
   homeRefreshIndicatorFunction() async {
     await locationController.getCurrentPosition();
     await addToNearByTurfList();
+  }
+
+  @override
+  void onInit() async {
+    await homeRefreshIndicatorFunction();
+    super.onInit();
   }
 }

@@ -6,8 +6,11 @@ class TurfTypeSelection extends GetView<HomeController> {
   const TurfTypeSelection({
     Key? key,
     required this.index,
+    required this.image,
   }) : super(key: key);
   final int index;
+
+  final ImageProvider<Object> image;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +21,7 @@ class TurfTypeSelection extends GetView<HomeController> {
         borderRadius: BorderRadius.circular(15),
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage(
-            controller.carouselItemImage[index],
-          ),
+          image: image,
         ),
       ),
       child: Padding(

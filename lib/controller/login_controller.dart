@@ -124,7 +124,8 @@ class LoginController extends GetxController {
           );
           await Future.delayed(const Duration(milliseconds: 2500));
           SharedPreferences pref = await SharedPreferences.getInstance();
-          await pref.setBool('userLoggedIn', true);
+          pref.setString('token', response.token!);
+
           Get.offAll(
             () => BottomNavigationScreen(),
           );

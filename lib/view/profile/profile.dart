@@ -15,7 +15,7 @@ class ProfilePage extends GetView<ProfilePageController> {
             child: const Text(
               'Logout',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
             onPressed: () {

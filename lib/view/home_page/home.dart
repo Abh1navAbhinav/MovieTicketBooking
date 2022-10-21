@@ -75,7 +75,7 @@ class HomePage extends GetView<HomeController> {
                 ),
                 const SizedBox(height: 15),
                 const NearYouList(
-                  heading: 'Popular',
+                  heading: 'All Turf\'s',
                 ),
               ],
             ),

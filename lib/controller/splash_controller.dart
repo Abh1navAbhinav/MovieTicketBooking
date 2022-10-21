@@ -1,26 +1,26 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ticket_booking/controller/home_controller.dart';
 import 'package:ticket_booking/controller/location_controller.dart';
 import 'package:ticket_booking/view/bottom_navigation/bottom_screen.dart';
+import 'package:ticket_booking/view/login/login.dart';
 
 class SplashScreenController extends GetxController {
-  final homeController = Get.put(HomeController());
   final locationcontroller = Get.put(LocationController());
   @override
-  void onInit() async {
-    await homeController.homeRefreshIndicatorFunction();
+  void onInit() {
     checkUserLoggedIn();
-
     super.onInit();
   }
 
   checkUserLoggedIn() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    final userLoggedIn = pref.getBool('userLoggedIn');
-    if (userLoggedIn == true || userLoggedIn != null) {
+    final userLoggedIn = pref.getString('token');
+    log(userLoggedIn.toString());
+    if (userLoggedIn == null || userLoggedIn.isEmpty) {
       Get.offAll(
-        () => BottomNavigationScreen(),
+        () => LoginPage(),
         transition: Transition.native,
         duration: const Duration(
           seconds: 3,

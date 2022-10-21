@@ -7,7 +7,7 @@ class ProfilePageController extends GetxController {
 
   logoutFunction() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.remove('userLoggedIn');
+    pref.remove('token');
     Get.offAll(() => LoginPage());
   }
 }

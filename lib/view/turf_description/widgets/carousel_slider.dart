@@ -4,19 +4,18 @@ import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
 import 'package:ticket_booking/view/home_page/widgets/turfs_type_selection.dart';
 
-class CarouselSliderWidget extends GetView<HomeController> {
-  CarouselSliderWidget({super.key});
+class CarouselSliderWidgetInDescription extends GetView<HomeController> {
+  CarouselSliderWidgetInDescription({super.key, required this.image});
   final homeController = Get.put(HomeController());
-
+  final List<String> image;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 30),
         CarouselSlider.builder(
-          itemCount: controller.carouselItemImage.length,
+          itemCount: image.length,
           options: CarouselOptions(
-            // autoPlayCurve: Curves.easeInOutQuad,
             autoPlay: true,
             aspectRatio: 9 / 4,
             autoPlayAnimationDuration: const Duration(milliseconds: 1500),
@@ -28,8 +27,8 @@ class CarouselSliderWidget extends GetView<HomeController> {
           itemBuilder: (context, index, realIndex) {
             return TurfTypeSelection(
               index: index,
-              image: AssetImage(
-                controller.carouselItemImage[index],
+              image: NetworkImage(
+                image[index],
               ),
             );
           },

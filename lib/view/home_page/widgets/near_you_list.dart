@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
 import 'package:ticket_booking/view/home_page/widgets/near_you_image.dart';
+import 'package:ticket_booking/view/turf_description/turf_description.dart';
+
+import '../../../model/home/nearyou/datum.dart';
 
 class NearYouList extends GetView<HomeController> {
   const NearYouList({super.key, required this.heading});
@@ -44,12 +47,16 @@ class NearYouList extends GetView<HomeController> {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  final newList = controller.nearByTurf[index];
+                  final Datum newList = controller.nearByTurf[index];
 
                   return GestureDetector(
-                    onTap: () async {},
+                    onTap: () {
+                      Get.to(
+                        TurfDescription(datum: newList),
+                      );
+                    },
                     child: NearYouImage(
-                      image: newList.turfImages!.turfImages2!,
+                      image: newList.turfLogo!,
                       name: newList.turfName!,
                       rating: newList.turfInfo!.turfRating!,
                     ),
