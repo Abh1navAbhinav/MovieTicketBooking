@@ -1,10 +1,10 @@
-import 'package:ticket_booking/model/home/nearyou/turf_amenities.dart';
-import 'package:ticket_booking/model/home/nearyou/turf_categories.dart';
-import 'package:ticket_booking/model/home/nearyou/turf_image.dart';
-import 'package:ticket_booking/model/home/nearyou/turf_info.dart';
-import 'package:ticket_booking/model/home/nearyou/turf_price.dart';
-import 'package:ticket_booking/model/home/nearyou/turf_time.dart';
-import 'package:ticket_booking/model/home/nearyou/turf_type.dart';
+import 'package:ticket_booking/model/home/all_turf/turf_amenities.dart';
+import 'package:ticket_booking/model/home/all_turf/turf_categories.dart';
+import 'package:ticket_booking/model/home/all_turf/turf_image.dart';
+import 'package:ticket_booking/model/home/all_turf/turf_info.dart';
+import 'package:ticket_booking/model/home/all_turf/turf_price.dart';
+import 'package:ticket_booking/model/home/all_turf/turf_time.dart';
+import 'package:ticket_booking/model/home/all_turf/turf_type.dart';
 
 class Datum {
   Datum({

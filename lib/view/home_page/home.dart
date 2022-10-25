@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
 import 'package:ticket_booking/controller/location_controller.dart';
 import 'package:ticket_booking/controller/search_controller.dart';
+import 'package:ticket_booking/view/home_page/widgets/all_turf.dart';
 import 'package:ticket_booking/view/home_page/widgets/greeting.dart';
 import 'package:ticket_booking/view/search/widget/search_icon.dart';
 import 'package:ticket_booking/view/home_page/widgets/carousel_slider.dart';
@@ -74,7 +75,7 @@ class HomePage extends GetView<HomeController> {
                   heading: 'Near you',
                 ),
                 const SizedBox(height: 15),
-                const NearYouList(
+                const AllTurf(
                   heading: 'All Turf\'s',
                 ),
               ],

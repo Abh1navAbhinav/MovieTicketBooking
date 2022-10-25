@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ticket_booking/model/home/nearyou/datum.dart';
+import 'package:ticket_booking/model/home/all_turf/datum.dart';
 
 HomeResponse homeResponseFromJson(String str) =>
     HomeResponse.fromJson(json.decode(str));

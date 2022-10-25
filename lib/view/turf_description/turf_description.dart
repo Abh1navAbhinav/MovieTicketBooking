@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_booking/model/home/nearyou/datum.dart';
+import 'package:ticket_booking/model/home/all_turf/datum.dart';
 import 'package:ticket_booking/view/turf_description/widgets/carousel_slider.dart';
 
 class TurfDescription extends StatelessWidget {

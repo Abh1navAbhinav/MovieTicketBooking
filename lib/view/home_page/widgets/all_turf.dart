@@ -7,8 +7,8 @@ import 'package:ticket_booking/view/turf_description/turf_description.dart';
 
 import '../../../model/home/all_turf/datum.dart';
 
-class NearYouList extends GetView<HomeController> {
-  const NearYouList({super.key, required this.heading});
+class AllTurf extends GetView<HomeController> {
+  const AllTurf({super.key, required this.heading});
   final String heading;
 
   @override
@@ -43,22 +43,22 @@ class NearYouList extends GetView<HomeController> {
           Expanded(
             child: Obx(
               () => ListView.builder(
-                itemCount: controller.nearByTurf.length,
+                itemCount: controller.allTurf.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  final Datum newList = controller.nearByTurf[index];
+                  final Datum allTurf = controller.allTurf[index];
 
                   return GestureDetector(
                     onTap: () {
                       Get.to(
-                        TurfDescription(datum: newList),
+                        TurfDescription(datum: allTurf),
                       );
                     },
                     child: NearYouImage(
-                      image: newList.turfLogo!,
-                      name: newList.turfName!,
-                      rating: newList.turfInfo!.turfRating!,
+                      image: allTurf.turfLogo!,
+                      name: allTurf.turfName!,
+                      rating: allTurf.turfInfo!.turfRating!,
                     ),
                   );
                 },
