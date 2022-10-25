@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_booking/controller/location_controller.dart';
@@ -28,6 +26,7 @@ class HomeController extends GetxController {
   var footballTurf = [].obs;
   var cricketTurf = [].obs;
   var yogaTurf = [].obs;
+  var compainedSeparatedList = [].obs;
 
 //------------------------------------adding to  near by turflist -------------------------------------
 
@@ -55,36 +54,61 @@ class HomeController extends GetxController {
     if (response != null && response.status == true) {
       allTurf.addAll(response.data!);
     } else {}
-    log("allturf:${allTurf.length}");
   }
 
-//--------------------------------------separating categories in all ---------------------------------------
+//--------------------------------------separating categories to seperate list  in all turf ---------------------------------------
 
   Future<void> separateCategoriesInAllTurf() async {
+    badmintonTurf.clear();
+    cricketTurf.clear();
+    footballTurf.clear();
+    yogaTurf.clear();
+
     for (Datum element in allTurf) {
       if (element.turfCategory!.turfBadminton == true) {
         badmintonTurf.add(element);
       }
       if (element.turfCategory!.turfCricket == true) {
-        badmintonTurf.add(element);
+        cricketTurf.add(element);
       }
       if (element.turfCategory!.turfFootball == true) {
-        badmintonTurf.add(element);
+        footballTurf.add(element);
       }
       if (element.turfCategory!.turfYoga == true) {
         yogaTurf.add(element);
       }
     }
-    log('badminton:${badmintonTurf.length} cricket:${cricketTurf.length} football:${footballTurf.length} yoga:${yogaTurf.length} ');
+  }
+
+//--------------------------------------adding the seperated list to a single list----------------------------------------
+
+  void addAllSeparatedLIst() {
+    RxList<dynamic> addSeparatedListToOnelist(i) {
+      switch (i) {
+        case 1:
+          return cricketTurf;
+        case 2:
+          return footballTurf;
+        case 3:
+          return badmintonTurf;
+        default:
+          return yogaTurf;
+      }
+    }
+
+    for (var i = 1; i <= 4; i++) {
+      compainedSeparatedList.add(addSeparatedListToOnelist(i));
+    }
   }
 
 //--------------------------------------all functions need to call in home initstate to fetch data---------------------------------
 
   homeRefreshIndicatorFunction() async {
     await locationController.getCurrentPosition();
-    await addToNearByTurfList();
+    addToNearByTurfList();
     await addToAllTurfList();
     await separateCategoriesInAllTurf();
+    addAllSeparatedLIst();
   }
 
 //----------------------------------------oninit function---------------------------------------------------------------
