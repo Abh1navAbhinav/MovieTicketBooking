@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:ticket_booking/controller/search_controller.dart';
 
 class SearchIconwidget extends GetView<SearchPageController> {
-  SearchIconwidget({super.key});
+  SearchIconwidget({super.key, required this.data});
+  final List<dynamic> data;
   final searchPageController = Get.put(SearchPageController());
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,8 @@ class SearchIconwidget extends GetView<SearchPageController> {
                   ),
                 ),
               ),
+              onEnd: () => controller.isIconChanged.value =
+                  !controller.isIconChanged.value,
             ),
             AnimatedPositioned(
               top: 5,
@@ -46,9 +49,19 @@ class SearchIconwidget extends GetView<SearchPageController> {
                   controller.searchController.clear();
                   FocusScope.of(context).unfocus();
                 },
-                icon: const Icon(
-                  Icons.search,
+                icon: Icon(
+                  controller.isIconChanged.value
+                      ? Icons.arrow_forward_ios_rounded
+                      : Icons.search,
+                  color: Colors.black54,
+                  size: controller.isIconChanged.value ? 20 : null,
                 ),
+                /*  icon: AnimatedIcon(
+                  icon: controller.isSearchClicked.value
+                      ? AnimatedIcons.close_menu
+                      : AnimatedIcons.search_ellipsis,
+                  progress: controller.animatedIconController,
+                ), */
               ),
             ),
             AnimatedPositioned(
@@ -78,12 +91,10 @@ class SearchIconwidget extends GetView<SearchPageController> {
                         hintText: 'Enter the Search',
                       ),
                       onChanged: (value) async {
-                        if (controller.searchController.text.isEmpty) {
-                          await Future.delayed(
-                            const Duration(seconds: 5),
-                          );
-                          controller.isSearchClicked.value = false;
-                        }
+                        controller.searchForTurf(
+                          value.trim(),
+                          data,
+                        );
                       },
                     ),
                   ),

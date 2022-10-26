@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
 import 'package:ticket_booking/view/home_page/widgets/turfs_type_selection.dart';
+import 'package:ticket_booking/view/turf_categories/turf_categories.dart';
 
 class CarouselSliderWidget extends GetView<HomeController> {
   CarouselSliderWidget({super.key});
@@ -23,13 +24,24 @@ class CarouselSliderWidget extends GetView<HomeController> {
             autoPlayInterval: const Duration(milliseconds: 5000),
             viewportFraction: 0.8,
             enlargeCenterPage: true,
-            initialPage: 1,
+            // initialPage: 1,
           ),
           itemBuilder: (context, index, realIndex) {
-            return TurfTypeSelection(
-              index: index,
-              image: AssetImage(
-                controller.carouselItemImage[index],
+            return GestureDetector(
+              onTap: () {
+                final image = controller.carouselItemImage[index];
+                Get.to(
+                  () => TurfCategories(
+                    image: image,
+                    index1: index,
+                  ),
+                );
+              },
+              child: TurfTypeSelection(
+                index: index,
+                image: AssetImage(
+                  controller.carouselItemImage[index],
+                ),
               ),
             );
           },

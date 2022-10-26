@@ -48,13 +48,6 @@ class NearYouImage extends GetView<HomeController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const SizedBox(height: 10),
-                    const Text(
-                      '1.5 km away',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
                     const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

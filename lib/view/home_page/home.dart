@@ -5,6 +5,7 @@ import 'package:ticket_booking/controller/location_controller.dart';
 import 'package:ticket_booking/controller/search_controller.dart';
 import 'package:ticket_booking/view/home_page/widgets/all_turf.dart';
 import 'package:ticket_booking/view/home_page/widgets/greeting.dart';
+import 'package:ticket_booking/view/search/search.dart';
 import 'package:ticket_booking/view/search/widget/search_icon.dart';
 import 'package:ticket_booking/view/home_page/widgets/carousel_slider.dart';
 import 'package:ticket_booking/view/home_page/widgets/near_you_list.dart';
@@ -42,7 +43,7 @@ class HomePage extends GetView<HomeController> {
                         bottom: 10,
                         child: Greetings(),
                       ),
-                      SearchIconwidget(),
+                      SearchIconwidget(data: controller.allTurf),
                     ],
                   ),
                   const SizedBox(
@@ -69,6 +70,10 @@ class HomePage extends GetView<HomeController> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                GetBuilder<SearchPageController>(
+                  builder: (controller) =>
+                      SearchPage(data: searchPageController.foundTurf),
+                ),
                 CarouselSliderWidget(),
                 const SizedBox(height: 50),
                 const NearYouList(

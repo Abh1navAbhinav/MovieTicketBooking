@@ -33,7 +33,7 @@ class BottomNavigationScreen extends GetView<BottomController> {
                 label: 'home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_outline),
+                icon: Icon(Icons.bookmark_outline),
                 label: 'wishlist',
               ),
               BottomNavigationBarItem(
