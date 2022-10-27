@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 import 'package:ticket_booking/view/turf_description/widgets/carousel_slider.dart';
 
@@ -45,21 +46,37 @@ class TurfDescription extends StatelessWidget {
                   const Text(
                     'Turf Amenities',
                   ),
-                  GridView.count(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(left: 20),
-                    crossAxisCount: 3,
-                    childAspectRatio: 1.5,
-                    children: List.generate(6, (index) {
-                      return Row(
-                        children: const [
-                          Icon(Icons.circle_outlined),
-                          Text(
-                            'Amenities',
-                          ),
-                        ],
-                      );
-                    }),
+                  Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      _Ammenries(
+                          text: 'Cafeteria',
+                          value: datum.turfAmenities!.turfCafeteria!),
+                      _Ammenries(
+                          text: 'Dressing',
+                          value: datum.turfAmenities!.turfDressing!),
+                      _Ammenries(
+                          text: 'Gallery',
+                          value: datum.turfAmenities!.turfGallery!),
+                      _Ammenries(
+                          text: 'Parking',
+                          value: datum.turfAmenities!.turfParking!),
+                      _Ammenries(
+                          text: 'Wash Room',
+                          value: datum.turfAmenities!.turfWashroom!),
+                      _Ammenries(
+                          text: 'Water',
+                          value: datum.turfAmenities!.turfWater!),
+                    ],
+                  ),
+                  RatingBarIndicator(
+                    rating: datum.turfInfo!.turfRating!,
+                    itemBuilder: (context, index) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    itemCount: 5,
+                    itemSize: 40.0,
                   ),
                   const SizedBox(height: 30),
                   const Text(
@@ -138,5 +155,24 @@ class TurfDescription extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _Ammenries extends StatelessWidget {
+  const _Ammenries({required this.value, required this.text});
+  final bool value;
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return value
+        ? Row(
+            children: [
+              const Icon(Icons.circle_outlined),
+              Text(
+                text,
+              ),
+            ],
+          )
+        : const SizedBox();
   }
 }

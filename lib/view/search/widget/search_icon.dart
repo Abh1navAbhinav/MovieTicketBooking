@@ -45,14 +45,16 @@ class SearchIconwidget extends GetView<SearchPageController> {
               child: IconButton(
                 onPressed: () {
                   controller.searchForTurf(
-                      controller.searchController.text.trim(), data);
+                    controller.searchController.text.trim(),
+                    data,
+                  );
                   controller.isSearchClicked.value =
                       !controller.isSearchClicked.value;
                   controller.searchController.clear();
                   FocusScope.of(context).unfocus();
                 },
                 icon: Icon(
-                  controller.isIconChanged.value
+                  !controller.isIconChanged.value
                       ? Icons.arrow_forward_ios_rounded
                       : Icons.search,
                   color: Colors.black54,
