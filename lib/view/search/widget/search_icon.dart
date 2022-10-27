@@ -44,6 +44,8 @@ class SearchIconwidget extends GetView<SearchPageController> {
               left: controller.isSearchClicked.value ? 0 : 300,
               child: IconButton(
                 onPressed: () {
+                  controller.searchForTurf(
+                      controller.searchController.text.trim(), data);
                   controller.isSearchClicked.value =
                       !controller.isSearchClicked.value;
                   controller.searchController.clear();
