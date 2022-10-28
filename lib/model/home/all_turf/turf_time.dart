@@ -14,4 +14,10 @@ class TurfTime {
         timeAfternoon: json["time_afternoon"],
         timeEvening: json["time_evening"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "time_morning": timeMorning,
+        "time_afternoon": timeAfternoon,
+        "time_evening": timeEvening,
+      };
 }

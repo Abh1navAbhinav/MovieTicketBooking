@@ -58,4 +58,21 @@ class Datum {
         turfLogo: json["turf_logo"],
         v: json["__v"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "turf_category": turfCategory!.toJson(),
+        "turf_type": turfType!.toJson(),
+        "turf_info": turfInfo!.toJson(),
+        "turf_amenities": turfAmenities!.toJson(),
+        "turf_time": turfName,
+        "_id": id,
+        "turf_creator_id": turfCreatorId,
+        "turf_name": turfName,
+        "turf_place": turfPlace,
+        "turf_municipality": turfMunicipality,
+        "turf_district": turfDistrict,
+        "turf_price": turfPrice!.toJson(),
+        "turf_logo": turfLogo,
+        "__v": v,
+      };
 }

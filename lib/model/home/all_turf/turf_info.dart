@@ -14,4 +14,10 @@ class TurfInfo {
         turfRating: json["turf_rating"].toDouble(),
         turfMap: json["turf_map"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "turf_isAvailable": turfIsAvailable,
+        "turf_rating": turfRating!.toDouble(),
+        "turf_map": turfMap,
+      };
 }

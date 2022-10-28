@@ -23,4 +23,13 @@ class TurfAmenities {
         turfGallery: json["turf_gallery"],
         turfCafeteria: json["turf_cafeteria"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "turf_washroom": turfWashroom,
+        "turf_water": turfWater,
+        "turf_dressing": turfDressing,
+        "turf_parking": turfParking,
+        "turf_gallery": turfGallery,
+        "turf_cafeteria": turfCafeteria,
+      };
 }

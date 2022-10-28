@@ -14,4 +14,10 @@ class TurfPrice {
         afternoonPrice: json["afternoon_price"],
         eveningPrice: json["evening_price"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "morning_price": morningPrice,
+        "afternoon_price": afternoonPrice,
+        "evening_price": eveningPrice,
+      };
 }

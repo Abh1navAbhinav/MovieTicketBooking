@@ -14,4 +14,10 @@ class TurfImages {
         turfImages2: json["turf_images2"],
         turfImages3: json["turf_images3"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "turf_images1": turfImages1,
+        "turf_images2": turfImages2,
+        "turf_images3": turfImages3,
+      };
 }
