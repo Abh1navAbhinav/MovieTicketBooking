@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
 import 'package:ticket_booking/controller/wishlist_controller.dart';
 import 'package:ticket_booking/global_constants/scroll_behaviour.dart';
-import 'package:ticket_booking/view/wishlist/widgets/wishlist_list_tile.dart';
+import 'package:ticket_booking/view/wishlist/widgets/wishlist_list_tiles.dart';
 
 class Wishlist extends GetView<WishListController> {
   Wishlist({super.key});
