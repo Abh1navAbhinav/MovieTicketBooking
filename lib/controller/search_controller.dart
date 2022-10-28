@@ -27,7 +27,7 @@ class SearchPageController
     return 'Good Evening';
   }
 
-//--------------------------- searching for turf function --------------------------
+//--------------------------- searching for all  turf function --------------------------
 
   void searchForTurf(String query, List<dynamic> allTurf) {
     List<dynamic> searchResults = [];

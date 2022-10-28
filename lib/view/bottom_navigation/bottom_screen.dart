@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/bottom_navigation_controller.dart';
+import 'package:ticket_booking/controller/search_controller.dart';
 
 class BottomNavigationScreen extends GetView<BottomController> {
   BottomNavigationScreen({super.key});
   final bottomController = Get.put(BottomController());
+  final searchpagecontroller = Get.put(SearchPageController());
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -26,18 +28,36 @@ class BottomNavigationScreen extends GetView<BottomController> {
             selectedItemColor: Colors.greenAccent,
             backgroundColor: Colors.transparent,
             currentIndex: controller.selectedPageIndex.value,
-            onTap: (value) => controller.selectedPageIndex.value = value,
-            items: const [
+            onTap: (value) async {
+              controller.selectedPageIndex.value = value;
+              if (controller.selectedPageIndex.value == 0) {
+                await Future.delayed(const Duration(milliseconds: 1500));
+                searchpagecontroller.isSearchClicked.value = false;
+              }
+            },
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: Icon(
+                  (controller.selectedPageIndex.value == 0)
+                      ? Icons.home
+                      : Icons.home_outlined,
+                ),
                 label: 'home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.bookmark_outline),
+                icon: Icon(
+                  (controller.selectedPageIndex.value == 1)
+                      ? Icons.bookmark
+                      : Icons.bookmark_border_outlined,
+                ),
                 label: 'wishlist',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
+                icon: Icon(
+                  (controller.selectedPageIndex.value == 2)
+                      ? Icons.person
+                      : Icons.person_outline_outlined,
+                ),
                 label: 'Profile',
               ),
             ],

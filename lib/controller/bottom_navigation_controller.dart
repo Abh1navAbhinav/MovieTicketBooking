@@ -7,7 +7,7 @@ class BottomController extends GetxController {
   // final homecontrller = Get.put(HomeController());
   final pages = [
     HomePage(),
-    const Wishlist(),
+    Wishlist(),
     ProfilePage(),
   ];
 

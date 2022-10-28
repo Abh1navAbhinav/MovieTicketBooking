@@ -22,7 +22,7 @@ class SearchPage extends GetView<SearchPageController> {
         height: controller.isSearchClicked.value
             ? MediaQuery.of(context).size.height - 250
             : 0,
-        color: !controller.isIconChanged.value
+        color: controller.isIconChanged.value
             ? Colors.black54
             : const Color.fromARGB(255, 239, 247, 239),
         child: controller.foundTurf.isNotEmpty
@@ -31,10 +31,10 @@ class SearchPage extends GetView<SearchPageController> {
                 itemBuilder: (context, int index) {
                   final Datum datas = data[index];
                   return GestureDetector(
-                      onTap: () => Get.to(() => TurfDescription(datum: datas),
-                          transition: Transition.zoom,
-                          curve: Curves.slowMiddle),
-                      child: TurfSearchAllTurf(datas: datas));
+                    onTap: () => Get.to(() => TurfDescription(datum: datas),
+                        transition: Transition.zoom, curve: Curves.slowMiddle),
+                    child: TurfSearchAllTurf(datas: datas),
+                  );
                 },
               )
             : const Center(

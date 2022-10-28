@@ -54,7 +54,7 @@ class SearchIconwidget extends GetView<SearchPageController> {
                   FocusScope.of(context).unfocus();
                 },
                 icon: Icon(
-                  !controller.isIconChanged.value
+                  controller.isIconChanged.value
                       ? Icons.arrow_forward_ios_rounded
                       : Icons.search,
                   color: Colors.black54,

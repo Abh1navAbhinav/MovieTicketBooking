@@ -16,6 +16,10 @@ class HomeResponse {
 
   factory HomeResponse.fromJson(Map<String, dynamic> json) => HomeResponse(
         status: json["status"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<Datum>.from(
+          json["data"].map(
+            (x) => Datum.fromJson(x),
+          ),
+        ),
       );
 }

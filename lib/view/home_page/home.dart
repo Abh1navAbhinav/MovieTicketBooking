@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
 import 'package:ticket_booking/controller/location_controller.dart';
 import 'package:ticket_booking/controller/search_controller.dart';
+import 'package:ticket_booking/global_constants/scroll_behaviour.dart';
 import 'package:ticket_booking/view/home_page/widgets/all_turf.dart';
 import 'package:ticket_booking/view/home_page/widgets/greeting.dart';
 import 'package:ticket_booking/view/search/search.dart';
@@ -67,23 +68,26 @@ class HomePage extends GetView<HomeController> {
           ),
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                GetBuilder<SearchPageController>(
-                  builder: (controller) =>
-                      SearchPage(data: searchPageController.foundTurf),
-                ),
-                CarouselSliderWidget(),
-                const SizedBox(height: 50),
-                const NearYouList(
-                  heading: 'Near you',
-                ),
-                const SizedBox(height: 15),
-                const AllTurf(
-                  heading: 'All Turf\'s',
-                ),
-              ],
+          child: ScrollConfiguration(
+            behavior: MyBehavior(),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  GetBuilder<SearchPageController>(
+                    builder: (controller) =>
+                        SearchPage(data: searchPageController.foundTurf),
+                  ),
+                  CarouselSliderWidget(),
+                  const SizedBox(height: 50),
+                  const NearYouList(
+                    heading: 'Near you',
+                  ),
+                  const SizedBox(height: 15),
+                  const AllTurf(
+                    heading: 'All Turf\'s',
+                  ),
+                ],
+              ),
             ),
           ),
         ),
