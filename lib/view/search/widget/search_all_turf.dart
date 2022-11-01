@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
+import 'package:ticket_booking/view/wishlist/widgets/fav_turf_icon_button.dart';
 
 class TurfSearchAllTurf extends StatelessWidget {
   const TurfSearchAllTurf({
@@ -34,10 +35,7 @@ class TurfSearchAllTurf extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.bookmark),
-                  ),
+                  FavTurfIconButton(data: datas),
                   Text(
                     "   ${datas.turfName!}",
                   ),

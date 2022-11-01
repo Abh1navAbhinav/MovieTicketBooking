@@ -1,19 +1,19 @@
 class TurfType {
   TurfType({
     this.turfSevens,
-    this.turfSixes,
+    this.turfFives,
   });
 
   bool? turfSevens;
-  bool? turfSixes;
+  bool? turfFives;
 
   factory TurfType.fromJson(Map<String, dynamic> json) => TurfType(
         turfSevens: json["turf_sevens"],
-        turfSixes: json["turf_sixes"],
+        turfFives: json["turf_sixes"],
       );
 
   Map<String, dynamic> toJson() => {
         "turf_sevens": turfSevens,
-        "turf_sixes": turfSixes,
+        "turf_sixes": turfFives,
       };
 }

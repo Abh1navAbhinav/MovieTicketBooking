@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_booking/controller/location_controller.dart';
@@ -53,7 +55,9 @@ class HomeController extends GetxController {
     allTurf.clear();
     if (response != null && response.status == true) {
       allTurf.addAll(response.data!);
-    } else {}
+    } else {
+      log('response from fetch all turf is null');
+    }
   }
 
 //--------------------------------------separating categories to seperate list  in all turf ---------------------------------------

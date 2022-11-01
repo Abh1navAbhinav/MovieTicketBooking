@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
+import 'package:ticket_booking/controller/wishlist_controller.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
+import 'package:ticket_booking/model/home/all_turf/datum.dart';
+import 'package:ticket_booking/view/wishlist/widgets/fav_turf_icon_button.dart';
 
 class NearYouImage extends GetView<HomeController> {
-  const NearYouImage({
+  NearYouImage({
     Key? key,
-    required this.image,
-    required this.name,
-    required this.rating,
+    required this.data,
   }) : super(key: key);
 
-  final String image;
-  final String name;
-  final double rating;
+  final Datum data;
+  final favController = Get.put(WishListController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class NearYouImage extends GetView<HomeController> {
                 borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(image),
+                  image: NetworkImage(data.turfLogo!),
                 ),
               ),
             ),
@@ -55,7 +55,7 @@ class NearYouImage extends GetView<HomeController> {
                         SizedBox(
                           width: 80,
                           child: Text(
-                            name,
+                            data.turfName!,
                             style: const TextStyle(
                               color: Colors.white,
                             ),
@@ -70,7 +70,7 @@ class NearYouImage extends GetView<HomeController> {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              rating.toString(),
+                              data.turfInfo!.turfRating!.toString(),
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
@@ -86,13 +86,7 @@ class NearYouImage extends GetView<HomeController> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.bookmark,
-                ),
-                color: Colors.amber,
-              ),
+              child: FavTurfIconButton(data: data),
             )
           ],
         ),

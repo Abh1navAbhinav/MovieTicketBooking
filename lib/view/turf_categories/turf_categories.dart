@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
-import 'package:ticket_booking/view/turf_categories/widgets/category_grid.dart';
+import 'package:ticket_booking/view/turf_categories/widgets/category_lists.dart';
 
 class TurfCategories extends GetView<HomeController> {
   const TurfCategories({
@@ -17,7 +15,7 @@ class TurfCategories extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey[200],
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -36,23 +34,7 @@ class TurfCategories extends GetView<HomeController> {
               child: Column(
                 children: [
                   const SizedBox(height: 50),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: controller.compainedSeparatedList[index1].length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final data1 = controller.compainedSeparatedList[index1];
-                      final data = data1[index];
-                      log(data.runtimeType.toString());
-                      return CategoryGrid(
-                        data: data,
-                      );
-                    },
-                  ),
+                  CategoryLists(index1: index1),
                 ],
               ),
             )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/wishlist_controller.dart';
 import 'package:ticket_booking/view/turf_description/turf_description.dart';
+import 'package:ticket_booking/view/wishlist/widgets/fav_turf_icon_button.dart';
 
 class WishlisTile extends GetView<WishListController> {
   const WishlisTile({
@@ -14,9 +15,9 @@ class WishlisTile extends GetView<WishListController> {
       builder: (controllers) => ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: controller.foundTurf.length,
+        itemCount: controller.foundTurfFav.length,
         itemBuilder: (context, index) {
-          final altruf = controller.foundTurf[index];
+          final altruf = controller.foundTurfFav[index];
           return GestureDetector(
             onTap: () {
               Get.to(
@@ -74,13 +75,7 @@ class WishlisTile extends GetView<WishListController> {
                       ],
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.bookmark,
-                      color: Colors.amberAccent,
-                    ),
-                  ),
+                  FavTurfIconButton(data: altruf),
                 ],
               ),
             ),

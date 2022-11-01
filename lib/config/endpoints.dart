@@ -7,4 +7,7 @@ class EndPoints {
   static const String emailOtpVerify = "/account/verify-email-otp";
   static const String nearestTurf = '/user/nearest-turf/';
   static const String allTurf = '/user/all-turf';
+  static const String addWishList = '/user/add-wishlist';
+  static const String getWishList = '/user/get-wishlist/';
+  static const String removeWishList = '/user/delete-wishlist/';
 }

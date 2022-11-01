@@ -56,9 +56,7 @@ class AllTurf extends GetView<HomeController> {
                       );
                     },
                     child: NearYouImage(
-                      image: allTurf.turfLogo!,
-                      name: allTurf.turfName!,
-                      rating: allTurf.turfInfo!.turfRating!,
+                      data: allTurf,
                     ),
                   );
                 },

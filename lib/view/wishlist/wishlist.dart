@@ -40,7 +40,7 @@ class Wishlist extends GetView<WishListController> {
                   ),
                   const SizedBox(height: 10),
                   GetBuilder<WishListController>(
-                    builder: (controllers) => controller.foundTurf.isEmpty
+                    builder: (controllers) => controller.foundTurfFav.isEmpty
                         ? const Text('No results found')
                         : const WishlisTile(),
                   ),

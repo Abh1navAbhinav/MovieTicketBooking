@@ -10,7 +10,7 @@ class HomeServices {
 
   //----------------------------------------fetch nearby turf------------------------------------------
 
-  Future<HomeResponse?> fetchNearbyTurf({
+  Future<AllResponse?> fetchNearbyTurf({
     required String location,
     required String token,
   }) async {
@@ -23,7 +23,7 @@ class HomeServices {
       );
 
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        return HomeResponse.fromJson(response.data);
+        return AllResponse.fromJson(response.data);
       }
     } catch (e) {
       constantObj.errorHandler(e);
@@ -33,7 +33,7 @@ class HomeServices {
 
   //----------------------------------------fetch all turf------------------------------------------
 
-  Future<HomeResponse?> fetchAllTurf({required String token}) async {
+  Future<AllResponse?> fetchAllTurf({required String token}) async {
     try {
       final Response response = await dio.get(
         EndPoints.allTurf,
@@ -43,7 +43,7 @@ class HomeServices {
       );
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         log('inside fetch all turf function after if condition');
-        return HomeResponse.fromJson(response.data);
+        return AllResponse.fromJson(response.data);
       }
     } catch (e) {
       constantObj.errorHandler(e);

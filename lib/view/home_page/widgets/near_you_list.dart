@@ -56,9 +56,7 @@ class NearYouList extends GetView<HomeController> {
                       );
                     },
                     child: NearYouImage(
-                      image: newList.turfLogo!,
-                      name: newList.turfName!,
-                      rating: newList.turfInfo!.turfRating!,
+                      data: newList,
                     ),
                   );
                 },

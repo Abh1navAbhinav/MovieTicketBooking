@@ -63,7 +63,7 @@ class LoginController extends GetxController {
 
   //service variable
   final Dio dio = Dio(BaseOptions(baseUrl: EndPoints.baseUrl));
-  String id = '';
+  // String id = '';
 
   //functions
 
@@ -84,7 +84,8 @@ class LoginController extends GetxController {
           await Future.delayed(const Duration(milliseconds: 2000));
           isOTpRegistration.value = false;
           loginButtonColor.value = constantObj.kColor40;
-          id = respones.id!;
+          final SharedPreferences pref = await SharedPreferences.getInstance();
+          pref.setString('user_id', respones.id!);
           // constantObj.getSnackbarMethod(
           //   message: 'OTP send to ${signUpEmailController.text.trim()}',
           // );
@@ -146,8 +147,9 @@ class LoginController extends GetxController {
       String otp = otpSignUpController.text.trim();
       final SharedPreferences storage = await SharedPreferences.getInstance();
       isLoading.value = true;
+      final userId = storage.getString('user_id');
       EmailVerifyRespones? responses =
-          await ApiServices().verifyEmailOtp(otp, id);
+          await ApiServices().verifyEmailOtp(otp, userId!);
       isLoading.value = false;
       if (responses != null) {
         if (responses.error == true) {

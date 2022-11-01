@@ -110,23 +110,22 @@ class GlobalConstants {
   errorHandler(Object e) {
     if (e is DioError) {
       log("error handler========================= ${e.toString()}");
-      if (e.response?.statusCode == 401) {
-        getSnackbarMethod(message: 'User not found !');
-        constantObj.getSnackbarMethod(
-          message: 'Please check your email & password',
-        );
-      } else if (e.type == DioErrorType.connectTimeout) {
-        getSnackbarMethod(message: 'Connection Timout');
-      } else if (e.type == DioErrorType.receiveTimeout) {
-        getSnackbarMethod(message: 'Recieve Timout');
-      } else if (e.type == DioErrorType.cancel) {
-        getSnackbarMethod(message: 'Request cancelled');
-      } else if (e.type == DioErrorType.sendTimeout) {
-        getSnackbarMethod(message: 'Url  sent timeout');
-      } else if (e.type == DioErrorType.response) {
-      } else if (e.type == DioErrorType.other) {
-        getSnackbarMethod(message: 'No Internet Connection');
-      }
+      // if (e.response?.statusCode == 401) {
+      //   log(" on dio e message${e.response!.data['message']}");
+      //   getSnackbarMethod(message: e.response!.data['message'].toString());
+      // } else if (e.type == DioErrorType.connectTimeout) {
+      //   getSnackbarMethod(message: e.response!.data['message'].toString());
+      // } else if (e.type == DioErrorType.receiveTimeout) {
+      //   getSnackbarMethod(message: e.response!.data['message'].toString());
+      // } else if (e.type == DioErrorType.cancel) {
+      //   getSnackbarMethod(message: e.response!.data['message'].toString());
+      // } else if (e.type == DioErrorType.sendTimeout) {
+      //   getSnackbarMethod(message: e.response!.data['message'].toString());
+      // } else if (e.type == DioErrorType.response) {
+      // } else if (e.type == DioErrorType.other) {
+      //   getSnackbarMethod(message: e.response!.data['message'].toString());
+      // }
+      getSnackbarMethod(message: e.response!.data['message'].toString());
     }
     if (e is SocketException) {
       getSnackbarMethod(message: 'socketexception');
