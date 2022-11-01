@@ -11,7 +11,7 @@ class CarouselSliderWidgetInDescription extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 30),
+        const SizedBox(height: 15),
         CarouselSlider.builder(
           itemCount: image.length,
           options: CarouselOptions(

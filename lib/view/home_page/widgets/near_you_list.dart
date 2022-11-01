@@ -52,7 +52,7 @@ class NearYouList extends GetView<HomeController> {
                   return GestureDetector(
                     onTap: () {
                       Get.to(
-                        TurfDescription(datum: newList),
+                        () => TurfDescription(datum: newList),
                       );
                     },
                     child: NearYouImage(
