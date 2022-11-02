@@ -45,6 +45,7 @@ class NearYouList extends GetView<HomeController> {
               () => ListView.builder(
                 itemCount: controller.nearByTurf.length,
                 shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   final Datum newList = controller.nearByTurf[index];

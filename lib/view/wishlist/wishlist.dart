@@ -18,7 +18,7 @@ class Wishlist extends GetView<WishListController> {
         behavior: MyBehavior(),
         child: SafeArea(
           child: SingleChildScrollView(
-            physics: const ScrollPhysics(),
+            physics: const PageScrollPhysics(),
             child: RefreshIndicator(
               onRefresh: () => homecontroller.homeRefreshIndicatorFunction(),
               child: Column(

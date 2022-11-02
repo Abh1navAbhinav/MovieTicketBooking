@@ -43,6 +43,7 @@ class AllTurf extends GetView<HomeController> {
           Expanded(
             child: Obx(
               () => ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: controller.allTurf.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,

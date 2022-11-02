@@ -27,6 +27,7 @@ class SearchPage extends GetView<SearchPageController> {
             : const Color.fromARGB(255, 239, 247, 239),
         child: controller.foundTurf.isNotEmpty
             ? ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: data.length,
                 itemBuilder: (context, int index) {
                   final Datum datas = data[index];
