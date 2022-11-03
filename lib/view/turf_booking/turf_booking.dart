@@ -58,11 +58,13 @@ class TurfBookingPage extends GetView<BookingController> {
                   heading: 'Morning',
                   headingIcon: Icons.wb_sunny_rounded,
                   iconColor: Colors.amber[300]!,
+                  list: controller.convertedmngTimeList,
                 ),
                 TimeSlotsBookingwithHeading(
                   data: data,
                   heading: 'Afternoon',
                   headingIcon: Icons.sunny,
+                  list: controller.convertedaftTimeList,
                   iconColor: const Color.fromARGB(255, 255, 143, 7),
                 ),
                 TimeSlotsBookingwithHeading(
@@ -70,6 +72,7 @@ class TurfBookingPage extends GetView<BookingController> {
                   heading: 'Evening',
                   headingIcon: Icons.nights_stay_outlined,
                   iconColor: Colors.black,
+                  list: controller.convertedevngTimeList,
                 ),
               ],
             ),

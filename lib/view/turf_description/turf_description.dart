@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:ticket_booking/controller/booking_controller.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/global_constants/scroll_behaviour.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
@@ -11,8 +12,9 @@ import 'package:ticket_booking/view/turf_description/widgets/headings_turf.dart'
 import 'package:ticket_booking/view/turf_description/widgets/turf_name_and_location.dart';
 import 'package:ticket_booking/view/turf_description/widgets/turf_price_widget.dart';
 
-class TurfDescription extends StatelessWidget {
-  const TurfDescription({super.key, required this.datum});
+class TurfDescription extends GetView<BookingController> {
+  TurfDescription({super.key, required this.datum});
+  final bookingcontroller = Get.put(BookingController());
   final Datum datum;
 
   @override
@@ -118,6 +120,7 @@ class TurfDescription extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          controller.descriptionBookingOnpressed(datum);
           datum.turfInfo!.turfIsAvailable!
               ? Get.to(
                   () => TurfBookingPage(

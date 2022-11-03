@@ -8,12 +8,14 @@ class TimeSlotsBookingwithHeading extends StatelessWidget {
     required this.heading,
     required this.headingIcon,
     required this.iconColor,
+    required this.list,
   }) : super(key: key);
 
   final Datum data;
   final String heading;
   final IconData headingIcon;
   final Color iconColor;
+  final List list;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class TimeSlotsBookingwithHeading extends StatelessWidget {
         ),
         Wrap(
           children: List.generate(
-            5,
+            list.length,
             (index) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -54,11 +56,16 @@ class TimeSlotsBookingwithHeading extends StatelessWidget {
                   border: Border.all(color: Colors.green),
                   color: Colors.green.withOpacity(0.4),
                 ),
-                height: 30,
-                width: 100,
-                child: const Center(
-                  child: Text(
-                    '1:30 pm',
+                height: 50,
+                width: MediaQuery.of(context).size.width * 0.28,
+                child: Center(
+                  child: FittedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Text(
+                        list[index],
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ticket_booking/controller/booking_controller.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 import 'package:ticket_booking/view/turf_description/widgets/turf_name_and_location.dart';
 
-class CustomGetModalSheet extends StatelessWidget {
+class CustomGetModalSheet extends GetView<BookingController> {
   const CustomGetModalSheet({
     Key? key,
     required this.data,
@@ -88,12 +90,15 @@ class CustomGetModalSheet extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Container(
-                  color: Colors.green,
-                  height: 50,
-                  child: const Center(
-                    child: Text(
-                      'book now',
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    color: Colors.green,
+                    height: 50,
+                    child: const Center(
+                      child: Text(
+                        'book now',
+                      ),
                     ),
                   ),
                 ),
