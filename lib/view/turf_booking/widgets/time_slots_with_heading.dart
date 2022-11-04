@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/booking_controller.dart';
@@ -19,7 +17,7 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
   final String heading;
   final IconData headingIcon;
   final Color iconColor;
-  final List list;
+  final List<String> list;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +56,6 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
               child: GestureDetector(
                 onTap: () {
                   controller.selectingSlot(index, list);
-
-                  log(controller.selectedSlots.toString());
                 },
                 child: GetBuilder<BookingController>(
                   builder: (controllers) => Container(
@@ -77,7 +73,7 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: Text(
-                            list[index],
+                            list[index].trim(),
                           ),
                         ),
                       ),

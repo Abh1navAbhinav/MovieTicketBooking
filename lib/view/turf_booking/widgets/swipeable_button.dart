@@ -15,6 +15,7 @@ class SwipeAbleButtonWidget extends GetView<BookingController> {
       () => SwipeableButtonView(
         onFinish: () {
           Get.bottomSheet(
+            backgroundColor: Colors.white,
             enableDrag: false,
             CustomGetModalSheet(data: data),
           );

@@ -7,15 +7,15 @@ class BookingController extends GetxController {
 //----------------------------------------------------------------variables
   DateTime selectedDate = DateTime.now();
   RxBool isFinished = false.obs;
-  var selectedSlots = [];
-  var convertedTimeList = [];
-  var convertedmngTimeList = [];
-  var convertedaftTimeList = [];
-  var convertedevngTimeList = [];
+  List<String> selectedSlots = [];
+  List<int> convertedTimeList = [];
+  List<String> convertedmngTimeList = [];
+  List<String> convertedaftTimeList = [];
+  List<String> convertedevngTimeList = [];
 
 //----------------------------------------------------------------converting 24 hrs to 12 hrs
   void convert24Hrs(Datum data) {
-    var mngtoevngList = [];
+    List<int> mngtoevngList = [];
     convertedTimeList.clear();
     mngtoevngList.addAll([
       data.turfTime!.timeMorningStart!,
@@ -53,23 +53,24 @@ class BookingController extends GetxController {
 
   void descriptionBookingOnpressed(Datum data) {
     convert24Hrs(data);
+    selectedSlots.clear();
     addingConvertedTimeToList(
       first: convertedTimeList[0],
       second: convertedTimeList[1],
       list: convertedmngTimeList,
-      time: ' ',
+      time: '',
     );
     addingConvertedTimeToList(
       first: convertedTimeList[2],
       second: convertedTimeList[3],
       list: convertedaftTimeList,
-      time: '',
+      time: '   ',
     );
     addingConvertedTimeToList(
       first: convertedTimeList[4],
       second: convertedTimeList[5],
       list: convertedevngTimeList,
-      time: '',
+      time: '     ',
     );
   }
 

@@ -15,6 +15,25 @@ class TurfBookingPage extends GetView<BookingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(160),
+        child: Column(
+          children: [
+            const SizedBox(height: 40),
+            const HeadingsDescriptions(heading: 'Select  your  time  slot'),
+            DatePicker(
+              DateTime.now(),
+              initialSelectedDate: controller.selectedDate,
+              daysCount: 31,
+              selectionColor: Colors.green,
+              selectedTextColor: Colors.white,
+              onDateChange: (selectedDate) {
+                controller.selectedDate = selectedDate;
+              },
+            ),
+          ],
+        ),
+      ),
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SafeArea(
@@ -22,18 +41,6 @@ class TurfBookingPage extends GetView<BookingController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 10),
-                DatePicker(
-                  DateTime.now(),
-                  initialSelectedDate: controller.selectedDate,
-                  daysCount: 31,
-                  selectionColor: Colors.green,
-                  selectedTextColor: Colors.white,
-                  onDateChange: (selectedDate) {
-                    controller.selectedDate = selectedDate;
-                  },
-                ),
-                const HeadingsDescriptions(heading: 'Select your time slot'),
                 TimeSlotsBookingwithHeading(
                   data: data,
                   heading: 'Morning',
