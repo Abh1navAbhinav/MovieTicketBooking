@@ -39,10 +39,11 @@ class BookingController extends GetxController {
     required List list,
     required int first,
     required int second,
+    required String time,
   }) {
     list.clear();
     for (var i = first; i < second; i++) {
-      list.add("$i:00 - ${i + 1}:00 ");
+      list.add("$time$i:00 - ${i + 1}:00$time");
     }
 
     log(list.toString());
@@ -56,16 +57,19 @@ class BookingController extends GetxController {
       first: convertedTimeList[0],
       second: convertedTimeList[1],
       list: convertedmngTimeList,
+      time: '  ',
     );
     addingConvertedTimeToList(
       first: convertedTimeList[2],
       second: convertedTimeList[3],
       list: convertedaftTimeList,
+      time: ' ',
     );
     addingConvertedTimeToList(
       first: convertedTimeList[4],
       second: convertedTimeList[5],
       list: convertedevngTimeList,
+      time: ' ',
     );
   }
 
