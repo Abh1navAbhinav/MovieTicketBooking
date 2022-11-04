@@ -57,19 +57,19 @@ class BookingController extends GetxController {
       first: convertedTimeList[0],
       second: convertedTimeList[1],
       list: convertedmngTimeList,
-      time: '  ',
+      time: ' ',
     );
     addingConvertedTimeToList(
       first: convertedTimeList[2],
       second: convertedTimeList[3],
       list: convertedaftTimeList,
-      time: ' ',
+      time: '',
     );
     addingConvertedTimeToList(
       first: convertedTimeList[4],
       second: convertedTimeList[5],
       list: convertedevngTimeList,
-      time: ' ',
+      time: '',
     );
   }
 
