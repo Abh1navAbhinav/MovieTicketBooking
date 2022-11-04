@@ -20,28 +20,9 @@ class TurfBookingPage extends GetView<BookingController> {
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.date_range),
-                      splashRadius: 20,
-                      splashColor: Colors.green,
-                      onPressed: () async {
-                        final calenderPickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: controller.selectedDate,
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime.now().add(
-                            const Duration(days: 31),
-                          ),
-                        );
-                        controller.selectedDate = calenderPickedDate!;
-                      },
-                    ),
-                  ],
-                ),
+                const SizedBox(height: 10),
                 DatePicker(
                   DateTime.now(),
                   initialSelectedDate: controller.selectedDate,
@@ -74,14 +55,14 @@ class TurfBookingPage extends GetView<BookingController> {
                   iconColor: Colors.black,
                   list: controller.convertedevngTimeList,
                 ),
+                const SizedBox(height: 65),
               ],
             ),
           ),
         ),
       ),
-      // floatingActionButton: const SwipeAbleButtonWidget(),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(10),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 32),
         child: SwipeAbleButtonWidget(data: data),
       ),
     );

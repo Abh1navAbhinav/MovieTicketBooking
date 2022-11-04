@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ticket_booking/controller/booking_controller.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 
-class TimeSlotsBookingwithHeading extends StatelessWidget {
+class TimeSlotsBookingwithHeading extends GetView<BookingController> {
   const TimeSlotsBookingwithHeading({
     Key? key,
     required this.data,
@@ -22,6 +26,7 @@ class TimeSlotsBookingwithHeading extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          tileColor: Colors.green.withOpacity(0.02),
           leading: Icon(
             headingIcon,
             color: iconColor,
@@ -50,20 +55,31 @@ class TimeSlotsBookingwithHeading extends StatelessWidget {
             list.length,
             (index) => Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.green),
-                  color: Colors.green.withOpacity(0.4),
-                ),
-                height: 50,
-                width: MediaQuery.of(context).size.width * 0.28,
-                child: Center(
-                  child: FittedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text(
-                        list[index],
+              child: GestureDetector(
+                onTap: () {
+                  controller.selectingSlot(index, list);
+
+                  log(controller.selectedSlots.toString());
+                },
+                child: GetBuilder<BookingController>(
+                  builder: (controllers) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.green),
+                      color: controller.selectedSlots.contains(list[index])
+                          ? Colors.red
+                          : Colors.green.withOpacity(0.4),
+                    ),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.28,
+                    child: Center(
+                      child: FittedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Text(
+                            list[index],
+                          ),
+                        ),
                       ),
                     ),
                   ),

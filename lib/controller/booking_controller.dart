@@ -7,6 +7,7 @@ class BookingController extends GetxController {
 //----------------------------------------------------------------variables
   DateTime selectedDate = DateTime.now();
   RxBool isFinished = false.obs;
+  var selectedSlots = [];
   var convertedTimeList = [];
   var convertedmngTimeList = [];
   var convertedaftTimeList = [];
@@ -66,5 +67,16 @@ class BookingController extends GetxController {
       second: convertedTimeList[5],
       list: convertedevngTimeList,
     );
+  }
+
+//--------------------------------------------------------------------------selecting slots
+
+  void selectingSlot(int index, list) {
+    if (selectedSlots.contains(list[index])) {
+      selectedSlots.remove(list[index]);
+    } else {
+      selectedSlots.add(list[index]);
+    }
+    update();
   }
 }
