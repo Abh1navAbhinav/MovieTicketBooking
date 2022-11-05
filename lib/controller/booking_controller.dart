@@ -1,12 +1,13 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 
 class BookingController extends GetxController {
 //----------------------------------------------------------------variables
   DateTime selectedDate = DateTime.now();
   RxBool isFinished = false.obs;
+  RxBool isAvailableTime = false.obs;
   int totalAmount = 0;
   List<String> selectedSlots = [];
   List<int> convertedTimeList = [];
@@ -46,8 +47,6 @@ class BookingController extends GetxController {
     for (var i = first; i < second; i++) {
       list.add("$time$i:00 - ${i + 1}:00$time");
     }
-
-    log(list.toString());
   }
 
 //------------------------------------------------------------------------ontap of book button in description page
@@ -76,21 +75,87 @@ class BookingController extends GetxController {
     );
   }
 
+//---------------------------------checking is available or not
+
+  bool isAvailableCheckFunction({
+    required String item,
+    required String heading,
+  }) {
+    var temp = item.trim();
+    var splittedtime = temp.split(':').first;
+    var parsedTime = int.parse(splittedtime);
+    var parseddate = parseDate(selectedDate);
+    var finalTime = 0;
+    if (heading != 'Morning') {
+      finalTime = parsedTime + 12;
+    } else {
+      finalTime = parsedTime;
+    }
+    return DateTime.now().hour >= finalTime &&
+        parseddate == DateTime.now().day.toString();
+  }
+
 //--------------------------------------------------------------------------selecting slots
 
   void selectingSlot({
     required int index,
     required List<String> list,
     required int price,
+    required String key,
   }) {
-    if (selectedSlots.contains(list[index])) {
-      totalAmount -= price;
-      selectedSlots.remove(list[index]);
+//---------variables
+
+    var temp = list[index].trim();
+    var splittedtime = temp.split(':').first;
+    var parsedTime = int.parse(splittedtime);
+    var finalTime = 0;
+    var parseddate = parseDate(selectedDate);
+//-----checking if morning and adding 12 if not morning
+
+    if (key != 'Morning') {
+      finalTime = parsedTime + 12;
     } else {
-      totalAmount += price;
-      selectedSlots.add(list[index]);
+      finalTime = parsedTime;
     }
-    log(totalAmount.toString());
+//------final checking if the slot contains the list or not
+    if (parseddate == DateTime.now().day.toString()) {
+      if (selectedSlots.contains(list[index])) {
+        if (finalTime > DateTime.now().hour) {
+          totalAmount -= price;
+          selectedSlots.remove(list[index]);
+        } else {
+          constantObj.getSnackbarMethod(
+            message: 'Time not available',
+            duration: 1,
+          );
+        }
+      } else {
+        if (finalTime > DateTime.now().hour) {
+          totalAmount += price;
+          selectedSlots.add(list[index]);
+        } else {
+          constantObj.getSnackbarMethod(
+            message: 'Time not available',
+            duration: 1,
+          );
+        }
+      }
+    } else {
+      if (selectedSlots.contains(list[index])) {
+        totalAmount -= price;
+        selectedSlots.remove(list[index]);
+      } else {
+        totalAmount += price;
+        selectedSlots.add(list[index]);
+      }
+    }
+
     update();
+  }
+
+//--------------------------------------------parsing dat
+
+  String parseDate(DateTime date) {
+    return DateFormat.d().format(date);
   }
 }

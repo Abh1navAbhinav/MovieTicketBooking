@@ -20,7 +20,7 @@ class GlobalConstants {
   Color kColor10 = const Color.fromARGB(255, 247, 229, 253);
   Color kDustyGrass1 = const Color.fromARGB(255, 212, 252, 121);
   Color kDustyGrass2 = const Color.fromARGB(255, 150, 230, 161);
-  Color kAlreadyBookedSlots = Colors.red.withOpacity(0.5);
+  Color kAlreadyBookedSlots = Colors.grey.withOpacity(0.5);
   Color kUnSelectedSlotsColor = Colors.green.withOpacity(0.3);
   Color kSelectedSlotsColor = Colors.green;
   Color kSelectedSlotTextColor = Colors.white;
@@ -74,6 +74,7 @@ class GlobalConstants {
     required String message,
     String? title,
     bool? success,
+    int? duration,
   }) {
     return Get.showSnackbar(
       GetSnackBar(
@@ -100,8 +101,8 @@ class GlobalConstants {
             fontSize: 17,
           ),
         ),
-        duration: const Duration(
-          seconds: 3,
+        duration: Duration(
+          seconds: duration ?? 3,
         ),
         animationDuration: const Duration(
           seconds: 1,

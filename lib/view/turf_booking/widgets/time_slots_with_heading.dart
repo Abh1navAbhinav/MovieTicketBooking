@@ -61,25 +61,38 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                     index: index,
                     list: list,
                     price: price,
+                    key: heading,
                   );
                 },
                 child: GetBuilder<BookingController>(
                   builder: (controllers) {
+                    controller.isAvailableTime.value =
+                        controller.isAvailableCheckFunction(
+                      item: list[index],
+                      heading: heading,
+                    );
                     return Material(
                       borderRadius: BorderRadius.circular(20),
                       shadowColor: Colors.cyan.withOpacity(0.4),
                       elevation: controller.selectedSlots.contains(list[index])
                           ? 0
-                          : 5,
+                          : controller.isAvailableTime.value
+                              ? 0
+                              : 5,
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 500),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          border:
-                              Border.all(color: Colors.green.withOpacity(0.5)),
+                          border: Border.all(
+                            color: !controller.isAvailableTime.value
+                                ? Colors.green.withOpacity(0.5)
+                                : Colors.white38,
+                          ),
                           color: controller.selectedSlots.contains(list[index])
                               ? constantObj.kSelectedSlotsColor
-                              : constantObj.kUnSelectedSlotsColor,
+                              : controller.isAvailableTime.value
+                                  ? constantObj.kAlreadyBookedSlots
+                                  : constantObj.kUnSelectedSlotsColor,
                         ),
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.28,
@@ -94,7 +107,10 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                                   color: controller.selectedSlots
                                           .contains(list[index])
                                       ? constantObj.kSelectedSlotTextColor
-                                      : constantObj.kUnselectedSlotTextColor,
+                                      : controller.isAvailableTime.value
+                                          ? Colors.white38
+                                          : constantObj
+                                              .kUnselectedSlotTextColor,
                                 ),
                               ),
                             ),
