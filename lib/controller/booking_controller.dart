@@ -7,6 +7,7 @@ class BookingController extends GetxController {
 //----------------------------------------------------------------variables
   DateTime selectedDate = DateTime.now();
   RxBool isFinished = false.obs;
+  int totalAmount = 0;
   List<String> selectedSlots = [];
   List<int> convertedTimeList = [];
   List<String> convertedmngTimeList = [];
@@ -54,6 +55,7 @@ class BookingController extends GetxController {
   void descriptionBookingOnpressed(Datum data) {
     convert24Hrs(data);
     selectedSlots.clear();
+    totalAmount = 0;
     addingConvertedTimeToList(
       first: convertedTimeList[0],
       second: convertedTimeList[1],
@@ -76,12 +78,19 @@ class BookingController extends GetxController {
 
 //--------------------------------------------------------------------------selecting slots
 
-  void selectingSlot(int index, list) {
+  void selectingSlot({
+    required int index,
+    required List<String> list,
+    required int price,
+  }) {
     if (selectedSlots.contains(list[index])) {
+      totalAmount -= price;
       selectedSlots.remove(list[index]);
     } else {
+      totalAmount += price;
       selectedSlots.add(list[index]);
     }
+    log(totalAmount.toString());
     update();
   }
 }

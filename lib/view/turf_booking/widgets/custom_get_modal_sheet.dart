@@ -90,9 +90,9 @@ class CustomGetModalSheet extends GetView<BookingController> {
               child: Container(
                 color: Colors.greenAccent.withOpacity(0.4),
                 height: 50,
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'Total amount',
+                    controller.totalAmount.toString(),
                   ),
                 ),
               ),

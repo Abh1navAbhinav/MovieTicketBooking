@@ -12,6 +12,7 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
     required this.headingIcon,
     required this.iconColor,
     required this.list,
+    required this.price,
   }) : super(key: key);
 
   final Datum data;
@@ -19,7 +20,7 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
   final IconData headingIcon;
   final Color iconColor;
   final List<String> list;
-
+  final int price;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,7 +57,11 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  controller.selectingSlot(index, list);
+                  controller.selectingSlot(
+                    index: index,
+                    list: list,
+                    price: price,
+                  );
                 },
                 child: GetBuilder<BookingController>(
                   builder: (controllers) {
