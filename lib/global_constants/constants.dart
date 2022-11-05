@@ -20,6 +20,11 @@ class GlobalConstants {
   Color kColor10 = const Color.fromARGB(255, 247, 229, 253);
   Color kDustyGrass1 = const Color.fromARGB(255, 212, 252, 121);
   Color kDustyGrass2 = const Color.fromARGB(255, 150, 230, 161);
+  Color kAlreadyBookedSlots = Colors.red.withOpacity(0.5);
+  Color kUnSelectedSlotsColor = Colors.green.withOpacity(0.3);
+  Color kSelectedSlotsColor = Colors.green;
+  Color kSelectedSlotTextColor = Colors.white;
+  Color kUnselectedSlotTextColor = Colors.black;
 
 //----------------------------------------------------------gradient-------------------------------------------------------------------------
 

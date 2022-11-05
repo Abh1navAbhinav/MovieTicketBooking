@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:ticket_booking/controller/booking_controller.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 import 'package:ticket_booking/view/turf_description/widgets/turf_name_and_location.dart';
@@ -24,8 +25,8 @@ class CustomGetModalSheet extends GetView<BookingController> {
           height: 50,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 '   Booked for',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
@@ -33,8 +34,8 @@ class CustomGetModalSheet extends GetView<BookingController> {
                 ),
               ),
               Text(
-                '12/6/2022    ',
-                style: TextStyle(
+                '${parseDate(controller.selectedDate)}    ',
+                style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 15,
                 ),
@@ -119,5 +120,9 @@ class CustomGetModalSheet extends GetView<BookingController> {
         ),
       ],
     );
+  }
+
+  String parseDate(DateTime date) {
+    return DateFormat.yMMMMd().format(date);
   }
 }

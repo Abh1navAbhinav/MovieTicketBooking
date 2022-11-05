@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_booking/controller/booking_controller.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 
 class TimeSlotsBookingwithHeading extends GetView<BookingController> {
@@ -61,10 +62,10 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                   builder: (controllers) => Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.green),
+                      border: Border.all(color: Colors.green.withOpacity(0.5)),
                       color: controller.selectedSlots.contains(list[index])
-                          ? Colors.red
-                          : Colors.green.withOpacity(0.4),
+                          ? constantObj.kSelectedSlotsColor
+                          : constantObj.kUnSelectedSlotsColor,
                     ),
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.28,
@@ -74,6 +75,12 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: Text(
                             list[index].trim(),
+                            style: TextStyle(
+                              color:
+                                  controller.selectedSlots.contains(list[index])
+                                      ? constantObj.kSelectedSlotTextColor
+                                      : constantObj.kUnselectedSlotTextColor,
+                            ),
                           ),
                         ),
                       ),
