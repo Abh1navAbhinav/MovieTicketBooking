@@ -59,33 +59,45 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                   controller.selectingSlot(index, list);
                 },
                 child: GetBuilder<BookingController>(
-                  builder: (controllers) => Container(
-                    decoration: BoxDecoration(
+                  builder: (controllers) {
+                    return Material(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.green.withOpacity(0.5)),
-                      color: controller.selectedSlots.contains(list[index])
-                          ? constantObj.kSelectedSlotsColor
-                          : constantObj.kUnSelectedSlotsColor,
-                    ),
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.28,
-                    child: Center(
-                      child: FittedBox(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text(
-                            list[index].trim(),
-                            style: TextStyle(
-                              color:
-                                  controller.selectedSlots.contains(list[index])
+                      shadowColor: Colors.cyan.withOpacity(0.4),
+                      elevation: controller.selectedSlots.contains(list[index])
+                          ? 0
+                          : 5,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 500),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border:
+                              Border.all(color: Colors.green.withOpacity(0.5)),
+                          color: controller.selectedSlots.contains(list[index])
+                              ? constantObj.kSelectedSlotsColor
+                              : constantObj.kUnSelectedSlotsColor,
+                        ),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.28,
+                        child: Center(
+                          child: FittedBox(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              child: Text(
+                                list[index].trim(),
+                                style: TextStyle(
+                                  color: controller.selectedSlots
+                                          .contains(list[index])
                                       ? constantObj.kSelectedSlotTextColor
                                       : constantObj.kUnselectedSlotTextColor,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ),
             ),
