@@ -10,4 +10,6 @@ class EndPoints {
   static const String addWishList = '/user/add-wishlist';
   static const String getWishList = '/user/get-wishlist/';
   static const String removeWishList = '/user/delete-wishlist/';
+  static const String bookTurf = '/account/add-booking';
+  static const String getBookedTurf = '/account/get-booking/';
 }

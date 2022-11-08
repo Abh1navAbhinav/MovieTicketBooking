@@ -104,7 +104,9 @@ class CustomGetModalSheet extends GetView<BookingController> {
             ),
             Expanded(
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  // controller.bookNowButtonOnPress(turfId: data.id!);
+                },
                 child: Container(
                   color: Colors.green,
                   height: 50,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
@@ -9,11 +11,13 @@ class BookingController extends GetxController {
   RxBool isFinished = false.obs;
   bool isAvailableTime = false;
   int totalAmount = 0;
+  var backendbookedtimeslots = [];
   List<String> selectedSlots = [];
   List<int> convertedTimeList = [];
   List<String> convertedmngTimeList = [];
   List<String> convertedaftTimeList = [];
   List<String> convertedevngTimeList = [];
+  List<int> convertedSelectedSlots24Hrs = [];
 
 //----------------------------------------------------------------converting 24 hrs to 12 hrs
   void convert24Hrs(Datum data) {
@@ -122,6 +126,7 @@ class BookingController extends GetxController {
       if (selectedSlots.contains(list[index])) {
         if (finalTime > DateTime.now().hour) {
           totalAmount -= price;
+          convertedSelectedSlots24Hrs.remove(finalTime);
           selectedSlots.remove(list[index]);
         } else {
           constantObj.getSnackbarMethod(
@@ -132,6 +137,7 @@ class BookingController extends GetxController {
       } else {
         if (finalTime > DateTime.now().hour) {
           totalAmount += price;
+          convertedSelectedSlots24Hrs.add(finalTime);
           selectedSlots.add(list[index]);
         } else {
           constantObj.getSnackbarMethod(
@@ -143,13 +149,17 @@ class BookingController extends GetxController {
     } else {
       if (selectedSlots.contains(list[index])) {
         totalAmount -= price;
+        convertedSelectedSlots24Hrs.remove(finalTime);
         selectedSlots.remove(list[index]);
       } else {
         totalAmount += price;
+        convertedSelectedSlots24Hrs.add(finalTime);
         selectedSlots.add(list[index]);
       }
     }
-
+    log('selected slots: $selectedSlots');
+    log("converted24hrs $convertedSelectedSlots24Hrs");
+    log(DateFormat.yMd().format(selectedDate));
     update();
   }
 
@@ -167,4 +177,17 @@ class BookingController extends GetxController {
     selectedSlots.clear();
     update();
   }
+
+//------------------------------------------------book now button on press function
+  // Future<void> bookNowButtonOnPress({
+  //   required String turfId,
+  // }) async {
+  //   final AllResponse? response = await BookingService().addToBookedTurf(
+  //     bookedDate: DateFormat.yMd().format(selectedDate),
+  //     turfId: turfId,
+  //     timeSlots: convertedSelectedSlots24Hrs,
+  //   );
+  //   log('inside book now button on press function response:  $response');
+  // }
+
 }
