@@ -7,7 +7,7 @@ class BookingController extends GetxController {
 //----------------------------------------------------------------variables
   DateTime selectedDate = DateTime.now();
   RxBool isFinished = false.obs;
-  RxBool isAvailableTime = false.obs;
+  bool isAvailableTime = false;
   int totalAmount = 0;
   List<String> selectedSlots = [];
   List<int> convertedTimeList = [];
@@ -157,5 +157,14 @@ class BookingController extends GetxController {
 
   String parseDate(DateTime date) {
     return DateFormat.d().format(date);
+  }
+
+//--------------------------------------------on date change function
+
+  void onDateChangeFunction(selectedDates) {
+    selectedDate = selectedDates;
+    totalAmount = 0;
+    selectedSlots.clear();
+    update();
   }
 }

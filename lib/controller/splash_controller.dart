@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_booking/controller/location_controller.dart';
@@ -17,7 +15,6 @@ class SplashScreenController extends GetxController {
   checkUserLoggedIn() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     final userLoggedIn = pref.getString('token');
-    log(userLoggedIn.toString());
     if (userLoggedIn == null || userLoggedIn.isEmpty) {
       Get.offAll(
         () => LoginPage(),

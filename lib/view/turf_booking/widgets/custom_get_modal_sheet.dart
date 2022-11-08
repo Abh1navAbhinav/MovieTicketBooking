@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ticket_booking/controller/booking_controller.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
@@ -92,7 +93,11 @@ class CustomGetModalSheet extends GetView<BookingController> {
                 height: 50,
                 child: Center(
                   child: Text(
-                    controller.totalAmount.toString(),
+                    "Total:  ₹ ${controller.totalAmount}",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
               ),
@@ -103,12 +108,12 @@ class CustomGetModalSheet extends GetView<BookingController> {
                 child: Container(
                   color: Colors.green,
                   height: 50,
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       'Book now',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                      style: GoogleFonts.nunito(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
                         color: Colors.white,
                       ),
                     ),

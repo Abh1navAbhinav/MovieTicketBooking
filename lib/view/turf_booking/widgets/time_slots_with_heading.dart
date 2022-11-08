@@ -66,7 +66,7 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                 },
                 child: GetBuilder<BookingController>(
                   builder: (controllers) {
-                    controller.isAvailableTime.value =
+                    controller.isAvailableTime =
                         controller.isAvailableCheckFunction(
                       item: list[index],
                       heading: heading,
@@ -76,7 +76,7 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                       shadowColor: Colors.cyan.withOpacity(0.4),
                       elevation: controller.selectedSlots.contains(list[index])
                           ? 0
-                          : controller.isAvailableTime.value
+                          : controller.isAvailableTime
                               ? 0
                               : 5,
                       child: AnimatedContainer(
@@ -84,13 +84,13 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color: !controller.isAvailableTime.value
+                            color: !controller.isAvailableTime
                                 ? Colors.green.withOpacity(0.5)
-                                : Colors.white38,
+                                : Colors.grey,
                           ),
                           color: controller.selectedSlots.contains(list[index])
                               ? constantObj.kSelectedSlotsColor
-                              : controller.isAvailableTime.value
+                              : controller.isAvailableTime
                                   ? constantObj.kAlreadyBookedSlots
                                   : constantObj.kUnSelectedSlotsColor,
                         ),
@@ -107,7 +107,7 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                                   color: controller.selectedSlots
                                           .contains(list[index])
                                       ? constantObj.kSelectedSlotTextColor
-                                      : controller.isAvailableTime.value
+                                      : controller.isAvailableTime
                                           ? Colors.white38
                                           : constantObj
                                               .kUnselectedSlotTextColor,

@@ -28,7 +28,7 @@ class TurfBookingPage extends GetView<BookingController> {
               selectionColor: Colors.green,
               selectedTextColor: Colors.white,
               onDateChange: (selectedDate) {
-                controller.selectedDate = selectedDate;
+                controller.onDateChangeFunction(selectedDate);
               },
             ),
           ],
