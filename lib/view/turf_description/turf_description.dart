@@ -119,8 +119,8 @@ class TurfDescription extends GetView<BookingController> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          controller.descriptionBookingOnpressed(datum);
+        onPressed: () async {
+          await controller.descriptionBookingOnpressed(datum);
           datum.turfInfo!.turfIsAvailable!
               ? Get.to(
                   () => TurfBookingPage(
