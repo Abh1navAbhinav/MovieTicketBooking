@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
@@ -136,11 +134,6 @@ class BookingController extends GetxController {
     } else {
       checkAndAddPrice(list, index, price, finalTime);
     }
-
-    log('selected date : $selectedDate');
-    log('now date : $nowDate');
-    log('already booked slots : $alreadyBookedSlots');
-    log('final time : $finalTime');
     update();
   }
 
@@ -173,21 +166,16 @@ class BookingController extends GetxController {
 
   void onDateChangeFunction(selectedDates) {
     selectedDate = parseDate(selectedDates);
-
     totalAmount = 0;
-    log(selectedDate.toString());
-
     selectedSlots.clear();
+    convertedTimeList24Hrs.clear();
     addingAlreadyBookedToList();
-    log(bookedSlots.toString());
-    log(alreadyBookedSlots.toString());
     update();
   }
 
 //-----------------------------------------------get booked turf list
 
   Future<void> getBookedTurfList({required String id}) async {
-    log(id);
     final BookResponse? response =
         await BookingService().getBookedTurfList(id: id);
 
@@ -204,11 +192,6 @@ class BookingController extends GetxController {
     }
   }
 
-// //-------------------------------------------------------------adding already booked slots to a list
-//   void addingAlreadyBookedToList() {
-
-//   }
-
 //----------------------------------------------------------------book turf function
   Future<void> bookTurf({required String turfId, required Datum datum}) async {
     final AddBookedSlots model = AddBookedSlots(
@@ -219,9 +202,9 @@ class BookingController extends GetxController {
     final AddBookedSlots? statusAfterBooked =
         await BookingService().addToBookedTurf(model: model);
     constantObj.getSnackbarMethod(
-        message: statusAfterBooked!.message!.toString());
-    log(statusAfterBooked.message!.toString());
-    await Future.delayed(const Duration(seconds: 2));
-    Get.to(TurfDescription(datum: datum));
+        message: statusAfterBooked!.message!.toString(), duration: 1);
+    Get.to(
+        duration: const Duration(seconds: 2),
+        () => TurfDescription(datum: datum));
   }
 }
