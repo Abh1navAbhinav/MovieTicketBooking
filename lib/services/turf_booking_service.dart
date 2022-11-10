@@ -3,32 +3,23 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:ticket_booking/config/endpoints.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
+import 'package:ticket_booking/model/booking/booking_request.dart';
 import 'package:ticket_booking/model/booking/booking_response.dart';
-import 'package:ticket_booking/model/home/all_turf/home_response.dart';
 
 class BookingService {
   final Dio dio = Dio(BaseOptions(baseUrl: EndPoints.baseUrl));
 
 //-------------------------------------Add to booked turf
-  Future<AllResponse?> addToBookedTurf({
-    required String bookedDate,
-    required String turfId,
-    required List<int> timeSlots,
+  Future<AddBookedSlots?> addToBookedTurf({
+    required AddBookedSlots model,
   }) async {
-    Map<String, dynamic> data = {
-      "booking_date": bookedDate,
-      "turf_id": turfId,
-      "time_slot": timeSlots
-    };
     try {
-      final Response response = await dio.post(EndPoints.bookTurf, data: data);
+      final Response response =
+          await dio.post(EndPoints.bookTurf, data: model.toJson());
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        return AllResponse.fromJson(response.data);
+        return AddBookedSlots.fromJson(response.data);
       }
-      log('fav response after if inside try');
     } catch (e) {
-      log('add to booked turf service inside catch');
-      log(e.toString());
       constantObj.errorHandler(e);
     }
     return null;

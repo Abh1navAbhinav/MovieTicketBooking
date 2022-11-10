@@ -2,9 +2,12 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ticket_booking/global_constants/constants.dart';
+import 'package:ticket_booking/model/booking/booking_request.dart';
 import 'package:ticket_booking/model/booking/booking_response.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 import 'package:ticket_booking/services/turf_booking_service.dart';
+import 'package:ticket_booking/view/turf_description/turf_description.dart';
 
 class BookingController extends GetxController {
 //----------------------------------------------------------------variables
@@ -19,6 +22,7 @@ class BookingController extends GetxController {
   List<String> convertedmngTimeList = [];
   List<String> convertedaftTimeList = [];
   List<String> convertedevngTimeList = [];
+  List<int> convertedTimeList24Hrs = [];
   List<int> bookedSlots = [];
   Map<String, List<int>> alreadyBookedSlots = {};
 
@@ -150,9 +154,11 @@ class BookingController extends GetxController {
     if (selectedSlots.contains(list[index]) ||
         bookedSlots.contains(finalTime)) {
       totalAmount -= price;
+      convertedTimeList24Hrs.remove(finalTime);
       selectedSlots.remove(list[index]);
     } else {
       totalAmount += price;
+      convertedTimeList24Hrs.add(finalTime);
       selectedSlots.add(list[index]);
     }
   }
@@ -181,6 +187,7 @@ class BookingController extends GetxController {
 //-----------------------------------------------get booked turf list
 
   Future<void> getBookedTurfList({required String id}) async {
+    log(id);
     final BookResponse? response =
         await BookingService().getBookedTurfList(id: id);
 
@@ -195,5 +202,26 @@ class BookingController extends GetxController {
     if (alreadyBookedSlots.containsKey(selectedDate)) {
       bookedSlots.addAll(alreadyBookedSlots[selectedDate]!);
     }
+  }
+
+// //-------------------------------------------------------------adding already booked slots to a list
+//   void addingAlreadyBookedToList() {
+
+//   }
+
+//----------------------------------------------------------------book turf function
+  Future<void> bookTurf({required String turfId, required Datum datum}) async {
+    final AddBookedSlots model = AddBookedSlots(
+      bookingDate: selectedDate,
+      turfId: turfId,
+      timeSlot: convertedTimeList24Hrs,
+    );
+    final AddBookedSlots? statusAfterBooked =
+        await BookingService().addToBookedTurf(model: model);
+    constantObj.getSnackbarMethod(
+        message: statusAfterBooked!.message!.toString());
+    log(statusAfterBooked.message!.toString());
+    await Future.delayed(const Duration(seconds: 2));
+    Get.to(TurfDescription(datum: datum));
   }
 }
