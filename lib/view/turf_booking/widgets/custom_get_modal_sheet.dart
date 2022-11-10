@@ -35,7 +35,7 @@ class CustomGetModalSheet extends GetView<BookingController> {
                 ),
               ),
               Text(
-                '${parseDate(controller.selectedDate)}    ',
+                '${controller.selectedDate}    ',
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 15,

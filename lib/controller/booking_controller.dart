@@ -2,25 +2,25 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/model/booking/booking_response.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 import 'package:ticket_booking/services/turf_booking_service.dart';
 
 class BookingController extends GetxController {
 //----------------------------------------------------------------variables
-  DateTime selectedDate = DateTime.now();
+  String selectedDate = '11/9/2022';
   RxBool isFinished = false.obs;
   bool isAvailableTime = false;
+  RxBool isLoading = false.obs;
   int totalAmount = 0;
-  List<String> backendBookedDate = [];
-  List<dynamic> backendbookedtimeslots = [];
+  int finalTime = 0;
   List<String> selectedSlots = [];
   List<int> convertedTimeList = [];
   List<String> convertedmngTimeList = [];
   List<String> convertedaftTimeList = [];
   List<String> convertedevngTimeList = [];
-  List<int> convertedSelectedSlots24Hrs = [];
+  List<int> bookedSlots = [];
+  Map<String, List<int>> alreadyBookedSlots = {};
 
 //----------------------------------------------------------------converting 24 hrs to 12 hrs
   void convert24Hrs(Datum data) {
@@ -59,6 +59,7 @@ class BookingController extends GetxController {
 //------------------------------------------------------------------------ontap of book button in description page
 
   Future<void> descriptionBookingOnpressed(Datum data) async {
+    isLoading.value = true;
     convert24Hrs(data);
     selectedSlots.clear();
     totalAmount = 0;
@@ -80,10 +81,11 @@ class BookingController extends GetxController {
       list: convertedevngTimeList,
       time: '     ',
     );
-    convertedSelectedSlots24Hrs.clear();
-    backendBookedDate.clear();
-    backendbookedtimeslots.clear();
+    selectedDate = parseDate(DateTime.now());
     await getBookedTurfList(id: data.id!);
+    addingAlreadyBookedToList();
+
+    isLoading.value = false;
   }
 
 //---------------------------------checking is available or not
@@ -92,15 +94,17 @@ class BookingController extends GetxController {
     required String item,
     required String heading,
   }) {
-    var finalTime = 0;
-    var parseddate = parseDate(selectedDate);
+    finalTime = 0;
+
+    var nowDate = parseDate(DateTime.now());
+
     if (heading != 'Morning') {
       finalTime = int.parse(item.trim().split(':').first) + 12;
     } else {
       finalTime = int.parse(item.trim().split(':').first);
     }
-    return DateTime.now().hour >= finalTime &&
-        parseddate == DateTime.now().day.toString();
+    return (DateTime.now().hour >= finalTime && selectedDate == nowDate) ||
+        bookedSlots.contains(finalTime);
   }
 
 //--------------------------------------------------------------------------selecting slots
@@ -111,9 +115,7 @@ class BookingController extends GetxController {
     required int price,
     required String key,
   }) {
-    var finalTime = 0;
-    var parseddate = parseDate(selectedDate);
-    var nowDate = DateTime.now().day.toString();
+    var nowDate = parseDate(DateTime.now());
 //-----checking if morning and adding 12 if not morning
 
     if (key != 'Morning') {
@@ -122,23 +124,19 @@ class BookingController extends GetxController {
       finalTime = int.parse(list[index].trim().split(':').first);
     }
 //------final checking if the slot contains the list or not
-    if (parseddate == nowDate) {
+
+    if (selectedDate == nowDate) {
       if (finalTime > DateTime.now().hour) {
         checkAndAddPrice(list, index, price, finalTime);
-      } else {
-        constantObj.getSnackbarMethod(
-          message: 'Time not available',
-          duration: 1,
-        );
       }
     } else {
       checkAndAddPrice(list, index, price, finalTime);
     }
 
-    log("converted24hrs $convertedSelectedSlots24Hrs");
-    log('back_end_booked_times_slot : $backendbookedtimeslots');
-    log('back end date : $backendBookedDate');
-    log('selected date : $parseddate');
+    log('selected date : $selectedDate');
+    log('now date : $nowDate');
+    log('already booked slots : $alreadyBookedSlots');
+    log('final time : $finalTime');
     update();
   }
 
@@ -149,13 +147,12 @@ class BookingController extends GetxController {
     int price,
     int finalTime,
   ) {
-    if (selectedSlots.contains(list[index])) {
+    if (selectedSlots.contains(list[index]) ||
+        bookedSlots.contains(finalTime)) {
       totalAmount -= price;
-      convertedSelectedSlots24Hrs.remove(finalTime);
       selectedSlots.remove(list[index]);
     } else {
       totalAmount += price;
-      convertedSelectedSlots24Hrs.add(finalTime);
       selectedSlots.add(list[index]);
     }
   }
@@ -163,34 +160,40 @@ class BookingController extends GetxController {
 //--------------------------------------------parsing dat
 
   String parseDate(DateTime date) {
-    return DateFormat.d().format(date);
+    return DateFormat.yMd().format(date);
   }
 
 //--------------------------------------------on date change function
 
   void onDateChangeFunction(selectedDates) {
-    selectedDate = selectedDates;
-    totalAmount = 0;
-    convertedSelectedSlots24Hrs.clear();
-    selectedSlots.clear();
+    selectedDate = parseDate(selectedDates);
 
+    totalAmount = 0;
+    log(selectedDate.toString());
+
+    selectedSlots.clear();
+    addingAlreadyBookedToList();
+    log(bookedSlots.toString());
+    log(alreadyBookedSlots.toString());
     update();
   }
 
 //-----------------------------------------------get booked turf list
 
   Future<void> getBookedTurfList({required String id}) async {
-    log(id);
-    backendbookedtimeslots.clear();
-    log(backendbookedtimeslots.toString());
     final BookResponse? response =
         await BookingService().getBookedTurfList(id: id);
 
-    for (var i = 0; i < response!.data.length; i++) {
-      backendbookedtimeslots.addAll(
-        response.data[i].timeSlot,
-      );
-      backendBookedDate.add(response.data[i].bookingDate);
+    for (var element in response!.data) {
+      alreadyBookedSlots[element.bookingDate] = element.timeSlot;
+    }
+  }
+
+//-------------------------------------------------------------adding already booked slots to a list
+  void addingAlreadyBookedToList() {
+    bookedSlots.clear();
+    if (alreadyBookedSlots.containsKey(selectedDate)) {
+      bookedSlots.addAll(alreadyBookedSlots[selectedDate]!);
     }
   }
 }

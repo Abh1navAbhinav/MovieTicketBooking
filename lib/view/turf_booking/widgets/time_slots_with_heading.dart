@@ -91,7 +91,10 @@ class TimeSlotsBookingwithHeading extends GetView<BookingController> {
                           color: controller.selectedSlots.contains(list[index])
                               ? constantObj.kSelectedSlotsColor
                               : controller.isAvailableTime
-                                  ? constantObj.kAlreadyBookedSlots
+                                  ? controller.bookedSlots
+                                          .contains(controller.finalTime)
+                                      ? constantObj.kAlreadyBookedSlots
+                                      : constantObj.kExpiredSlotsColor
                                   : constantObj.kUnSelectedSlotsColor,
                         ),
                         height: 50,

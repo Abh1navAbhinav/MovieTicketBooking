@@ -118,34 +118,42 @@ class TurfDescription extends GetView<BookingController> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          await controller.descriptionBookingOnpressed(datum);
-          datum.turfInfo!.turfIsAvailable!
-              ? Get.to(
-                  () => TurfBookingPage(
-                    data: datum,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Obx(
+        () => !controller.isLoading.value
+            ? FloatingActionButton.extended(
+                onPressed: () async {
+                  await controller.descriptionBookingOnpressed(datum);
+                  datum.turfInfo!.turfIsAvailable!
+                      ? Get.to(
+                          () => TurfBookingPage(
+                            data: datum,
+                          ),
+                        )
+                      : constantObj.getSnackbarMethod(
+                          message: 'Turf is currently unavailable');
+                },
+                backgroundColor: datum.turfInfo!.turfIsAvailable!
+                    ? Colors.green
+                    : Colors.red,
+                label: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width,
                   ),
-                )
-              : constantObj.getSnackbarMethod(
-                  message: 'Turf is currently unavailable');
-        },
-        backgroundColor:
-            datum.turfInfo!.turfIsAvailable! ? Colors.green : Colors.red,
-        label: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width - 265),
-          child: SizedBox(
-            width: 100,
-            child: FittedBox(
-              child: Text(
-                datum.turfInfo!.turfIsAvailable!
-                    ? '    Book   '
-                    : 'Maintenance',
-              ),
-            ),
-          ),
-        ),
+                  child: Text(
+                    datum.turfInfo!.turfIsAvailable!
+                        ? 'Select your Slot'
+                        : 'Maintenance',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              )
+            : const CircularProgressIndicator(),
       ),
     );
   }
