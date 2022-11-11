@@ -1,15 +1,17 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:ticket_booking/global_constants/constants.dart';
 import 'package:ticket_booking/model/booking/booking_request.dart';
 import 'package:ticket_booking/model/booking/booking_response.dart';
 import 'package:ticket_booking/model/home/all_turf/datum.dart';
 import 'package:ticket_booking/services/turf_booking_service.dart';
-import 'package:ticket_booking/view/turf_description/turf_description.dart';
+import 'package:ticket_booking/view/home_page/home.dart';
 
 class BookingController extends GetxController {
 //----------------------------------------------------------------variables
   String selectedDate = '11/9/2022';
+  String turfId = '';
   RxBool isFinished = false.obs;
   bool isAvailableTime = false;
   RxBool isLoading = false.obs;
@@ -23,6 +25,9 @@ class BookingController extends GetxController {
   List<int> convertedTimeList24Hrs = [];
   List<int> bookedSlots = [];
   Map<String, List<int>> alreadyBookedSlots = {};
+
+//-------------------------------------------------------------------------RazorPay
+  late Razorpay _razorpay;
 
 //----------------------------------------------------------------converting 24 hrs to 12 hrs
   void convert24Hrs(Datum data) {
@@ -62,6 +67,7 @@ class BookingController extends GetxController {
 
   Future<void> descriptionBookingOnpressed(Datum data) async {
     isLoading.value = true;
+    turfId = data.id!;
     convert24Hrs(data);
     selectedSlots.clear();
     totalAmount = 0;
@@ -193,7 +199,7 @@ class BookingController extends GetxController {
   }
 
 //----------------------------------------------------------------book turf function
-  Future<void> bookTurf({required String turfId, required Datum datum}) async {
+  Future<void> bookTurf() async {
     final AddBookedSlots model = AddBookedSlots(
       bookingDate: selectedDate,
       turfId: turfId,
@@ -201,10 +207,63 @@ class BookingController extends GetxController {
     );
     final AddBookedSlots? statusAfterBooked =
         await BookingService().addToBookedTurf(model: model);
-    constantObj.getSnackbarMethod(
-        message: statusAfterBooked!.message!.toString(), duration: 1);
-    Get.to(
-        duration: const Duration(seconds: 2),
-        () => TurfDescription(datum: datum));
+    await constantObj.getSnackbarMethod(
+      message: statusAfterBooked!.message!.toString(),
+      duration: 1,
+      success: true,
+    );
+  }
+
+//-------------------------------------------------------------------------------------oninit
+  @override
+  void onInit() {
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    super.onInit();
+  }
+
+//-----------------------------------------------------------------------------------on dispose
+
+  @override
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
+  }
+
+//---------------------------------------------------------------------------options
+
+//-------------------------------------------------------------------------open the razorpay
+
+  void openRazorpay() {
+    var options = {
+      'key': 'rzp_test_5497QNEKbfsHqj',
+      'amount': totalAmount * 100, //in the smallest currency sub-unit.
+      'name': 'Acme Corp.',
+      // 'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
+      'description': 'Fine T-Shirt',
+      'timeout': 60, // in seconds
+      'prefill': {'contact': '9123456789', 'email': 'gaurav.kumar@example.com'}
+    };
+
+    _razorpay.open(options);
+    Get.back();
+  }
+//--------------------------------------------------------------------------------razorpay functions
+
+  Future<void> _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    Get.offAll(() => HomePage());
+    await bookTurf();
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+    Get.back();
+    constantObj.getSnackbarMethod(message: response.message.toString());
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    constantObj.getSnackbarMethod(message: response.walletName.toString());
   }
 }

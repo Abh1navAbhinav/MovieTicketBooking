@@ -105,7 +105,7 @@ class CustomGetModalSheet extends GetView<BookingController> {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  controller.bookTurf(turfId: data.id!, datum: data);
+                  controller.openRazorpay();
                 },
                 child: Container(
                   color: Colors.green,
