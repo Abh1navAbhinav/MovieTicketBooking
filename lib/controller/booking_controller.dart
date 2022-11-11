@@ -1,3 +1,4 @@
+import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -248,12 +249,16 @@ class BookingController extends GetxController {
     };
 
     _razorpay.open(options);
-    Get.back();
+    // Get.back();
   }
 //--------------------------------------------------------------------------------razorpay functions
 
   Future<void> _handlePaymentSuccess(PaymentSuccessResponse response) async {
-    Get.offAll(() => HomePage());
+    Get.offAll(
+      () => HomePage(),
+      curve: Curves.easeIn,
+      duration: const Duration(seconds: 2),
+    );
     await bookTurf();
   }
 
