@@ -153,7 +153,9 @@ class BookingController extends GetxController {
   ) {
     if (selectedSlots.contains(list[index]) ||
         bookedSlots.contains(finalTime)) {
-      totalAmount -= price;
+      if (bookedSlots.contains(finalTime)) {
+        totalAmount -= price;
+      }
       convertedTimeList24Hrs.remove(finalTime);
       selectedSlots.remove(list[index]);
     } else {
