@@ -117,7 +117,7 @@ class WishListController extends GetxController {
     favaTurf.clear();
     if (favresponse != null) {
       favaTurf.addAll(favresponse.data!);
-      log(favaTurf.toString());
+      log("fav turf list:------- $favaTurf");
     } else {
       log('favresponse is null');
     }
@@ -135,7 +135,7 @@ class WishListController extends GetxController {
     isFav(data).value == true
         ? await removeFromFav(data.id!)
         : await addFavToDb(data);
-    log("${isFav(data).value}");
+    log("isfav.value ${isFav(data).value}");
     await getFav();
     // log('inside checkandaddtodb after calling getfav favturflist length is :${favaTurf.length}');
   }
