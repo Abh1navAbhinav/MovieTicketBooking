@@ -41,6 +41,7 @@ class FavServices {
 
 //--------------------------------get favourite list service-------------------------------
   Future<AllResponse?> deleteWishlist(String id) async {
+    log(EndPoints.removeWishList + id);
     try {
       final Response response = await dio.delete(EndPoints.removeWishList + id);
 

@@ -17,12 +17,12 @@ class FavTurfIconButton extends GetView<WishListController> {
       onPressed: () {
         controller.checkFavAndAddToDb(data);
       },
-      icon: Icon(
-        controller.isFav(data).value ? Icons.bookmark : Icons.bookmark_outline,
+      icon: GetBuilder<WishListController>(
+        builder: (controller) => Icon(
+          controller.isFav(data) ? Icons.bookmark : Icons.bookmark_outline,
+        ),
       ),
-      color: controller.isFav(data).value
-          ? Colors.greenAccent
-          : Colors.greenAccent,
+      color: controller.isFav(data) ? Colors.greenAccent : Colors.greenAccent,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_booking/controller/home_controller.dart';
@@ -19,17 +20,20 @@ class WishListController extends GetxController {
 //-------------------------------------------------------------------------------------variables and lists
 
   RxBool isFavSearched = false.obs;
+  final TextEditingController favTextEditController = TextEditingController();
   List<dynamic> foundTurfFav = [];
   List<Datum> favaTurf = [];
 
 //-------------------------------------------------------------------------------------searching for favourite turf function
 
-  void searchForWishListTurf(String query, List<dynamic> allTurf) {
+  void searchForWishListTurf(
+    String query,
+  ) {
     List<dynamic> searchResults = [];
     if (query.isEmpty) {
-      searchResults = allTurf;
+      searchResults = favaTurf;
     } else {
-      searchResults = allTurf
+      searchResults = favaTurf
           .where(
             (element) => element.turfName!.toLowerCase().contains(
                   query.toLowerCase(),
@@ -103,8 +107,21 @@ class WishListController extends GetxController {
 
 //------------------------------------------------------------------------------------- remove from wishlist function
 
-  Future<void> removeFromFav(String turfId) async {
-    await FavServices().deleteWishlist(turfId);
+  Future<void> removeFromFav(String turfName) async {
+    String? id = idReturn(turfName);
+    if (id != null) {
+      await FavServices().deleteWishlist(id);
+    }
+  }
+
+//---------------------------------------------------------------------------------return id function
+  String? idReturn(String turfName) {
+    for (var item in favaTurf) {
+      if (item.turfName == turfName) {
+        return item.id!;
+      }
+    }
+    return null;
   }
 
 //-------------------------------------------------------------------------------------Get favourite list
@@ -121,29 +138,33 @@ class WishListController extends GetxController {
     } else {
       log('favresponse is null');
     }
+    update();
   }
 
 //-------------------------------------------------------------------------------------checking whether the turf is already added to favourite or not
 
-  RxBool isFav(Datum data) {
-    return favaTurf.contains(data).obs;
+  bool isFav(Datum data) {
+    var temp = [];
+    for (var element in favaTurf) {
+      temp.add(element.turfName);
+    }
+
+    return temp.contains(data.turfName);
   }
 
 //-------------------------------------------------------------------------------------favourite button final function
 
   checkFavAndAddToDb(Datum data) async {
-    isFav(data).value == true
-        ? await removeFromFav(data.id!)
-        : await addFavToDb(data);
-    log("isfav.value ${isFav(data).value}");
+    isFav(data) ? await removeFromFav(data.turfName!) : await addFavToDb(data);
+    log("isfav.value ${isFav(data)}");
     await getFav();
-    // log('inside checkandaddtodb after calling getfav favturflist length is :${favaTurf.length}');
   }
 //-------------------------------------------------------------------------------------oninit
 
   @override
   void onInit() {
-    foundTurfFav = homeController.allTurf;
+    foundTurfFav = favaTurf;
+    getFav();
     super.onInit();
   }
 }
